@@ -1,0 +1,42 @@
+﻿@model List<Goods>
+
+<h1>Goods List</h1>
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+       <th>
+           Goods Type
+       </th>
+       <th>
+           Model 
+       </th>
+       <th>
+           Available
+       </th>
+       <th>
+           Image
+       </th>
+      
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            <tr>
+                <td>
+                @obj.Name
+            </td>
+            <td>
+                @obj.Type
+            </td>
+            <td>
+                @obj.IsTaken
+            </td>
+            <td>
+                @obj.ImageUrl
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -2,6 +2,7 @@
 using InventarVali.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InventarVali.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240809125642_AddedImageUrlToTable")]
+    partial class AddedImageUrlToTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,7 +32,7 @@ namespace InventarVali.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("ImageUrle")
                         .HasColumnType("text");
 
                     b.Property<bool>("IsTaken")
@@ -47,32 +50,6 @@ namespace InventarVali.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Goods");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ImageUrl = "",
-                            IsTaken = true,
-                            Name = "Masina",
-                            Type = "Dacia Duster"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ImageUrl = "",
-                            IsTaken = false,
-                            Name = "Masina",
-                            Type = "Audi A6"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ImageUrl = "",
-                            IsTaken = true,
-                            Name = "Laptop",
-                            Type = "Asus Rog"
-                        });
                 });
 #pragma warning restore 612, 618
         }
