@@ -40,5 +40,58 @@ namespace InventarVali.Controllers
                 return View();
             }
         }
+        public IActionResult Edit(int id) 
+        {
+            if(id == null || id == 0) 
+            {
+                return NotFound(); 
+            }
+            Goods? obj = _db.Goods.FirstOrDefault(x => x.Id == id);
+
+            if (obj == null) 
+            {
+                return NotFound();
+            } 
+            return View(obj);
+        }
+        [HttpPost]
+        public IActionResult Edit(Goods obj) 
+        {
+            if (ModelState.IsValid) 
+            {
+                _db.Goods.Update(obj);
+                _db.SaveChanges();
+            }
+            return RedirectToAction("Index", "Goods");
+        }
+        public IActionResult Delete(int? id) 
+        {
+            if (id == null || id == 0) 
+            {
+                return NotFound();
+            }
+
+            Goods obj = _db.Goods.FirstOrDefault(x => x.Id == id);
+
+            if (obj == null) 
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+        [HttpPost,ActionName("Delete")]
+        public IActionResult DeleteGoods(int?id) 
+        {
+            Goods obj = _db.Goods.FirstOrDefault(x => x.Id == id);
+            if (obj == null) 
+            {
+                return NotFound();
+            }
+
+            _db.Goods.Remove(obj);
+            _db.SaveChanges();
+
+            return RedirectToAction("Index", "Goods");
+        }
     }
 }
