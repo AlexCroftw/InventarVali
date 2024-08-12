@@ -33,6 +33,8 @@ namespace InventarVali.Controllers
             {
                 _db.Goods.Add(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Goods created successfully";
+
                 return RedirectToAction("Index","Goods");
             }
             else 
@@ -61,6 +63,7 @@ namespace InventarVali.Controllers
             {
                 _db.Goods.Update(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Goods updated successfully";
             }
             return RedirectToAction("Index", "Goods");
         }
@@ -90,6 +93,7 @@ namespace InventarVali.Controllers
 
             _db.Goods.Remove(obj);
             _db.SaveChanges();
+            TempData["success"] = "Goods deleted successfully";
 
             return RedirectToAction("Index", "Goods");
         }
