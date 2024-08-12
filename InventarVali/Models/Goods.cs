@@ -13,7 +13,6 @@ namespace InventarVali.Models
         public string Name { get; set; }
         public string Type { get; set; }
         [Required]
-        
         public bool IsTaken { get; set; }
         public string? ImageUrl { get; set; }
 

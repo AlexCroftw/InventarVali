@@ -1,4 +1,5 @@
 ﻿using InventarVali.Models;
+using InventarVali.Models.ViewModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventarVali.Data
