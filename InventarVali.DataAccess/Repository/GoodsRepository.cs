@@ -17,7 +17,7 @@ namespace InventarVali.DataAccess.Repository
         {
             _db = db;
         }
-        public void Save(Goods obj)
+        public void Save()
         {
             _db.SaveChanges();
         }

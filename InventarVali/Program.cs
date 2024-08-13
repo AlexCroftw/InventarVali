@@ -1,4 +1,6 @@
 using InventarVali.DataAccess.Data;
+using InventarVali.DataAccess.Repository;
+using InventarVali.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventarVali
@@ -13,7 +15,7 @@ namespace InventarVali
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicationDbContext>(options => 
             options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+            builder.Services.AddScoped<IGoodsRepository, GoodsRepository>();
 
             var app = builder.Build();
 

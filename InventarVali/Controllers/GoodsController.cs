@@ -1,4 +1,5 @@
 ﻿using InventarVali.DataAccess.Data;
+using InventarVali.DataAccess.Repository.IRepository;
 using InventarVali.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,14 +7,14 @@ namespace InventarVali.Controllers
 {
     public class GoodsController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public GoodsController(ApplicationDbContext db)
+        private readonly IGoodsRepository _goodsRepo;
+        public GoodsController(IGoodsRepository goodsRepo)
         {
-            _db = db;
+            _goodsRepo = goodsRepo;
         }
         public IActionResult Index()
         {
-            List<Goods> objGoodsList = _db.Goods.ToList();
+            List<Goods> objGoodsList = _goodsRepo.GetAll().ToList();
             return View(objGoodsList);
         }
         public IActionResult CreateGoods()
@@ -30,8 +31,8 @@ namespace InventarVali.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Goods.Add(obj);
-                _db.SaveChanges();
+                _goodsRepo.Add(obj);
+                _goodsRepo.Save();
                 TempData["success"] = "Goods created successfully";
 
                 return RedirectToAction("Index","Goods");
@@ -47,7 +48,7 @@ namespace InventarVali.Controllers
             {
                 return NotFound(); 
             }
-            Goods? obj = _db.Goods.FirstOrDefault(x => x.Id == id);
+            Goods? obj = _goodsRepo.Get(o => o.Id == id);
 
             if (obj == null) 
             {
@@ -60,8 +61,8 @@ namespace InventarVali.Controllers
         {
             if (ModelState.IsValid) 
             {
-                _db.Goods.Update(obj);
-                _db.SaveChanges();
+                _goodsRepo.Update(obj);
+                _goodsRepo.Save();
                 TempData["success"] = "Goods updated successfully";
             }
             return RedirectToAction("Index", "Goods");
@@ -73,7 +74,7 @@ namespace InventarVali.Controllers
                 return NotFound();
             }
 
-            Goods obj = _db.Goods.FirstOrDefault(x => x.Id == id);
+            Goods obj = _goodsRepo.Get(o => o.Id == id);
 
             if (obj == null) 
             {
@@ -84,14 +85,14 @@ namespace InventarVali.Controllers
         [HttpPost,ActionName("Delete")]
         public IActionResult DeleteGoods(int?id) 
         {
-            Goods obj = _db.Goods.FirstOrDefault(x => x.Id == id);
+            Goods obj = _goodsRepo.Get(o => o.Id == id);
             if (obj == null) 
             {
                 return NotFound();
             }
 
-            _db.Goods.Remove(obj);
-            _db.SaveChanges();
+            _goodsRepo.Remove(obj);
+            _goodsRepo.Save();
             TempData["success"] = "Goods deleted successfully";
 
             return RedirectToAction("Index", "Goods");

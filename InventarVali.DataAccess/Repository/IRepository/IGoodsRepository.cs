@@ -10,6 +10,6 @@ namespace InventarVali.DataAccess.Repository.IRepository
     public interface IGoodsRepository : IRepository<Goods>
     {
         void Update(Goods obj);
-        void Save(Goods obj);
+        void Save();
     }
 }
