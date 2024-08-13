@@ -1,6 +1,5 @@
-﻿using InventarVali.Data;
+﻿using InventarVali.DataAccess.Data;
 using InventarVali.Models;
-using InventarVali.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InventarVali.Controllers

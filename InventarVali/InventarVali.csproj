@@ -16,4 +16,10 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\InventarVali.DataAccess\InventarVali.DataAccess.csproj" />
+    <ProjectReference Include="..\InventarVali.Models\InventarVali.Models.csproj" />
+    <ProjectReference Include="..\InventarVali.Utility\InventarVali.Utility.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,4 @@
-using InventarVali.Data;
+using InventarVali.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventarVali
