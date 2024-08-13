@@ -15,7 +15,7 @@ namespace InventarVali
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicationDbContext>(options => 
             options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-            builder.Services.AddScoped<IGoodsRepository, GoodsRepository>();
+            builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 
             var app = builder.Build();
 
@@ -36,7 +36,7 @@ namespace InventarVali
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{area=Employee}/{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }

@@ -2,8 +2,9 @@ using InventarVali.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace InventarVali.Controllers
+namespace InventarVali.Areas.Employee.Controllers
 {
+    [Area("Employee")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

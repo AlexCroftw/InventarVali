@@ -3,18 +3,19 @@ using InventarVali.DataAccess.Repository.IRepository;
 using InventarVali.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace InventarVali.Controllers
+namespace InventarVali.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class GoodsController : Controller
     {
-        private readonly IGoodsRepository _goodsRepo;
-        public GoodsController(IGoodsRepository goodsRepo)
+        private readonly IUnitOfWork _unitOfWork;
+        public GoodsController(IUnitOfWork unitOfWork)
         {
-            _goodsRepo = goodsRepo;
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
-            List<Goods> objGoodsList = _goodsRepo.GetAll().ToList();
+            List<Goods> objGoodsList = _unitOfWork.Goods.GetAll().ToList();
             return View(objGoodsList);
         }
         public IActionResult CreateGoods()
@@ -25,74 +26,74 @@ namespace InventarVali.Controllers
         [HttpPost]
         public IActionResult CreateGoods(Goods obj)
         {
-            if (obj.Name == obj.Type) 
+            if (obj.Name == obj.Type)
             {
                 ModelState.AddModelError("name", "Name cannot be the same as Type");
             }
             if (ModelState.IsValid)
             {
-                _goodsRepo.Add(obj);
-                _goodsRepo.Save();
+                _unitOfWork.Goods.Add(obj);
+                _unitOfWork.Save();
                 TempData["success"] = "Goods created successfully";
 
-                return RedirectToAction("Index","Goods");
+                return RedirectToAction("Index", "Goods");
             }
-            else 
+            else
             {
                 return View();
             }
         }
-        public IActionResult Edit(int id) 
+        public IActionResult Edit(int id)
         {
-            if(id == null || id == 0) 
-            {
-                return NotFound(); 
-            }
-            Goods? obj = _goodsRepo.Get(o => o.Id == id);
-
-            if (obj == null) 
+            if (id == null || id == 0)
             {
                 return NotFound();
-            } 
+            }
+            Goods? obj = _unitOfWork.Goods.Get(o => o.Id == id);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
             return View(obj);
         }
         [HttpPost]
-        public IActionResult Edit(Goods obj) 
+        public IActionResult Edit(Goods obj)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
-                _goodsRepo.Update(obj);
-                _goodsRepo.Save();
+                _unitOfWork.Goods.Update(obj);
+                _unitOfWork.Save();
                 TempData["success"] = "Goods updated successfully";
             }
             return RedirectToAction("Index", "Goods");
         }
-        public IActionResult Delete(int? id) 
+        public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0) 
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
 
-            Goods obj = _goodsRepo.Get(o => o.Id == id);
+            Goods obj = _unitOfWork.Goods.Get(o => o.Id == id);
 
-            if (obj == null) 
+            if (obj == null)
             {
                 return NotFound();
             }
             return View(obj);
         }
-        [HttpPost,ActionName("Delete")]
-        public IActionResult DeleteGoods(int?id) 
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteGoods(int? id)
         {
-            Goods obj = _goodsRepo.Get(o => o.Id == id);
-            if (obj == null) 
+            Goods obj = _unitOfWork.Goods.Get(o => o.Id == id);
+            if (obj == null)
             {
                 return NotFound();
             }
 
-            _goodsRepo.Remove(obj);
-            _goodsRepo.Save();
+            _unitOfWork.Goods.Remove(obj);
+            _unitOfWork.Save();
             TempData["success"] = "Goods deleted successfully";
 
             return RedirectToAction("Index", "Goods");

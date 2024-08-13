@@ -1,27 +1,27 @@
 ﻿using InventarVali.DataAccess.Data;
 using InventarVali.DataAccess.Repository.IRepository;
-using InventarVali.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace InventarVali.DataAccess.Repository
 {
-    public class GoodsRepository : Repository<Goods>, IGoodsRepository
+    public class UnitOfWork : IUnitOfWork
     {
         private ApplicationDbContext _db;
-        public GoodsRepository(ApplicationDbContext db) : base (db)
+        public IGoodsRepository Goods { get; private set; }
+
+        public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
+            Goods = new GoodsRepository(_db);
         }
         
-
-        public void Update(Goods obj)
+        public void Save()
         {
-           _db.Goods.Update(obj);
+            _db.SaveChanges();
         }
     }
 }
