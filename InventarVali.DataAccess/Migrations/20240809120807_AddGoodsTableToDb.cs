@@ -3,7 +3,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace InventarVali.Migrations
+namespace InventarVali.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddGoodsTableToDb : Migration

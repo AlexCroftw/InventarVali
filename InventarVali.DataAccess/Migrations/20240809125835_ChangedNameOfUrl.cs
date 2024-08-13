@@ -2,27 +2,27 @@
 
 #nullable disable
 
-namespace InventarVali.Migrations
+namespace InventarVali.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedImageUrlToTable : Migration
+    public partial class ChangedNameOfUrl : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
+            migrationBuilder.RenameColumn(
                 name: "ImageUrle",
                 table: "Goods",
-                type: "text",
-                nullable: true);
+                newName: "ImageUrl");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "ImageUrle",
-                table: "Goods");
+            migrationBuilder.RenameColumn(
+                name: "ImageUrl",
+                table: "Goods",
+                newName: "ImageUrle");
         }
     }
 }

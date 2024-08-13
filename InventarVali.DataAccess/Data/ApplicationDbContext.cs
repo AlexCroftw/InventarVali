@@ -1,8 +1,7 @@
 ﻿using InventarVali.Models;
-using InventarVali.Models.ViewModel;
 using Microsoft.EntityFrameworkCore;
 
-namespace InventarVali.Data
+namespace InventarVali.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {
