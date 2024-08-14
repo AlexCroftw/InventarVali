@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventarVali.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace InventarVali.DataAccess.Repository.IRepository
 {
-    public interface IUnitOfWork
+    public interface IEmployeeRepository : IRepository<Employee>
     {
-        IGoodsRepository Goods { get; }
-        IEmployeeRepository Employee { get; }
-        void Save();
+        void Update(Employee obj);
     }
 }
