@@ -10,6 +10,7 @@ namespace InventarVali.DataAccess.Repository.IRepository
     {
         IGoodsRepository Goods { get; }
         IEmployeeRepository Employee { get; }
+        IAutovehicule Autovehicule { get; }
         void Save();
     }
 }

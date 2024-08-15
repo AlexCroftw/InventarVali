@@ -21,5 +21,7 @@ namespace InventarVali.Models
         public DateTime InsurenceDate { get; set; }
         [Required]
         public bool HasITP { get; set; }
+
+        
     }
 }
