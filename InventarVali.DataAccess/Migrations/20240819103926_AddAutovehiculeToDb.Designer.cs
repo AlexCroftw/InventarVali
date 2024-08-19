@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InventarVali.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240819102849_ReAddedAutovehiculeToDb")]
-    partial class ReAddedAutovehiculeToDb
+    [Migration("20240819103926_AddAutovehiculeToDb")]
+    partial class AddAutovehiculeToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
