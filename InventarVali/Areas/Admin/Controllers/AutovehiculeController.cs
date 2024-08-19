@@ -41,13 +41,13 @@ namespace InventarVali.Areas.Admin.Controllers
             }
         }
 
-        public IActionResult Edit(int id ) 
+        public IActionResult Edit(int id) 
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
-            Autovehicule obj = _unitOfWork.Autovehicule.Get(x => x.Id == id);
+            Autovehicule? obj = _unitOfWork.Autovehicule.Get(x => x.Id == id);
             if (obj == null) 
             {
                 return NotFound();
@@ -56,7 +56,7 @@ namespace InventarVali.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edi(Autovehicule obj) 
+        public IActionResult Edit(Autovehicule obj) 
         {
             
             if (ModelState.IsValid) 
@@ -86,7 +86,7 @@ namespace InventarVali.Areas.Admin.Controllers
 
             return View(obj);
         }
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         public IActionResult DeleteVehicule(int id) 
         {
             Autovehicule obj = _unitOfWork.Autovehicule.Get(x => x.Id == id);
