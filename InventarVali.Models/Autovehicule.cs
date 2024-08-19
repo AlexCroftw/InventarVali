@@ -22,6 +22,6 @@ namespace InventarVali.Models
         [Required]
         public bool HasITP { get; set; }
 
-        
+
     }
 }

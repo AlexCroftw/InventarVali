@@ -7,7 +7,7 @@ namespace InventarVali.DataAccess.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
         {
-            
+           
         }
 
         public DbSet<Goods> Goods { get; set; }
@@ -27,8 +27,8 @@ namespace InventarVali.DataAccess.Data
                new Employee { Id = 3, FirstName = "Vasile", LastName = "Braconieru", Email = "test4@email.com" }
                );
             modelBuilder.Entity<Autovehicule>().HasData(
-                new Autovehicule { Id = 1, HasITP = true, InsurenceDate = DateTime.UtcNow, LicensePlate = "B 06 CAR", Type = "Duba", VinNumber = "1XPWDBTX48D766660" },
-                new Autovehicule { Id = 2, HasITP = false, InsurenceDate = DateTime.UtcNow, LicensePlate = "CL 06 PLM", Type = "Audi R8", VinNumber = "1XPWDBTX48D766660" });
+                new Autovehicule { Id = 1, HasITP = true, InsurenceDate = DateTime.SpecifyKind(DateTime.Parse("07/11/2024"),DateTimeKind.Utc), LicensePlate = "B 06 CAR", Type = "Duba", VinNumber = "1XPWDBTX48D766660" },
+                new Autovehicule { Id = 2, HasITP = false, InsurenceDate = DateTime.SpecifyKind(DateTime.Parse("12/11/2024"), DateTimeKind.Utc), LicensePlate = "CL 06 PLM", Type = "Audi R8", VinNumber = "1XPWDBTX48D766660" });
         }
 
     }

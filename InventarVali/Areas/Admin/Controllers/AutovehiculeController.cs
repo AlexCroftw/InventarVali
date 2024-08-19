@@ -19,7 +19,7 @@ namespace InventarVali.Areas.Admin.Controllers
             return View(objAutovehiculeslist);
         }
 
-        public IActionResult CreateAutovehicules() 
+        public IActionResult CreateAutovehicule() 
         {
             return View();
         }
@@ -32,7 +32,7 @@ namespace InventarVali.Areas.Admin.Controllers
                 _unitOfWork.Save();
                 TempData["success"] = "Autovehicule was created successfully";
 
-                return RedirectToAction("Index","Autovehicule");
+                return RedirectToAction("Index", "Autovehicule");
             }
 
             else 
@@ -56,7 +56,6 @@ namespace InventarVali.Areas.Admin.Controllers
         }
 
         [HttpPost]
-
         public IActionResult Edi(Autovehicule obj) 
         {
             

@@ -57,7 +57,7 @@ namespace InventarVali.DataAccess.Migrations
                         {
                             Id = 1,
                             HasITP = true,
-                            InsurenceDate = new DateTime(2024, 8, 15, 8, 33, 32, 660, DateTimeKind.Utc).AddTicks(7220),
+                            InsurenceDate = new DateTime(2024, 11, 7, 0, 0, 0, 0, DateTimeKind.Utc),
                             LicensePlate = "B 06 CAR",
                             Type = "Duba",
                             VinNumber = "1XPWDBTX48D766660"
@@ -66,7 +66,7 @@ namespace InventarVali.DataAccess.Migrations
                         {
                             Id = 2,
                             HasITP = false,
-                            InsurenceDate = new DateTime(2024, 8, 15, 8, 33, 32, 660, DateTimeKind.Utc).AddTicks(7222),
+                            InsurenceDate = new DateTime(2024, 11, 12, 0, 0, 0, 0, DateTimeKind.Utc),
                             LicensePlate = "CL 06 PLM",
                             Type = "Audi R8",
                             VinNumber = "1XPWDBTX48D766660"
