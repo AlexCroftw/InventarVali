@@ -62,10 +62,9 @@ namespace InventarVali.Areas.Admin.Controllers
         }
 
         [HttpPost]
-
         public IActionResult Edit(Employees obj) 
         {
-            if (!ModelState.IsValid) 
+            if (ModelState.IsValid) 
             {
                 _unitOfWork.Employee.Update(obj);
                 _unitOfWork.Save();
@@ -100,7 +99,7 @@ namespace InventarVali.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 _unitOfWork.Employee.Remove(obj);
                 _unitOfWork.Save();
