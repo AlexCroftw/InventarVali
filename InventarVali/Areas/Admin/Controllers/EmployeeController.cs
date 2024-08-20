@@ -74,5 +74,40 @@ namespace InventarVali.Areas.Admin.Controllers
             }
             return View();
         }
+
+        public IActionResult Delete(int id) 
+        {
+                if (id == 0 || id == null)
+                {
+                    return NotFound();
+                }
+                Employees obj = _unitOfWork.Employee.Get(o => o.Id == id);
+                if (obj == null)
+                {
+                    return NotFound();
+                }
+                return View(obj);
+        }
+
+        [HttpPost,ActionName("Delete")]
+
+        public IActionResult DeleteEmployee(int id) 
+        {
+            Employees obj = _unitOfWork.Employee.Get(o => o.Id == id);
+
+            if (id == 0 || id == null)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid) 
+            {
+                _unitOfWork.Employee.Remove(obj);
+                _unitOfWork.Save();
+                TempData["success"] = "This employee was deleted successfully";
+                return RedirectToAction("Index", "Employee");
+            }
+            return View();
+        }
     }
 }
