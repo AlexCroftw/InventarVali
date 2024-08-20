@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InventarVali.Models
 {
-    public class Employee
+    public class Employees
     {
         //TODO A new class for car to add diferent options/settings to it ex: license plate
         public int Id { get; set; }

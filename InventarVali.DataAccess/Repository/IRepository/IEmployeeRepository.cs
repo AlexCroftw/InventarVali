@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace InventarVali.DataAccess.Repository.IRepository
 {
-    public interface IEmployeeRepository : IRepository<Employee>
+    public interface IEmployeeRepository : IRepository<Employees>
     {
-        void Update(Employee obj);
+        void Update(Employees obj);
     }
 }

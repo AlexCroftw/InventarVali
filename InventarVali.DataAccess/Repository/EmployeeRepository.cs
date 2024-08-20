@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace InventarVali.DataAccess.Repository
 {
-    public class EmployeeRepository : Repository<Employee>, IEmployeeRepository
+    public class EmployeeRepository : Repository<Employees>, IEmployeeRepository
     {
         private ApplicationDbContext _db;
         public EmployeeRepository(ApplicationDbContext db) : base(db) 
         {
             _db = db;
         }
-        public void Update(Employee obj)
+        public void Update(Employees obj)
         {
             _db.Employees.Update(obj);
         }
