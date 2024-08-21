@@ -14,6 +14,7 @@ namespace InventarVali.DataAccess.Data
         public DbSet<Goods> Goods { get; set; }
         public DbSet<Autovehicule> Autovehicule { get; set; }
         public DbSet<Employees> Employees { get; set; }
+        public DbSet<Computer> Computers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,7 +30,12 @@ namespace InventarVali.DataAccess.Data
                );
             modelBuilder.Entity<Autovehicule>().HasData(
                new Autovehicule { Id = 1, HasITP = true, InsurenceDate = DateTime.SpecifyKind(DateTime.Parse("07/11/2024"), DateTimeKind.Utc), LicensePlate = "B 06 CAR", Type = "Duba", VinNumber = "1XPWDBTX48D766660" },
-               new Autovehicule { Id = 2, HasITP = false, InsurenceDate = DateTime.SpecifyKind(DateTime.Parse("12/11/2024"), DateTimeKind.Utc), LicensePlate = "CL 06 PLM", Type = "Audi R8", VinNumber = "1XPWDBTX48D766660" });
+               new Autovehicule { Id = 2, HasITP = false, InsurenceDate = DateTime.SpecifyKind(DateTime.Parse("12/11/2024"), DateTimeKind.Utc), LicensePlate = "CL 06 PLM", Type = "Audi R8", VinNumber = "1XPWDBTX48D766660" }
+               );
+            modelBuilder.Entity<Computer>().HasData(
+                new Computer { Id = 1, Type = "Laptop", Model = "Asus Rog", Description = "Intel Core I9, RTX 4070, 32 GB RAM", SerialNumber = "12-12AB3" },
+                new Computer { Id = 2, Type = "Desktop", Model = "x570 Aorus Elite", Description = "Intel Core I5, no GPU, 32 GB RAM", }
+                );
         }
     
 
