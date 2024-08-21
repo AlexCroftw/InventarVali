@@ -4,22 +4,24 @@ using InventarVali.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace InventarVali.DataAccess.Repository
 {
-    public class AutovehiculeRepository : Repository<Autovehicule>, IAutovehiculeRepository
+    public class ComputerRepository : Repository<Computer>,IComputerRepository
     {
-        private ApplicationDbContext _db;
-        public AutovehiculeRepository(ApplicationDbContext db) : base(db)
+        private readonly ApplicationDbContext _db;
+        public ComputerRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
-        public void Update(Autovehicule obj)
+
+       public void Update(Computer obj) 
         {
-            _db.Autovehicule.Update(obj);
+            _db.Computers.Update(obj);    
         }
+
+       
     }
 }

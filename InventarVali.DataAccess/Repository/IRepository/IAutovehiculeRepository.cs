@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InventarVali.DataAccess.Repository.IRepository
 {
-    public interface IAutovehicule : IRepository<Autovehicule>
+    public interface IAutovehiculeRepository : IRepository<Autovehicule>
     {
         void Update(Autovehicule obj);
     }
