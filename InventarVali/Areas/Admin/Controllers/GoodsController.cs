@@ -20,6 +20,7 @@ namespace InventarVali.Areas.Admin.Controllers
         }
         public IActionResult CreateGoods()
         {
+
             return View();
         }
 

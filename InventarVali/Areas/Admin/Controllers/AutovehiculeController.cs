@@ -1,7 +1,9 @@
 ﻿using InventarVali.DataAccess.Repository;
 using InventarVali.DataAccess.Repository.IRepository;
 using InventarVali.Models;
+using InventarVali.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace InventarVali.Areas.Admin.Controllers
 {
@@ -21,7 +23,17 @@ namespace InventarVali.Areas.Admin.Controllers
 
         public IActionResult CreateAutovehicule() 
         {
-            return View();
+            AutovehiculeVM autovehiculeVM = new()
+            {
+               AutovehiculeList = _unitOfWork.Autovehicule
+               .GetAll().Select(u => new SelectListItem
+            {
+                Text = u.Type,
+                Value = u.Id.ToString()
+            }),
+                Autovehicule =  new Autovehicule()
+            };
+            return View(autovehiculeVM);
         }
         [HttpPost]
         public IActionResult CreateAutovehicule(Autovehicule obj) 
