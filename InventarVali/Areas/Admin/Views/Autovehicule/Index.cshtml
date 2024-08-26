@@ -7,7 +7,7 @@
             </div>
         </div>
     </div>
-    <div class="card-body p-4">
+    <div class="card-body pb - 4">
     </div>
     <div class="row pb-3">
         <div class="col-12">
@@ -18,7 +18,7 @@
             </a>
         </div>
     </div>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped" style="overflow-y: auto; overflow-x: auto;">
         <thead>
             <tr>
                 <th>
@@ -28,17 +28,27 @@
                     License Plate
                 </th>
                 <th>
-                    HasITP
+                    ITP
                 </th>
                 <th>
-                    Insurence Date
+                    ITP Expiration Date
+                </th>
+                <th>
+                    Insurence Start Date
+                </th>
+                <th>
+                    Insurance Expiration Date
                 </th>
                 <th>
                     VIN Number
                 </th>
                 <th>
-                    Employee
+                    Vinieta
                 </th>
+                <th>
+                    Vinieta Expiration Date
+                </th>
+                
             </tr>
         </thead>
         <tbody>
@@ -55,12 +65,24 @@
                         @obj.HasITP
                     </td>
                     <td>
+                        @obj.ITPExpirationDate
+                    </td>
+                    <td>
                         @obj.InsurenceDate
+                    </td>
+                    <td>
+                        @obj.InsuranceExpirationDate
                     </td>
                     <td>
                         @obj.VinNumber
                     </td>
-                    <td></td>
+                    <td>
+                        @obj.HasVinieta
+                    </td>
+                    <td>
+                        @obj.VinietaExpirationDate
+                    </td>
+
                     <td>
                         <div class="w-75 btn-group" role="group">
                             <a asp-controller="Autovehicule" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">

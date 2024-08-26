@@ -3,6 +3,7 @@ using System;
 using InventarVali.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InventarVali.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240826083742_AddedNewColumsToDb")]
+    partial class AddedNewColumsToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,13 +33,7 @@ namespace InventarVali.DataAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("GoodsId")
-                        .HasColumnType("integer");
-
                     b.Property<bool>("HasITP")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("HasVinieta")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime>("ITPExpirationDate")
@@ -60,12 +57,13 @@ namespace InventarVali.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool>("Vinieta")
+                        .HasColumnType("boolean");
+
                     b.Property<DateTime>("VinietaExpirationDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GoodsId");
 
                     b.ToTable("Autovehicule");
 
@@ -73,29 +71,27 @@ namespace InventarVali.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            GoodsId = 2,
                             HasITP = true,
-                            HasVinieta = true,
                             ITPExpirationDate = new DateTime(2024, 9, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             InsuranceExpirationDate = new DateTime(2024, 11, 7, 0, 0, 0, 0, DateTimeKind.Utc),
                             InsurenceDate = new DateTime(2024, 11, 7, 0, 0, 0, 0, DateTimeKind.Utc),
                             LicensePlate = "B 06 CAR",
                             Type = "Duba",
                             VinNumber = "1XPWDBTX48D766660",
+                            Vinieta = true,
                             VinietaExpirationDate = new DateTime(2024, 10, 4, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = 2,
-                            GoodsId = 1,
                             HasITP = false,
-                            HasVinieta = false,
                             ITPExpirationDate = new DateTime(2024, 9, 10, 0, 0, 0, 0, DateTimeKind.Utc),
                             InsuranceExpirationDate = new DateTime(2024, 11, 2, 0, 0, 0, 0, DateTimeKind.Utc),
                             InsurenceDate = new DateTime(2024, 11, 12, 0, 0, 0, 0, DateTimeKind.Utc),
                             LicensePlate = "CL 06 PLM",
                             Type = "Audi R8",
                             VinNumber = "1XPWDBTX48D766660",
+                            Vinieta = false,
                             VinietaExpirationDate = new DateTime(2024, 9, 7, 0, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
@@ -112,9 +108,6 @@ namespace InventarVali.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("GoodsId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Model")
                         .IsRequired()
                         .HasColumnType("text");
@@ -128,8 +121,6 @@ namespace InventarVali.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GoodsId");
-
                     b.ToTable("Computers");
 
                     b.HasData(
@@ -137,7 +128,6 @@ namespace InventarVali.DataAccess.Migrations
                         {
                             Id = 1,
                             Description = "Intel Core I9, RTX 4070, 32 GB RAM",
-                            GoodsId = 1,
                             Model = "Asus Rog",
                             SerialNumber = "12-12AB3",
                             Type = "Laptop"
@@ -146,7 +136,6 @@ namespace InventarVali.DataAccess.Migrations
                         {
                             Id = 2,
                             Description = "Intel Core I5, no GPU, 32 GB RAM",
-                            GoodsId = 2,
                             Model = "x570 Aorus Elite",
                             Type = "Desktop"
                         });
@@ -167,16 +156,11 @@ namespace InventarVali.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("GoodsId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GoodsId");
 
                     b.ToTable("Employees");
 
@@ -186,7 +170,6 @@ namespace InventarVali.DataAccess.Migrations
                             Id = 1,
                             Email = "test@email.com",
                             FirstName = "John",
-                            GoodsId = 1,
                             LastName = "Doe"
                         },
                         new
@@ -194,7 +177,6 @@ namespace InventarVali.DataAccess.Migrations
                             Id = 2,
                             Email = "test2@email.com",
                             FirstName = "Michael",
-                            GoodsId = 1,
                             LastName = "Cox"
                         },
                         new
@@ -202,7 +184,6 @@ namespace InventarVali.DataAccess.Migrations
                             Id = 3,
                             Email = "test4@email.com",
                             FirstName = "Vasile",
-                            GoodsId = 2,
                             LastName = "Braconieru"
                         });
                 });
@@ -259,33 +240,6 @@ namespace InventarVali.DataAccess.Migrations
                             Name = "Laptop",
                             Type = "Asus Rog"
                         });
-                });
-
-            modelBuilder.Entity("InventarVali.Models.Autovehicule", b =>
-                {
-                    b.HasOne("InventarVali.Models.Goods", "Goods")
-                        .WithMany()
-                        .HasForeignKey("GoodsId");
-
-                    b.Navigation("Goods");
-                });
-
-            modelBuilder.Entity("InventarVali.Models.Computer", b =>
-                {
-                    b.HasOne("InventarVali.Models.Goods", "Goods")
-                        .WithMany()
-                        .HasForeignKey("GoodsId");
-
-                    b.Navigation("Goods");
-                });
-
-            modelBuilder.Entity("InventarVali.Models.Employees", b =>
-                {
-                    b.HasOne("InventarVali.Models.Goods", "Goods")
-                        .WithMany()
-                        .HasForeignKey("GoodsId");
-
-                    b.Navigation("Goods");
                 });
 #pragma warning restore 612, 618
         }

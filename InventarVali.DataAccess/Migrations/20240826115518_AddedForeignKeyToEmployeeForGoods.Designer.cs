@@ -3,6 +3,7 @@ using System;
 using InventarVali.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InventarVali.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240826115518_AddedForeignKeyToEmployeeForGoods")]
+    partial class AddedForeignKeyToEmployeeForGoods
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,9 +115,6 @@ namespace InventarVali.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("GoodsId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Model")
                         .IsRequired()
                         .HasColumnType("text");
@@ -128,8 +128,6 @@ namespace InventarVali.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GoodsId");
-
                     b.ToTable("Computers");
 
                     b.HasData(
@@ -137,7 +135,6 @@ namespace InventarVali.DataAccess.Migrations
                         {
                             Id = 1,
                             Description = "Intel Core I9, RTX 4070, 32 GB RAM",
-                            GoodsId = 1,
                             Model = "Asus Rog",
                             SerialNumber = "12-12AB3",
                             Type = "Laptop"
@@ -146,7 +143,6 @@ namespace InventarVali.DataAccess.Migrations
                         {
                             Id = 2,
                             Description = "Intel Core I5, no GPU, 32 GB RAM",
-                            GoodsId = 2,
                             Model = "x570 Aorus Elite",
                             Type = "Desktop"
                         });
@@ -262,15 +258,6 @@ namespace InventarVali.DataAccess.Migrations
                 });
 
             modelBuilder.Entity("InventarVali.Models.Autovehicule", b =>
-                {
-                    b.HasOne("InventarVali.Models.Goods", "Goods")
-                        .WithMany()
-                        .HasForeignKey("GoodsId");
-
-                    b.Navigation("Goods");
-                });
-
-            modelBuilder.Entity("InventarVali.Models.Computer", b =>
                 {
                     b.HasOne("InventarVali.Models.Goods", "Goods")
                         .WithMany()

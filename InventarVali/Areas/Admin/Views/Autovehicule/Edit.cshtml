@@ -34,10 +34,30 @@
                     <span asp-validation-for="HasITP" class="text-danger"></span>
 
                 </div>
+                <div class="py-2 col-12">
+                    <input data-val="true"
+                           data-val-required="The HasVinieta field is required."
+                           id="HasVinieta"
+                           name="HasVinieta"
+                           type="checkbox"
+                           value="true" />
+                    <label asp-for="HasVinieta" class="ms-2"></label>
+                    <span asp-validation-for="HasVinieta" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="ITPExpirationDate" class="form-control border-0 shadow"></input>
+                    <label asp-for="ITPExpirationDate" class="ms-2"></label>
+                    <span asp-validation-for="ITPExpirationDate" class="text-danger"></span>
+                </div>
                 <div class="form-floating py-2 col-12">
                     <input asp-for="InsurenceDate" class="form-control border-0 shadow"></input>
                     <label asp-for="InsurenceDate" class="ms-2"></label>
                     <span asp-validation-for="InsurenceDate" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="InsuranceExpirationDate" class="form-control border-0 shadow"></input>
+                    <label asp-for="InsuranceExpirationDate" class="ms-2"></label>
+                    <span asp-validation-for="InsuranceExpirationDate" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-2 col-12">
                     <input asp-for="LicensePlate" class="form-control border-0 shadow"></input>
