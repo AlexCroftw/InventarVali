@@ -12,15 +12,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InventarVali.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240826072805_AddedNewColumsToTheAutovehiculeTable")]
-    partial class AddedNewColumsToTheAutovehiculeTable
+    [Migration("20240826150450_ReCreatedDb")]
+    partial class ReCreatedDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -34,6 +34,9 @@ namespace InventarVali.DataAccess.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("HasITP")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("HasVinieta")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime>("ITPExpirationDate")
@@ -57,6 +60,9 @@ namespace InventarVali.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("VinietaExpirationDate")
+                        .HasColumnType("timestamp without time zone");
+
                     b.HasKey("Id");
 
                     b.ToTable("Autovehicule");
@@ -66,23 +72,27 @@ namespace InventarVali.DataAccess.Migrations
                         {
                             Id = 1,
                             HasITP = true,
+                            HasVinieta = true,
                             ITPExpirationDate = new DateTime(2024, 9, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             InsuranceExpirationDate = new DateTime(2024, 11, 7, 0, 0, 0, 0, DateTimeKind.Utc),
                             InsurenceDate = new DateTime(2024, 11, 7, 0, 0, 0, 0, DateTimeKind.Utc),
                             LicensePlate = "B 06 CAR",
                             Type = "Duba",
-                            VinNumber = "1XPWDBTX48D766660"
+                            VinNumber = "1XPWDBTX48D766660",
+                            VinietaExpirationDate = new DateTime(2024, 10, 4, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = 2,
                             HasITP = false,
+                            HasVinieta = false,
                             ITPExpirationDate = new DateTime(2024, 9, 10, 0, 0, 0, 0, DateTimeKind.Utc),
                             InsuranceExpirationDate = new DateTime(2024, 11, 2, 0, 0, 0, 0, DateTimeKind.Utc),
                             InsurenceDate = new DateTime(2024, 11, 12, 0, 0, 0, 0, DateTimeKind.Utc),
                             LicensePlate = "CL 06 PLM",
                             Type = "Audi R8",
-                            VinNumber = "1XPWDBTX48D766660"
+                            VinNumber = "1XPWDBTX48D766660",
+                            VinietaExpirationDate = new DateTime(2024, 9, 7, 0, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
 

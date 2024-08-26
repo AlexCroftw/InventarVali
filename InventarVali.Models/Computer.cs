@@ -15,9 +15,7 @@ namespace InventarVali.Models
         public string Model { get; set; }
         public string Description { get; set; }
         public string? SerialNumber { get; set; }
-        public int? GoodsId { get; set; }
-        [ForeignKey("GoodsId")]
-        [ValidateNever]
-        public Goods Goods { get; set; }
+
+        
     }
 }

@@ -31,10 +31,7 @@ namespace InventarVali.Models
         public bool HasVinieta { get; set; }
         [Required]
         public DateTime VinietaExpirationDate { get;set; }
-        public int? GoodsId { get; set; }
-        [ForeignKey("GoodsId")]
-        [ValidateNever]
-        public Goods Goods { get; set; }
+        
 
        
     }
