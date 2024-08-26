@@ -1,4 +1,4 @@
-﻿@model EmployeesVM
+﻿@model Employees
 
 <div class="card shadow border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
@@ -10,20 +10,20 @@
     </div>
     <div class="card-body p-4">
         <form method="post">
-            <input asp-for="Employees.Id" hidden />
+            <input asp-for="Id" hidden />
             <div class="border p-3">
                 @* <div asp-validation-summary="ModelOnly"></div> *@
                 <div class="form-floating py-2 col-12">
-                    <input asp-for="Employees.FirstName" disabled class="form-control border-0 shadow"></input>
-                    <label asp-for="Employees.FirstName" class="ms-2"></label>
+                    <input asp-for="FirstName" disabled class="form-control border-0 shadow"></input>
+                    <label asp-for="FirstName" class="ms-2"></label>
                 </div>
                 <div class="form-floating py-2 col-12">
-                    <input asp-for="Employees.LastName" disabled class="form-control border-0 shadow"></input>
-                    <label asp-for="Employees.LastName" class="ms-2"></label>
+                    <input asp-for="LastName" disabled class="form-control border-0 shadow"></input>
+                    <label asp-for="LastName" class="ms-2"></label>
                 </div>
                 <div class="form-floating py-2 col-12">
-                    <input asp-for="Employees.Email" disabled class="form-control border-0 shadow"></input>
-                    <label asp-for="Employees.Email" class="ms-2"></label>
+                    <input asp-for="Email" disabled class="form-control border-0 shadow"></input>
+                    <label asp-for="Email" class="ms-2"></label>
                 </div>
 
                 <div class="row pt-2">
