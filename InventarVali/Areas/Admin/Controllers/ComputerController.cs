@@ -24,21 +24,19 @@ namespace InventarVali.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateComouter(Computer obj) 
+        public IActionResult CreateComputer(Computer obj) 
         {
-            if (obj == null) 
-            {
-                return NotFound();
-            }
             if (ModelState.IsValid)
             {
                 _unitOfWork.Computer.Add(obj);
                 _unitOfWork.Save();
                 TempData["success"] = "Computer was added successfully";
-                return RedirectToAction("Index","Computer");
+                return RedirectToAction("Index", "Computer");
             }
-            
-            return View();
+            else 
+            {
+                return View();
+            }
             
         }
 
