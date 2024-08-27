@@ -31,8 +31,12 @@ namespace InventarVali.Models
         public bool HasVinieta { get; set; }
         [Required]
         public DateTime VinietaExpirationDate { get;set; }
-        
+        public int? EmployeeId { get; set; }
+        [ForeignKey("EmployeeId")]
+        [ValidateNever]
+        public Employees Employees { get; set; }
+        [ValidateNever]
+        public string? ImageUrl { get; set; }
 
-       
     }
 }

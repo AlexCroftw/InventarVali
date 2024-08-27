@@ -25,31 +25,34 @@ namespace InventarVali.Areas.Admin.Controllers
         {
             AutovehiculeVM autovehiculeVM = new()
             {
-               AutovehiculeList = _unitOfWork.Autovehicule
-               .GetAll().Select(u => new SelectListItem
-            {
-                Text = u.Type,
-                Value = u.Id.ToString()
-            }),
-                Autovehicule =  new Autovehicule()
+                EmployeeList = _unitOfWork.Employee.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.LastName,
+                    Value = u.Id.ToString()
+                }),
+                Autovehicule = new Autovehicule()
             };
             return View(autovehiculeVM);
         }
         [HttpPost]
-        public IActionResult CreateAutovehicule(Autovehicule obj) 
+        public IActionResult CreateAutovehicule(AutovehiculeVM autovehiculeVM) 
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Autovehicule.Add(obj);
+                _unitOfWork.Autovehicule.Add(autovehiculeVM.Autovehicule);
                 _unitOfWork.Save();
                 TempData["success"] = "Autovehicule was created successfully";
 
                 return RedirectToAction("Index", "Autovehicule");
             }
-
             else 
             {
-                return View();
+                autovehiculeVM.EmployeeList = _unitOfWork.Employee.GetAll().Select(u => new SelectListItem 
+                {
+                    Text = u.LastName,
+                    Value = u.Id.ToString()
+                });
+                return View(autovehiculeVM);
             }
         }
 

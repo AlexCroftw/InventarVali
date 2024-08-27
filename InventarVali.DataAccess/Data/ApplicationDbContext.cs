@@ -31,11 +31,11 @@ namespace InventarVali.DataAccess.Data
             modelBuilder.Entity<Autovehicule>().HasData(
                new Autovehicule { Id = 1, HasITP = true, InsurenceDate = DateTime.SpecifyKind(DateTime.Parse("07/11/2024"), DateTimeKind.Utc), LicensePlate = "B 06 CAR", Type = "Duba", VinNumber = "1XPWDBTX48D766660",
                    InsuranceExpirationDate = DateTime.SpecifyKind(DateTime.Parse("07/11/2024"),DateTimeKind.Utc), ITPExpirationDate = DateTime.SpecifyKind(DateTime.Parse("01/09/2024"), DateTimeKind.Utc),
-                   HasVinieta = true,VinietaExpirationDate = DateTime.SpecifyKind(DateTime.Parse("04/10/2024"), DateTimeKind.Utc),
+                   HasVinieta = true,VinietaExpirationDate = DateTime.SpecifyKind(DateTime.Parse("04/10/2024"), DateTimeKind.Utc), EmployeeId = 1
                },
                new Autovehicule { Id = 2, HasITP = false, InsurenceDate = DateTime.SpecifyKind(DateTime.Parse("12/11/2024"), DateTimeKind.Utc), LicensePlate = "CL 06 PLM", Type = "Audi R8", VinNumber = "1XPWDBTX48D766660",
                    InsuranceExpirationDate = DateTime.SpecifyKind(DateTime.Parse("02/11/2024"), DateTimeKind.Utc), ITPExpirationDate = DateTime.SpecifyKind(DateTime.Parse("10/09/2024"), DateTimeKind.Utc),
-                   HasVinieta = false,VinietaExpirationDate = DateTime.SpecifyKind(DateTime.Parse("07/09/2024"), DateTimeKind.Utc)
+                   HasVinieta = false,VinietaExpirationDate = DateTime.SpecifyKind(DateTime.Parse("07/09/2024"), DateTimeKind.Utc),EmployeeId = 2
                }
                );
             modelBuilder.Entity<Computer>().HasData(
