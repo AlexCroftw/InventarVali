@@ -432,6 +432,8 @@ svg {
 table {
     caption-side: bottom;
     border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
 }
 
 caption {
@@ -450,7 +452,9 @@ thead,
 tbody,
 tfoot,
 tr,
-td,
+td {
+    word-wrap: break-word;
+},
 th {
     border-color: inherit;
     border-style: solid;
@@ -4931,6 +4935,7 @@ textarea.form-control-lg {
     background-clip: border-box;
     border: var(--bs-card-border-width) solid var(--bs-card-border-color);
     border-radius: var(--bs-card-border-radius);
+    overflow-y: auto;
 }
 
     .card > hr {

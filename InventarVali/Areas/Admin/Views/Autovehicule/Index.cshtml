@@ -1,24 +1,22 @@
 ﻿@model List<Autovehicule>
-<div class="card shadow border-0 mt-4">
+<div class="card shadow border-0 my-4">
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-black py-2">Autovehicule List</h2>
+                <h2 class="text-white py-2">Autovehicule List</h2>
             </div>
         </div>
     </div>
-    <div class="card-body pb - 4">
+    <div class="card-body p-4">
     </div>
     <div class="row pb-3">
-        <div class="col-12">
-        </div>
-        <div class="text-center">
+       <div class="col-12 text-center">
             <a asp-controller="Autovehicule" asp-action="Upsert" class="btn btn-primary">
                 <i class="bi bi-plus-square-fill"></i> Create New Autovehicule
             </a>
-        </div>
+       </div>
     </div>
-    <table class="table table-bordered table-striped" style="overflow-y: auto; overflow-x: auto;">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>
@@ -54,7 +52,6 @@
                 <th>
                     Employee
                 </th>
-                
             </tr>
         </thead>
         <tbody>
@@ -63,40 +60,40 @@
                 <tr>
                     <td>
                         @obj.Type
-                    </td>
-                    <td>
+                    </td>   
+                    <td>    
                         @obj.LicensePlate
-                    </td>
-                    <td>
+                    </td>   
+                    <td>    
                         @obj.HasITP
-                    </td>
-                    <td>
+                    </td>   
+                    <td>    
                         @obj.ITPExpirationDate
-                    </td>
-                    <td>
+                    </td>   
+                    <td>    
                         @obj.InsurenceDate
-                    </td>
-                    <td>
+                    </td>   
+                    <td>    
                         @obj.InsuranceExpirationDate
-                    </td>
-                    <td>
+                    </td>   
+                    <td>    
                         @obj.VinNumber
-                    </td>
-                    <td>
+                    </td>   
+                    <td>    
                         @obj.HasVinieta
-                    </td>
-                    <td>
+                    </td>   
+                    <td>    
                         @obj.VinietaExpirationDate
-                    </td>
-                    <td>
+                    </td>   
+                    <td>    
                         @obj.ImageUrl
                     </td>
                     <td>
                         @obj.EmployeeId
                     </td>
-
-                    <td>
-                        <div class="w-75 btn-group" role="group">
+                    <td >
+                       
+                        <div class="w-15 btn-group text-center" role="group">
                             <a asp-controller="Autovehicule" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
                                 <i class="bi bi-pencil-square"></i>Edit
                             </a>
@@ -110,4 +107,5 @@
 
         </tbody>
     </table>
+
 </div>

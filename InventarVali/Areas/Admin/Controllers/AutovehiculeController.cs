@@ -11,9 +11,11 @@ namespace InventarVali.Areas.Admin.Controllers
     public class AutovehiculeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public AutovehiculeController(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public AutovehiculeController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -51,7 +53,41 @@ namespace InventarVali.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Autovehicule.Add(autovehiculeVM.Autovehicule);
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null) 
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string autovehiculePath = Path.Combine(wwwRootPath, @"images\autovehicule");
+
+                    if (!string.IsNullOrEmpty(autovehiculeVM.Autovehicule.ImageUrl)) 
+                    {
+                        //Delete old img
+                        var oldimgPath = Path.Combine(wwwRootPath, autovehiculeVM.Autovehicule.ImageUrl.TrimStart('\\'));
+
+                        if (System.IO.File.Exists(oldimgPath))
+                        {
+                            System.IO.File.Delete(oldimgPath);
+                        }
+                    }
+
+                    using (var fileStream = new FileStream(Path.Combine(autovehiculePath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    
+                    autovehiculeVM.Autovehicule.ImageUrl = @"\images\autovehicule\" + fileName;
+                }
+
+                if (autovehiculeVM.Autovehicule.Id == 0)
+                {
+                    _unitOfWork.Autovehicule.Add(autovehiculeVM.Autovehicule);
+                }
+                else 
+                {
+                    _unitOfWork.Autovehicule.Update(autovehiculeVM.Autovehicule);
+
+                }
+                
                 _unitOfWork.Save();
                 TempData["success"] = "Autovehicule was created successfully";
 

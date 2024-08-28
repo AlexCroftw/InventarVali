@@ -23,4 +23,8 @@
     <ProjectReference Include="..\InventarVali.Utility\InventarVali.Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\autovehicule\" />
+  </ItemGroup>
+
 </Project>
