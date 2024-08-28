@@ -17,20 +17,20 @@ namespace InventarVali.Models
         public string Type { get; set; }
         [Required]
         public string LicensePlate { get; set; }
-        [Required]
+
         public string VinNumber { get; set; }
-        [Required]
-        public DateTime InsurenceDate { get; set; }
-        [Required]
-        public bool HasITP { get; set; }
-        [Required]
-        public DateTime ITPExpirationDate { get; set; }
-        [Required]
-        public DateTime InsuranceExpirationDate { get; set; }
-        [Required]
-        public bool HasVinieta { get; set; }
-        [Required]
-        public DateTime VinietaExpirationDate { get;set; }
+    
+        public DateTime? InsurenceDate { get; set; }
+       
+        public bool? HasITP { get; set; }
+    
+        public DateTime? ITPExpirationDate { get; set; }
+     
+        public DateTime? InsuranceExpirationDate { get; set; }
+      
+        public bool? HasVinieta { get; set; }
+        
+        public DateTime? VinietaExpirationDate { get;set; }
         public int? EmployeeId { get; set; }
         [ForeignKey("EmployeeId")]
         [ValidateNever]

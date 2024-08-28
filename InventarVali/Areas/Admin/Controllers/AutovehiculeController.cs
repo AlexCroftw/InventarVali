@@ -29,7 +29,7 @@ namespace InventarVali.Areas.Admin.Controllers
             {
                 EmployeeList = _unitOfWork.Employee.GetAll().Select(u => new SelectListItem
                 {
-                    Text = u.LastName,
+                    Text = u.FullName,
                     Value = u.Id.ToString()
                 }),
                 Autovehicule = new Autovehicule()

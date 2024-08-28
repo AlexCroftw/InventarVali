@@ -24,9 +24,9 @@ namespace InventarVali.DataAccess.Data
                 new Goods { Id = 3, Name = "Laptop", Type = "Asus Rog", IsTaken = true, ImageUrl = "" }
                 );
             modelBuilder.Entity<Employees>().HasData(
-               new Employees { Id = 1, FirstName = "John", LastName = "Doe", Email = "test@email.com" },
-               new Employees { Id = 2, FirstName = "Michael", LastName = "Cox", Email = "test2@email.com" },
-               new Employees { Id = 3, FirstName = "Vasile", LastName = "Braconieru", Email = "test4@email.com" }
+               new Employees { Id = 1, FirstName = "John", LastName = "Doe", Email = "test@email.com", FullName = "John Doe" },
+               new Employees { Id = 2, FirstName = "Michael", LastName = "Cox", Email = "test2@email.com" , FullName = "Michael Cox" },
+               new Employees { Id = 3, FirstName = "Vasile", LastName = "Braconieru", Email = "test4@email.com" , FullName = "Vasile Braconieru" }
                );
             modelBuilder.Entity<Autovehicule>().HasData(
                new Autovehicule { Id = 1, HasITP = true, InsurenceDate = DateTime.SpecifyKind(DateTime.Parse("07/11/2024"), DateTimeKind.Utc), LicensePlate = "B 06 CAR", Type = "Duba", VinNumber = "1XPWDBTX48D766660",
@@ -39,8 +39,8 @@ namespace InventarVali.DataAccess.Data
                }
                );
             modelBuilder.Entity<Computer>().HasData(
-                new Computer { Id = 1, Type = "Laptop", Model = "Asus Rog", Description = "Intel Core I9, RTX 4070, 32 GB RAM", SerialNumber = "12-12AB3" },
-                new Computer { Id = 2, Type = "Desktop", Model = "x570 Aorus Elite", Description = "Intel Core I5, no GPU, 32 GB RAM"}
+                new Computer { Id = 1, Type = "Laptop", Model = "Asus Rog", Description = "Intel Core I9, RTX 4070, 32 GB RAM", SerialNumber = "12-12AB3" , ImageUrl = "" , EmployeeId = 2 },
+                new Computer { Id = 2, Type = "Desktop", Model = "x570 Aorus Elite", Description = "Intel Core I5, no GPU, 32 GB RAM", ImageUrl = "" , EmployeeId = 1}
                 );
         }
     
