@@ -97,7 +97,7 @@ namespace InventarVali.Areas.Admin.Controllers
             {
                 autovehiculeVM.EmployeeList = _unitOfWork.Employee.GetAll().Select(u => new SelectListItem 
                 {
-                    Text = u.LastName,
+                    Text = u.FullName,
                     Value = u.Id.ToString()
                 });
                 return View(autovehiculeVM);

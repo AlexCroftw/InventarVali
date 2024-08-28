@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace InventarVali.Models.ViewModel
     public class ComputerVM
     {
         public Computer Computer { get; set; }
-        public IEnumerable<SelectListItem> ComputerList { get; set; }
+        [ValidateNever]
+        public IEnumerable<SelectListItem> EmployeeList { get; set; }
     }
 }

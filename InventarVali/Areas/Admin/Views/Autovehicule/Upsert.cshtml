@@ -3,7 +3,7 @@
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">@(Model.Autovehicule.Id != 0?"Update ":"Create ") Autovehicule </h2>
+                <h2 class="text-white py-2">@(Model.Autovehicule.Id != 0? "Update ":"Create ") Autovehicule </h2>
             </div>
         </div>
     </div>
@@ -15,9 +15,10 @@
                 <div class="col-10">
                     <div class="border p-3">
                         @* <div asp-validation-summary="ModelOnly"></div> *@
-                        <div class="py-2 col-12">
-                            <label asp-for="Autovehicule.Type" class="ms-2 text-muted"></label>
-                            <textarea asp-for="Autovehicule.Type" class="form-control border-0 shadow"></textarea>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="Autovehicule.Type" class="form-control border-0 shadow">
+                            <label asp-for="Autovehicule.Type" class="ms-2"></label>
+                            <span asp-validation-for="Autovehicule.Type" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
                             <input asp-for="Autovehicule.LicensePlate" class="form-control border-0 shadow">
@@ -109,20 +110,7 @@
 
 
 @section Scripts {
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-            tinycomments_mode: 'embedded',
-            tinycomments_author: 'Author name',
-            mergetags_list: [
-                { value: 'First.Name', title: 'First Name' },
-                { value: 'Email', title: 'Email' },
-            ],
-            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
-        });
-    </script>
+   
     @{
         <partial name="_ValidationScriptsPartial" />
     }
