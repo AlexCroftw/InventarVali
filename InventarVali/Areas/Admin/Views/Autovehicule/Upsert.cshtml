@@ -69,8 +69,8 @@
                             <select asp-for="Autovehicule.EmployeeId" asp-items="@Model.EmployeeList" class="form-control border-0 shadow">
                                 <option disabled selected>---Select Employee---</option>
                             </select>
-                            <label asp-for="Autovehicule.EmployeeId" class="ms-2"></label>
-                            <span asp-validation-for="Autovehicule.EmployeeId" class="text-danger"></span>
+                            <label asp-for="Autovehicule.Employees.LastName" class="ms-2"></label>
+                            <span asp-validation-for="Autovehicule.Employees.LastName" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
                             <input type="file" name="file" class="form-control border-0 shadow">

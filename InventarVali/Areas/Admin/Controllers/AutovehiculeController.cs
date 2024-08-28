@@ -19,7 +19,7 @@ namespace InventarVali.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Autovehicule> objAutovehiculeslist = _unitOfWork.Autovehicule.GetAll().ToList();
+            List<Autovehicule> objAutovehiculeslist = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
             return View(objAutovehiculeslist);
         }
 
