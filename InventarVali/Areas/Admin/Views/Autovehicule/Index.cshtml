@@ -16,7 +16,7 @@
             </a>
        </div>
     </div>
-    <table class="table table-bordered table-striped" style="width:100%">
+    <table id="tblData" class="table table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
                 <th>
@@ -26,19 +26,19 @@
                     License Plate
                 </th>
                 <th>
+                    VIN Number
+                </th>
+                <th>
+                    Insurence Start Date
+                </th>
+                <th>
                     ITP
                 </th>
                 <th>
                     ITP Expiration Date
                 </th>
                 <th>
-                    Insurence Start Date
-                </th>
-                <th>
                     Insurance Expiration Date
-                </th>
-                <th>
-                    VIN Number
                 </th>
                 <th>
                     Vinieta
@@ -52,60 +52,16 @@
                 <th>
                     Employee
                 </th>
+                <th>
+
+                </th>
             </tr>
         </thead>
-        <tbody>
-            @foreach (var obj in Model)
-            {
-                <tr>
-                    <td>
-                        @obj.Type
-                    </td>   
-                    <td>    
-                        @obj.LicensePlate
-                    </td>   
-                    <td>    
-                        @obj.HasITP
-                    </td>   
-                    <td>    
-                        @obj.ITPExpirationDate
-                    </td>   
-                    <td>    
-                        @obj.InsurenceDate
-                    </td>   
-                    <td>    
-                        @obj.InsuranceExpirationDate
-                    </td>   
-                    <td>    
-                        @obj.VinNumber
-                    </td>   
-                    <td>    
-                        @obj.HasVinieta
-                    </td>   
-                    <td>    
-                        @obj.VinietaExpirationDate
-                    </td>   
-                    <td>    
-                        @obj.ImageUrl
-                    </td>
-                    <td>
-                        @obj.Employees.FullName
-                    </td>
-                    <td >
-                       
-                        <div class="w-15 btn-group text-center" role="group">
-                            <a asp-controller="Autovehicule" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
-                                <i class="bi bi-pencil-square"></i>Edit
-                            </a>
-                            <a asp-controller="Autovehicule" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
-                                <i class="bi bi-trash3"></i>Delete
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            }
-
-        </tbody>
+        
     </table>
 
 </div>
+
+@section Scripts {
+    <script src="~/js/autovehicule.js"></script>
+}

@@ -4,6 +4,7 @@ using InventarVali.Models;
 using InventarVali.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Cryptography.X509Certificates;
 
 namespace InventarVali.Areas.Admin.Controllers
 {
@@ -143,7 +144,17 @@ namespace InventarVali.Areas.Admin.Controllers
             {
                 return View();
             }
+
+            
         }
+        #region API CALL
+        [HttpGet]
+        public IActionResult Getall()
+        {
+            List<Autovehicule> objAutovehiculeList = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
+            return Json(new { data = objAutovehiculeList });
+        }
+        #endregion
     }
 }
 
