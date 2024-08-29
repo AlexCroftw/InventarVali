@@ -34,38 +34,17 @@
                     Serial Number
                 </th>
                 <th>
-                    Iamge
+                    Image
                 </th>
                 <th>
                     Employee
                 </th>
+                <th>
+                    
+                </th>
             </tr>
         </thead>
-        <tbody>
-            @foreach (var obj in Model)
-            {
-             <tr>
-                 <td>
-                    @obj.Type
-                 </td>
-                 <td>
-                    @obj.Model
-                 </td>
-                 <td>
-                    @obj.Description
-                 </td>
-                  <td>
-                    @obj.SerialNumber
-                 </td>
-                  <td>
-                     @obj.ImageUrl
-                  </td>
-                   <td>
-                     @obj.Employees.FullName
-                   </td>
-             </tr>   
-            }
-        </tbody>
+       
     </table>
 </div>
 
