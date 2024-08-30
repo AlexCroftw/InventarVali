@@ -106,36 +106,6 @@ namespace InventarVali.Areas.Admin.Controllers
 
         }
 
-        public IActionResult Delete(int id) 
-        {
-            if (id == 0 || id == null)
-            {
-                return NotFound();
-            }
-            Computer obj = _unitOfWork.Computer.Get(o => o.Id == id);
-            if (obj == null)
-            {
-                return NotFound();
-            }
-            return View(obj);
-        }
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteComputer(int id) 
-        {
-            Computer obj = _unitOfWork.Computer.Get(o => o.Id == id);
-            if (id == 0 || id == null) 
-            {
-                return NotFound();
-            }
-            if (ModelState.IsValid) 
-            {
-                _unitOfWork.Computer.Remove(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "The Computer was deleted successfully";
-                return RedirectToAction("Index", "Computer");
-            }
-            return View();
-        }
 
         #region API CALLS
         [HttpGet]
@@ -143,6 +113,26 @@ namespace InventarVali.Areas.Admin.Controllers
         {
             List<Computer> objComputerList = _unitOfWork.Computer.GetAll(includeProperties: "Employees").ToList();
             return Json(new { data = objComputerList });
+        }
+        [HttpDelete]
+        public IActionResult Delete(int? id)
+        {
+            var computerToBeDeleted = _unitOfWork.Computer.Get(o => o.Id == id);
+            if (computerToBeDeleted == null)
+            {
+                return Json(new { success = false, message = "Error while deleting" });
+            }
+
+            var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, computerToBeDeleted.ImageUrl.TrimStart('\\'));
+
+            if (System.IO.File.Exists(oldImagePath))
+            {
+                System.IO.File.Delete(oldImagePath);
+            }
+            _unitOfWork.Computer.Remove(computerToBeDeleted);
+            _unitOfWork.Save();
+
+            return Json(new {success = true, message = "Deleted Successfully"});
         }
         #endregion
     }
