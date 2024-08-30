@@ -51,6 +51,10 @@ namespace InventarVali.Areas.Admin.Controllers
                 ModelState.AddModelError("error", "First name cannot be the same as Last name");
                 return BadRequest();
             }
+            if (employeeVM.Employees.Email ==  null)
+            {
+                employeeVM.Employees.Email = "n/a";
+            }
 
             if (ModelState.IsValid)
             {
@@ -106,6 +110,16 @@ namespace InventarVali.Areas.Admin.Controllers
                 return RedirectToAction("Index", "Employee");
             }
             return View();
+     
         }
+
+        #region API CALLS
+        [HttpGet]
+        public IActionResult Getall()
+        {
+            List<Employees> objEmployeeList = _unitOfWork.Employee.GetAll().ToList();
+            return Json(new { data = objEmployeeList });
+        }
+        #endregion
     }
 }
