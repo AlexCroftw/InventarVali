@@ -105,54 +105,34 @@ namespace InventarVali.Areas.Admin.Controllers
             }
         }
 
-        public IActionResult Delete(int id) 
-        {
-            if (id == null || id == 0) 
-            {
-                return NotFound();
-            }
-
-            Autovehicule obj = _unitOfWork.Autovehicule.Get(x => x.Id == id);
-
-            if (obj == null) 
-            {
-                return NotFound();
-            }
-
-            return View(obj);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteVehicule(int id) 
-        {
-            Autovehicule obj = _unitOfWork.Autovehicule.Get(x => x.Id == id);
-
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Autovehicule.Remove(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "The Autovehicule  was deleted successfully";
-
-                return RedirectToAction("Index", "Autovehicule");
-            }
-            else
-            {
-                return View();
-            }
-
-            
-        }
+       
         #region API CALL
         [HttpGet]
         public IActionResult Getall()
         {
             List<Autovehicule> objAutovehiculeList = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
             return Json(new { data = objAutovehiculeList });
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int? id)
+        {
+            var autovehiculeToBeDeleted = _unitOfWork.Autovehicule.Get(o => o.Id == id);
+            if (autovehiculeToBeDeleted == null)
+            {
+                return Json(new { success = false, message = "Error while deleting" });
+            }
+
+            var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, autovehiculeToBeDeleted.ImageUrl.TrimStart('\\'));
+
+            if (System.IO.File.Exists(oldImagePath))
+            {
+                System.IO.File.Delete(oldImagePath);
+            }
+            _unitOfWork.Autovehicule.Remove(autovehiculeToBeDeleted);
+            _unitOfWork.Save();
+
+            return Json(new { success = true, message = "Deleted Successfully" });
         }
         #endregion
     }
