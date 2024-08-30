@@ -13,7 +13,7 @@
         <div class="col-12">
         </div>
         <div class="text-center">
-            <a asp-controller="Employee" asp-action="CreateEmployee" class="btn btn-primary">
+            <a asp-controller="Employee" asp-action="Upsert" class="btn btn-primary">
                 <i class="bi bi-plus-square-fill"></i> Create New Emplyoee
             </a>
         </div>
@@ -53,7 +53,7 @@
                     </td>
                     <td>
                         <div class="w-75 btn-group" role="group">
-                            <a asp-controller="Employee" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+                            <a asp-controller="Employee" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
                                 <i class="bi bi-pencil-square"></i>Edit
                             </a>
                             <a asp-controller="Employee" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
