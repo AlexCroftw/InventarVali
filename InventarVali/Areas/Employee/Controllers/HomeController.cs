@@ -1,4 +1,7 @@
+using InventarVali.DataAccess.Data;
+using InventarVali.DataAccess.Repository.IRepository;
 using InventarVali.Models;
+using InventarVali.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,15 +11,18 @@ namespace InventarVali.Areas.Employee.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+ 
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+
         }
 
         public IActionResult Index()
         {
-            return View();
+           
+            return View(); 
         }
 
         public IActionResult Privacy()

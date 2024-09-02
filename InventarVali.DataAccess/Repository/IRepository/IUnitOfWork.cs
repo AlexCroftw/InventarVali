@@ -8,7 +8,6 @@ namespace InventarVali.DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork
     {
-        IGoodsRepository Goods { get; }
         IEmployeeRepository Employee { get; }
         IAutovehiculeRepository Autovehicule { get; }
         IComputerRepository Computer { get; }

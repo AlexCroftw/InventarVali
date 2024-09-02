@@ -1,4 +1,5 @@
 ﻿using InventarVali.Models;
+using InventarVali.Models.ViewModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventarVali.DataAccess.Data
@@ -11,18 +12,11 @@ namespace InventarVali.DataAccess.Data
 
         }
 
-        public DbSet<Goods> Goods { get; set; }
         public DbSet<Autovehicule> Autovehicule { get; set; }
         public DbSet<Employees> Employees { get; set; }
         public DbSet<Computer> Computers { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Goods>().HasData(
-                new Goods { Id = 1, Name = "Masina", Type = "Dacia Duster", IsTaken = true, ImageUrl = "" },
-                new Goods { Id = 2, Name = "Masina", Type = "Audi A6", IsTaken = false, ImageUrl = "" },
-                new Goods { Id = 3, Name = "Laptop", Type = "Asus Rog", IsTaken = true, ImageUrl = "" }
-                );
             modelBuilder.Entity<Employees>().HasData(
                new Employees { Id = 1, FirstName = "John", LastName = "Doe", Email = "test@email.com", FullName = "John Doe" },
                new Employees { Id = 2, FirstName = "Michael", LastName = "Cox", Email = "test2@email.com" , FullName = "Michael Cox" },

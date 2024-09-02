@@ -11,14 +11,12 @@ namespace InventarVali.DataAccess.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private ApplicationDbContext _db;
-        public IGoodsRepository Goods { get; private set; }
         public IEmployeeRepository Employee { get; private set; }
         public IAutovehiculeRepository Autovehicule { get; private set; }
         public IComputerRepository Computer { get; private set; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
-            Goods = new GoodsRepository(_db);
             Employee = new EmployeeRepository(_db);
             Autovehicule = new AutovehiculeRepository(_db);
             Computer = new ComputerRepository(_db);
