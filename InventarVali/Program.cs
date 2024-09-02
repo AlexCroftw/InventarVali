@@ -1,6 +1,7 @@
 using InventarVali.DataAccess.Data;
 using InventarVali.DataAccess.Repository;
 using InventarVali.DataAccess.Repository.IRepository;
+using InventarVali.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventarVali

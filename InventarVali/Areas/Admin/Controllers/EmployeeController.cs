@@ -1,7 +1,9 @@
-﻿using InventarVali.DataAccess.Repository;
+﻿using AutoMapper;
+using InventarVali.DataAccess.Repository;
 using InventarVali.DataAccess.Repository.IRepository;
 using InventarVali.Models;
 using InventarVali.Models.ViewModel;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -20,13 +22,14 @@ namespace InventarVali.Areas.Admin.Controllers
             List<Employees> employeesList = _unitOfWork.Employee.GetAll().ToList();
             return View(employeesList);
         }
-
+        
         public IActionResult Upsert(int? id)
         {
             EmployeesVM employeesVM = new()
             {
                 Employees = new Employees()
             };
+
 
             if (id == 0 || id == null)
             {
@@ -77,41 +80,7 @@ namespace InventarVali.Areas.Admin.Controllers
             
         }
 
-        public IActionResult Delete(int id) 
-        {
-                if (id == 0 || id == null)
-                {
-                    return NotFound();
-                }
-                Employees obj = _unitOfWork.Employee.Get(o => o.Id == id);
-                if (obj == null)
-                {
-                    return NotFound();
-                }
-                return View(obj);
-        }
-
-        [HttpPost,ActionName("Delete")]
-
-        public IActionResult DeleteEmployee(int id) 
-        {
-            Employees obj = _unitOfWork.Employee.Get(o => o.Id == id);
-
-            if (id == 0 || id == null)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Employee.Remove(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "This employee was deleted successfully";
-                return RedirectToAction("Index", "Employee");
-            }
-            return View();
-     
-        }
+       
 
         #region API CALLS
         [HttpGet]
@@ -120,6 +89,23 @@ namespace InventarVali.Areas.Admin.Controllers
             List<Employees> objEmployeeList = _unitOfWork.Employee.GetAll().ToList();
             return Json(new { data = objEmployeeList });
         }
+
+
+        [HttpDelete]
+        public IActionResult Delete(int? id)
+        {
+            var employeeToBeDeleted = _unitOfWork.Employee.Get(o => o.Id == id);
+            if (employeeToBeDeleted == null)
+            {
+                return Json(new { success = false, message = "Error while deleting" });
+            }
+           
+            _unitOfWork.Employee.Remove(employeeToBeDeleted);
+            _unitOfWork.Save();
+
+            return Json(new { success = true, message = "Deleted Successfully" });
+        }
+
         #endregion
     }
 }
