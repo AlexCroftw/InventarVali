@@ -15,3 +15,4 @@ namespace InventarVali.Models.ViewModel
         public IEnumerable<SelectListItem> EmployeeList { get; set; }
     }
 }
+///TODO  Create a automapper situation
