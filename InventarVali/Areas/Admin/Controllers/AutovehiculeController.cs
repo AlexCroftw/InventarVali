@@ -1,4 +1,5 @@
-﻿using InventarVali.DataAccess.Repository;
+﻿using AutoMapper;
+using InventarVali.DataAccess.Repository;
 using InventarVali.DataAccess.Repository.IRepository;
 using InventarVali.Models;
 using InventarVali.Models.ViewModel;
@@ -13,27 +14,30 @@ namespace InventarVali.Areas.Admin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public AutovehiculeController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
+        private readonly IMapper _mapper;
+        public AutovehiculeController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
+            _mapper = mapper;
         }
         public IActionResult Index()
-        {
+        {   
             List<Autovehicule> objAutovehiculeslist = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
-            return View(objAutovehiculeslist);
+            var autovehicule = _mapper.Map<List<AutovehiculeVM>>(objAutovehiculeslist);
+            return View(autovehicule);
         }
 
         public IActionResult Upsert(int? id) 
         {
-            AutovehiculeVM autovehiculeVM = new()
+            AutovehiculeDetailsVM autovehiculeVM = new()
             {
                 EmployeeList = _unitOfWork.Employee.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.FullName,
                     Value = u.Id.ToString()
                 }),
-                Autovehicule = new Autovehicule()
+                Autovehicule = new AutovehiculeVM()
             };
 
             if (id == null || id == 0)
@@ -43,8 +47,10 @@ namespace InventarVali.Areas.Admin.Controllers
             }
             else 
             {
+
                 //Update
-                autovehiculeVM.Autovehicule = _unitOfWork.Autovehicule.Get(o => o.Id == id);
+                var autovehicule = _unitOfWork.Autovehicule.Get(o => o.Id == id);
+                autovehiculeVM.Autovehicule = _mapper.Map<AutovehiculeVM>(autovehicule);
                 return View(autovehiculeVM);
             }
             

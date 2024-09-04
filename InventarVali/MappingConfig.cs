@@ -13,6 +13,8 @@ namespace InventarVali.Models
         public MappingConfig()
         {
             CreateMap<Autovehicule,AutovehiculeVM>().ReverseMap();
+            CreateMap<Employees, EmployeesVM>().ReverseMap();
+            CreateMap<Computer, ComputerVM>().ReverseMap();
         }
     }
 }

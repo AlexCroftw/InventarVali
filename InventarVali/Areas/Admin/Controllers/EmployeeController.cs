@@ -13,9 +13,11 @@ namespace InventarVali.Areas.Admin.Controllers
     public class EmployeeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public EmployeeController(IUnitOfWork unitOfWork)
+        private readonly IMapper _mapper;
+        public EmployeeController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
@@ -87,7 +89,8 @@ namespace InventarVali.Areas.Admin.Controllers
         public IActionResult Getall()
         {
             List<Employees> objEmployeeList = _unitOfWork.Employee.GetAll().ToList();
-            return Json(new { data = objEmployeeList });
+            var employees = _mapper.Map<List<EmployeesVM>>(objEmployeeList);
+            return Json(new { data = employees });
         }
 
 
