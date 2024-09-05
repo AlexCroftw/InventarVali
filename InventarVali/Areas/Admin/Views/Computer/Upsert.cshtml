@@ -1,4 +1,4 @@
-﻿@model ComputerVM
+﻿@model ComputerDetailsVM
 
 <div class="card shadow border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
@@ -10,42 +10,42 @@
     </div>
     <div class="card-body p-4">
         <form method="post" class="row" enctype="multipart/form-data">
-            <input asp-for="Computer.Id" hidden />
-            <input asp-for="Computer.ImageUrl" hidden />
+            <input asp-for="@Model.Computer.Id" hidden />
+            <input asp-for="@Model.Computer.ImageUrl" hidden />
             <div class="row">
                 <div class="col-10">
                     <div class="border p-3">
                         @* <div asp-validation-summary="ModelOnly"></div> *@
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Computer.Type" class="form-control border-0 shadow">
-                            <label asp-for="Computer.Type" class="ms-2"></label>
-                            <span asp-validation-for="Computer.Type" class="text-danger"></span>
+                            <input asp-for="@Model.Computer.Type" class="form-control border-0 shadow">
+                            <label asp-for="@Model.Computer.Type" class="ms-2"></label>
+                            <span asp-validation-for="@Model.Computer.Type" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Computer.Model" class="form-control border-0 shadow">
-                            <label asp-for="Computer.Model" class="ms-2"></label>
-                            <span asp-validation-for="Computer.Model" class="text-danger"></span>
+                            <input asp-for="@Model.Computer.Model" class="form-control border-0 shadow">
+                            <label asp-for="@Model.Computer.Model" class="ms-2"></label>
+                            <span asp-validation-for="@Model.Computer.Model" class="text-danger"></span>
                         </div>
                         <div class="py-2 col-12">
-                            <label asp-for="Computer.Description" class="ms-2 text-muted"></label>
+                            <label asp-for="@Model.Computer.Description" class="ms-2 text-muted"></label>
 
-                            <textarea asp-for="Computer.Description" class="form-control border-0 shadow"></textarea>
+                            <textarea asp-for="@Model.Computer.Description" class="form-control border-0 shadow"></textarea>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Computer.SerialNumber" class="form-control border-0 shadow">
-                            <label asp-for="Computer.SerialNumber" class="ms-2"></label>
-                            <span asp-validation-for="Computer.SerialNumber" class="text-danger"></span>
+                            <input asp-for="@Model.Computer.SerialNumber" class="form-control border-0 shadow">
+                            <label asp-for="@Model.Computer.SerialNumber" class="ms-2"></label>
+                            <span asp-validation-for="@Model.Computer.SerialNumber" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <select asp-for="Computer.EmployeeId" asp-items="@Model.EmployeeList" class="form-control border-0 shadow">
+                            <select asp-for="@Model.Computer.EmployeeId" asp-items="@Model.EmployeeList" class="form-control border-0 shadow">
                                 <option disabled selected>---Select Employee---</option>
                             </select>
-                            <label asp-for="Computer.Employees.FullName" class="ms-2"></label>
-                            <span asp-validation-for="Computer.Employees.FullName" class="text-danger"></span>
+                            <label asp-for="@Model.Computer.Employee.FullName" class="ms-2"></label>
+                            <span asp-validation-for="@Model.Computer.Employee.FullName" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
                             <input type="file" name="file" class="form-control border-0 shadow">
-                            <label asp-for="Computer.ImageUrl" class="ms-2"></label>
+                            <label asp-for="@Model.Computer.ImageUrl" class="ms-2"></label>
                         </div>
                         <div class="row pt-2">
                             <div class="col-6 col-md-3">

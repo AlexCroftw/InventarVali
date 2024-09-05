@@ -22,16 +22,14 @@ namespace InventarVali.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Employees> employeesList = _unitOfWork.Employee.GetAll().ToList();
-            return View(employeesList);
+            var employeesVM = _mapper.Map<List<EmployeesVM>>(employeesList);
+            return View(employeesVM);
         }
         
         public IActionResult Upsert(int? id)
         {
-            EmployeesVM employeesVM = new()
-            {
-                Employees = new Employees()
-            };
-
+            
+            EmployeesVM employeesVM = new();
 
             if (id == 0 || id == null)
             {
@@ -42,7 +40,8 @@ namespace InventarVali.Areas.Admin.Controllers
             {
                 //Update
 
-                employeesVM.Employees = _unitOfWork.Employee.Get(o => o.Id == id);
+                var employee = _unitOfWork.Employee.Get(o => o.Id == id);
+                employeesVM = _mapper.Map<EmployeesVM>(employee);
                 return View(employeesVM);
             }
         }
@@ -50,26 +49,26 @@ namespace InventarVali.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Upsert (EmployeesVM employeeVM, int? id)
         {
-
-            if (employeeVM.Employees.FirstName == employeeVM.Employees.LastName)
+            var employee = _mapper.Map<Employees>(employeeVM);
+            if (employee.FirstName == employee.LastName)
             {
                 ModelState.AddModelError("error", "First name cannot be the same as Last name");
                 return BadRequest();
             }
-            if (employeeVM.Employees.Email ==  null)
+            if (employee.Email ==  null)
             {
-                employeeVM.Employees.Email = "n/a";
+                employee.Email = "n/a";
             }
 
             if (ModelState.IsValid)
             {
-                if (employeeVM.Employees.Id == 0) 
+                if (employee.Id == 0) 
                 {
-                     _unitOfWork.Employee.Add(employeeVM.Employees);
+                     _unitOfWork.Employee.Add(employee);
                 }
                 else
                 {
-                    _unitOfWork.Employee.Update(employeeVM.Employees);
+                    _unitOfWork.Employee.Update(employee);
                 }
                 _unitOfWork.Save();
                 TempData["Success"] = "The employee was created successfully";

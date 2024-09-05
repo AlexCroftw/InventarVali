@@ -21,7 +21,7 @@ namespace InventarVali.Areas.Employee.Controllers
 
         public IActionResult Index()
         {
-            var tuple = 
+             
            
             return View(); 
         }

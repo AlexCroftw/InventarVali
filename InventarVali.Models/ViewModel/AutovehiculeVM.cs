@@ -31,10 +31,12 @@ namespace InventarVali.Models.ViewModel
         public bool? HasVinieta { get; set; }
 
         public DateTime? VinietaExpirationDate { get; set; }
+        public int? EmployeeId { get; set; }
 
         public string? ImageUrl { get; set; }
         [ValidateNever]
-        public IEnumerable<SelectListItem> EmployeeList { get; set; }
+        public EmployeesVM EmployeesVM { get; set; }    
+        
     }
 }
-///TODO  Create a automapper situation
+

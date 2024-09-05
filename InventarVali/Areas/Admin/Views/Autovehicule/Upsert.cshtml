@@ -1,4 +1,4 @@
-﻿@model AutovehiculeVM
+﻿@model AutovehiculeDetailsVM
 <div class="card shadow border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
         <div class="row">
@@ -68,8 +68,8 @@
                             <select asp-for="Autovehicule.EmployeeId" asp-items="@Model.EmployeeList" class="form-control border-0 shadow">
                                 <option disabled selected>---Select Employee---</option>
                             </select>
-                            <label asp-for="Autovehicule.Employees.FullName" class="ms-2"></label>
-                            <span asp-validation-for="Autovehicule.Employees.FullName" class="text-danger"></span>
+                            <label asp-for="Autovehicule.EmployeesVM.FullName" class="ms-2"></label>
+                            <span asp-validation-for="Autovehicule.EmployeesVM.FullName" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
                             <input type="file" name="file" class="form-control border-0 shadow">

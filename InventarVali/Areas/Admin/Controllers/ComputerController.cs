@@ -1,4 +1,5 @@
-﻿using InventarVali.DataAccess.Repository.IRepository;
+﻿using AutoMapper;
+using InventarVali.DataAccess.Repository.IRepository;
 using InventarVali.Models;
 using InventarVali.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -11,47 +12,54 @@ namespace InventarVali.Areas.Admin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public ComputerController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
+        private readonly IMapper _mapper;
+        public ComputerController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
             List<Computer> objComputerList = _unitOfWork.Computer.GetAll(includeProperties : "Employees").ToList();
-            return View(objComputerList);
+            var computerVM = _mapper.Map<List<ComputerVM>>(objComputerList);
+            return View(computerVM);
         }
 
         public IActionResult Upsert(int? id) 
         {
-            ComputerVM computerVM = new()
+            ComputerDetailsVM computerDetailswVM = new()
             {
                 EmployeeList = _unitOfWork.Employee.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.FullName,
                     Value = u.Id.ToString()
                 }),
-                Computer = new Computer()
+                Computer = new ComputerVM()
             };
-
+           
             if (id == null || id == 0)
             {
                 //Create
-                return View(computerVM);
+                return View(computerDetailswVM);
             }
             else
             {
                 //Update
-                computerVM.Computer = _unitOfWork.Computer.Get(o => o.Id == id);
-                return View(computerVM);
+                var computer = _unitOfWork.Computer.Get(o => o.Id == id);
+                computerDetailswVM.Computer = _mapper.Map<ComputerVM>(computer);
+                return View(computerDetailswVM);
             }
         }
 
         [HttpPost]
-        public IActionResult Upsert(ComputerVM computerVM, IFormFile file) 
+        public IActionResult Upsert(ComputerDetailsVM computerDetailsVM, IFormFile file) 
         {
+            
             if (ModelState.IsValid)
-            {
+             {
+                var model = _mapper.Map<Computer>(computerDetailsVM.Computer);
+
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
                 if (file != null)
                 {
@@ -60,10 +68,10 @@ namespace InventarVali.Areas.Admin.Controllers
 
                    
 
-                    if (!string.IsNullOrEmpty(computerVM.Computer.ImageUrl))
+                    if (!string.IsNullOrEmpty(model.ImageUrl))
                     {
                         //Delete old img
-                        var oldimgPath = Path.Combine(wwwRootPath, computerVM.Computer.ImageUrl.TrimStart('\\'));
+                        var oldimgPath = Path.Combine(wwwRootPath, computerDetailsVM.Computer.ImageUrl.TrimStart('\\'));
 
                         if (System.IO.File.Exists(oldimgPath))
                         {
@@ -76,16 +84,17 @@ namespace InventarVali.Areas.Admin.Controllers
                         file.CopyTo(fileStream);
                     }
 
-                    computerVM.Computer.ImageUrl = @"\images\computer\" + fileName;
+                     model.ImageUrl = @"\images\computer\" + fileName;
                 }
+                
 
-                if (computerVM.Computer.Id == 0)
+                if (model.Id == 0)
                 {
-                    _unitOfWork.Computer.Add(computerVM.Computer);
+                    _unitOfWork.Computer.Add(model);
                 }
                 else
                 {
-                    _unitOfWork.Computer.Update(computerVM.Computer);
+                    _unitOfWork.Computer.Update(model);
 
                 }
 
@@ -96,12 +105,13 @@ namespace InventarVali.Areas.Admin.Controllers
             }
             else
             {
-                computerVM.EmployeeList = _unitOfWork.Employee.GetAll().Select(u => new SelectListItem
+                
+                computerDetailsVM.EmployeeList = _unitOfWork.Employee.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.FullName,
                     Value = u.Id.ToString()
                 });
-                return View(computerVM);
+                return View(computerDetailsVM);
             }
 
         }

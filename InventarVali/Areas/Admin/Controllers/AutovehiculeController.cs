@@ -56,20 +56,21 @@ namespace InventarVali.Areas.Admin.Controllers
             
         }
         [HttpPost]
-        public IActionResult Upsert(AutovehiculeVM autovehiculeVM, IFormFile? file) 
+        public IActionResult Upsert(AutovehiculeDetailsVM autovehiculeVM, IFormFile? file) 
         {
             if (ModelState.IsValid)
             {
+                var model = _mapper.Map<Autovehicule>(autovehiculeVM.Autovehicule);
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
                 if (file != null) 
                 {
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     string autovehiculePath = Path.Combine(wwwRootPath, @"images\autovehicule");
 
-                    if (!string.IsNullOrEmpty(autovehiculeVM.Autovehicule.ImageUrl)) 
+                    if (!string.IsNullOrEmpty(model.ImageUrl)) 
                     {
                         //Delete old img
-                        var oldimgPath = Path.Combine(wwwRootPath, autovehiculeVM.Autovehicule.ImageUrl.TrimStart('\\'));
+                        var oldimgPath = Path.Combine(wwwRootPath, model.ImageUrl.TrimStart('\\'));
 
                         if (System.IO.File.Exists(oldimgPath))
                         {
@@ -81,17 +82,17 @@ namespace InventarVali.Areas.Admin.Controllers
                     {
                         file.CopyTo(fileStream);
                     }
-                    
-                    autovehiculeVM.Autovehicule.ImageUrl = @"\images\autovehicule\" + fileName;
+
+                    model.ImageUrl = @"\images\autovehicule\" + fileName;
                 }
 
-                if (autovehiculeVM.Autovehicule.Id == 0)
+                if (model.Id == 0)
                 {
-                    _unitOfWork.Autovehicule.Add(autovehiculeVM.Autovehicule);
+                    _unitOfWork.Autovehicule.Add(model);
                 }
                 else 
                 {
-                    _unitOfWork.Autovehicule.Update(autovehiculeVM.Autovehicule);
+                    _unitOfWork.Autovehicule.Update(model);
 
                 }
                 

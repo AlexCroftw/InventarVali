@@ -18,7 +18,8 @@ namespace InventarVali.Models.ViewModel
         public string? SerialNumber { get; set; }
         [ValidateNever]
         public string? ImageUrl { get; set; }
+        public int? EmployeeId { get; set; }
         [ValidateNever]
-        public IEnumerable<SelectListItem> EmployeeList { get; set; }
+        public EmployeesVM Employee { get; set; }
     }
 }
