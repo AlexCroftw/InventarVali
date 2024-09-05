@@ -25,17 +25,17 @@ namespace InventarVali.Areas.Employee.Controllers
 
         public IActionResult Index()
         {
-            CombinedDataViewModel combinedData = new CombinedDataViewModel();
-            List<Autovehicule> autovehiculeList = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employess").ToList();
-            var autovehiculeVM = _mapper.Map<List<AutovehiculeVM>>(autovehiculeList);
-            List<Computer> computerList = _unitOfWork.Computer.GetAll(includeProperties: "Employess").ToList();
-            var computerVM = _mapper.Map<List<ComputerVM>>(computerList);
-
-            combinedData.Autovehicule = _mapper.Map<List<ComputerDetailsVM>>(autovehiculeVM);
+            List<CombinedDataViewModel> combinedData = new List<CombinedDataViewModel>();
+            var autovehiculeList = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
+            var computerList = _unitOfWork.Computer.GetAll(includeProperties: "Employees").ToList();
+            var combinedDataAuatovehicule = _mapper.Map<List<CombinedDataViewModel>>(autovehiculeList);
+            var combinedDataComputer = _mapper.Map <List<CombinedDataViewModel>>(computerList);
+            combinedData.AddRange(combinedDataAuatovehicule);
+            combinedData.AddRange(combinedDataComputer);
             ///TODO
             ///Resolve the View Model Issue for Home Page
 
-            return View(); 
+            return View(combinedData); 
         }
 
         public IActionResult Privacy()

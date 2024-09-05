@@ -15,15 +15,23 @@
         </tr>
     </thead>
     <tbody>
-
+        @foreach (var obj in Model)
+        {
             <tr>
-                <td></td>
-              <td></td>
-                <td>  </td>
                 <td>
-                
+                    @obj.LicensePlate
                 </td>
+                <td>
+                    @obj.Type
+                </td>
+                <td> 
+                    @obj.FullName
+                </td>
+               
             </tr>
+        }
+
+            
     </tbody>
 </table>
 
