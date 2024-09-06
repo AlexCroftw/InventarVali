@@ -1,18 +1,18 @@
 ﻿@model List<EmployeesVM>
-<div class="card shadow border-0 mt-4">
-    <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-black py-2">Employee List</h2>
-            </div>
-        </div>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <div class="col-12 text-center">
+        <h2 class="text-black py-2">Employee List</h2>
     </div>
-    <div class="card-body p-4">
-    </div>
+    </head>
+    <body>
     <div class="row pb-3">
         <div class="col-12">
         </div>
-        <div class="text-center">
+        <div class="text-left">
             <a asp-controller="Employee" asp-action="Upsert" class="btn btn-primary">
                 <i class="bi bi-plus-square-fill"></i> Create New Emplyoee
             </a>
@@ -37,7 +37,7 @@
         </thead>
        
     </table>
-</div>
+</body>
 @section Scripts {
     <script src="~/js/employee.js"></script>
 }
