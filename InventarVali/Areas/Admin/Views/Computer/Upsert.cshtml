@@ -1,80 +1,98 @@
 ﻿@model ComputerDetailsVM
 
-<div class="card shadow border-0 mt-4">
-    <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-white py-2">@(Model.Computer.Id != 0 ? "Update " : "Create ") Computer </h2>
-            </div>
-        </div>
-    </div>
-    <div class="card-body p-4">
-        <form method="post" class="row" enctype="multipart/form-data">
-            <input asp-for="@Model.Computer.Id" hidden />
-            <input asp-for="@Model.Computer.ImageUrl" hidden />
-            <div class="row">
-                <div class="col-10">
-                    <div class="border p-3">
-                        @* <div asp-validation-summary="ModelOnly"></div> *@
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="@Model.Computer.Type" class="form-control border-0 shadow">
-                            <label asp-for="@Model.Computer.Type" class="ms-2"></label>
-                            <span asp-validation-for="@Model.Computer.Type" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="@Model.Computer.Model" class="form-control border-0 shadow">
-                            <label asp-for="@Model.Computer.Model" class="ms-2"></label>
-                            <span asp-validation-for="@Model.Computer.Model" class="text-danger"></span>
-                        </div>
-                        <div class="py-2 col-12">
-                            <label asp-for="@Model.Computer.Description" class="ms-2 text-muted"></label>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-                            <textarea asp-for="@Model.Computer.Description" class="form-control border-0 shadow"></textarea>
-                        </div>
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="@Model.Computer.SerialNumber" class="form-control border-0 shadow">
-                            <label asp-for="@Model.Computer.SerialNumber" class="ms-2"></label>
-                            <span asp-validation-for="@Model.Computer.SerialNumber" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
-                            <select asp-for="@Model.Computer.EmployeeId" asp-items="@Model.EmployeeList" class="form-control border-0 shadow">
-                                <option disabled selected>---Select Employee---</option>
-                            </select>
-                            <label asp-for="@Model.Computer.Employee.FullName" class="ms-2"></label>
-                            <span asp-validation-for="@Model.Computer.Employee.FullName" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
-                            <input type="file" name="file" class="form-control border-0 shadow">
-                            <label asp-for="@Model.Computer.ImageUrl" class="ms-2"></label>
-                        </div>
-                        <div class="row pt-2">
-                            <div class="col-6 col-md-3">
-                                @if (Model.Computer.Id != 0)
-                                {
-                                    <button type="submit" class="btn btn-primary form-control">Update</button>
-                                }
-                                else
-                                {
-                                    <button type="submit" class="btn btn-primary form-control">Create</button>
-                                }
+    <!-- Add Bootstrap 5 CDN for modern styling -->
+</head>
 
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <a asp-controller="Computer" asp-action="Index" class="btn btn-outline-primary border form-control">
-                                    Back to List
-                                </a>
+
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-lg">
+                    <div class="card-header text-center bg-black text-white">
+                        <div class="row">
+                            <div class="col-10 text-center">
+                                <h2 class="text-white py-2">@(Model.Computer.Id != 0 ? "Update " : "Create ") Computer  <i class="bi bi-laptop"></i></h2>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-2">
-                    <img src="@Model.Computer.ImageUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                    <div class="card-body">
+                        <form method="post" class="row" enctype="multipart/form-data">
+                            <input asp-for="@Model.Computer.Id" hidden />
+                            <input asp-for="@Model.Computer.ImageUrl" hidden />
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="border p-3">
+                                        @* <div asp-validation-summary="ModelOnly"></div> *@
+                                        <div class="form-group mb-3">
+                                            <label asp-for="@Model.Computer.Type" class="ms-2"></label>
+                                            <input asp-for="@Model.Computer.Type" class="form-control border-0 shadow">
+                                            <span asp-validation-for="@Model.Computer.Type" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label asp-for="@Model.Computer.Model" class="ms-2"></label>
+                                            <input asp-for="@Model.Computer.Model" class="form-control border-0 shadow">
+                                            <span asp-validation-for="@Model.Computer.Model" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label asp-for="@Model.Computer.Description" class="ms-2 text-muted"></label>
+                                            <textarea asp-for="@Model.Computer.Description" class="form-control border-0 shadow"></textarea>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label asp-for="@Model.Computer.SerialNumber" class="ms-2"></label>
+                                            <input asp-for="@Model.Computer.SerialNumber" class="form-control border-0 shadow">
+                                            <span asp-validation-for="@Model.Computer.SerialNumber" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label asp-for="@Model.Computer.Employee.FullName" class="ms-2"></label>
+                                            <select asp-for="@Model.Computer.EmployeeId" asp-items="@Model.EmployeeList" class="form-control border-0 shadow">
+                                                <option disabled selected>---Select Employee---</option>
+                                            </select>
+                                            <span asp-validation-for="@Model.Computer.Employee.FullName" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group mb-3">
+                                            <label asp-for="@Model.Computer.ImageUrl" class="ms-2"></label>
+                                            <input type="file" name="file" class="form-control border-0 shadow">     
+                                        </div>
+                                        <div class="row pt-2">
+                                            <div class="col-6 col-md-3">
+                                                @if (Model.Computer.Id != 0)
+                                                {
+                                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                                }
+                                                else
+                                                {
+                                                    <button type="submit" class="btn btn-primary form-control">Create</button>
+                                                }
+
+                                            </div>
+                                            <div class="col-6 col-md-3">
+                                                <a asp-controller="Computer" asp-action="Index" class="btn btn-outline-primary border form-control">
+                                                    Back to List
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <img src="@Model.Computer.ImageUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+                                </div>
+                            </div>
+                        </form>
+                       
+                    </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
-</div>
 
+    </body>
 
 
 

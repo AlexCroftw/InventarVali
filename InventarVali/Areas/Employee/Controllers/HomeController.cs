@@ -32,8 +32,6 @@ namespace InventarVali.Areas.Employee.Controllers
             var combinedDataComputer = _mapper.Map <List<CombinedDataViewModel>>(computerList);
             combinedData.AddRange(combinedDataAuatovehicule);
             combinedData.AddRange(combinedDataComputer);
-            ///TODO
-            ///Resolve the View Model Issue for Home Page
 
             return View(combinedData); 
         }
