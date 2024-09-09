@@ -1,5 +1,6 @@
 using AutoMapper;
 using InventarVali.DataAccess.Data;
+using InventarVali.DataAccess.Repository;
 using InventarVali.DataAccess.Repository.IRepository;
 using InventarVali.Models;
 using InventarVali.Models.ViewModel;
@@ -46,5 +47,20 @@ namespace InventarVali.Areas.Employee.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<CombinedDataViewModel> combinedData = new List<CombinedDataViewModel>();
+            var autovehiculeList = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
+            var computerList = _unitOfWork.Computer.GetAll(includeProperties: "Employees").ToList();
+            var combinedDataAuatovehicule = _mapper.Map<List<CombinedDataViewModel>>(autovehiculeList);
+            var combinedDataComputer = _mapper.Map<List<CombinedDataViewModel>>(computerList);
+            combinedData.AddRange(combinedDataAuatovehicule);
+            combinedData.AddRange(combinedDataComputer);
+
+            return Json(new { data = combinedData });
+        }
     }
+
 }

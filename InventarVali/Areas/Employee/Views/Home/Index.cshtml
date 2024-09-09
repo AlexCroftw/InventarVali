@@ -1,48 +1,33 @@
 ﻿@model List<CombinedDataViewModel>
-<table class="table">
+
+<div class="text-center">
+    <h1 class="display-4 text-primary"> Basic Info Table  </h1>
+</div>
+
+<table id="tblData" class="table table-bordered table-striped" style="width:100%">
     <thead>
         <tr>
             <th>
-                Name
+                Type
             </th>
             <th>
-                Occupancy
+                License Plate
             </th>
             <th>
-                Price
+                Computer Model
             </th>
-            <th></th>
+            <th>
+                Employee
+            </th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var obj in Model)
-        {
-            <tr>
-                <td>
-                    @obj.LicensePlate
-                </td>
-                <td>
-                    @obj.Type
-                </td>
-                <td> 
-                    @obj.FullName
-                </td>
-               
-            </tr>
-        }
-
-            
-    </tbody>
 </table>
 
 
 
 
-@{
-  ViewData["Title"] = "Home Page";
-}
 
-<div class="text-center">
-    <h1 class="display-4">Work in progress <i class="bi bi-wrench"></i> </h1>
-    <h2>Made by Alex Cro </h2>
-</div>
+
+@section Scripts {
+    <script src="~/js/home.js"></script>
+}
