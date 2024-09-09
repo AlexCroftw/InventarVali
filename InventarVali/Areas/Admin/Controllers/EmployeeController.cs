@@ -58,7 +58,9 @@ namespace InventarVali.Areas.Admin.Controllers
             if (employee.Email ==  null)
             {
                 employee.Email = "n/a";
-            }
+            } 
+
+            employee.FullName = employee.FirstName + " " + employee.LastName;
 
             if (ModelState.IsValid)
             {
