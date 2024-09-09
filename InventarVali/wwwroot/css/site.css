@@ -85,7 +85,11 @@ body {
     flex-direction: column;
     min-height: 100vh;
     position: relative;
-    overflow-x: hidden
+    overflow-x: hidden;
+    background-image:url('../images/KME Logos/Background.png');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 h1 {
