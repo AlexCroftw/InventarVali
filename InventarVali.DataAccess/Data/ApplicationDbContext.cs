@@ -1,10 +1,11 @@
 ﻿using InventarVali.Models;
 using InventarVali.Models.ViewModel;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventarVali.DataAccess.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
         {
@@ -17,6 +18,9 @@ namespace InventarVali.DataAccess.Data
         public DbSet<Computer> Computers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Employees>().HasData(
                new Employees { Id = 1, FirstName = "John", LastName = "Doe", Email = "test@email.com", FullName = "John Doe" },
                new Employees { Id = 2, FirstName = "Michael", LastName = "Cox", Email = "test2@email.com" , FullName = "Michael Cox" },
