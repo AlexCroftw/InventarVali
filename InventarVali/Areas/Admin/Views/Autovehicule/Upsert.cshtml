@@ -65,6 +65,11 @@
                                                    type="checkbox"
                                                    value="true" />
                                             <span asp-validation-for="Autovehicule.HasVinieta" class="text-danger"></span>
+                                            <div class="form-group mb-3">
+                                                <label asp-for="Autovehicule.VinietaExpirationDate" class="ms-2"></label>
+                                                <input asp-for="Autovehicule.VinietaExpirationDate" class="form-control border-0 shadow">
+                                                <span asp-validation-for="Autovehicule.VinietaExpirationDate" class="text-danger"></span>
+                                            </div>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label asp-for="Autovehicule.InsurenceDate" class="ms-2"></label>

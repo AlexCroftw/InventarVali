@@ -10,17 +10,17 @@ function loadDataTable() {
             url: '/admin/autovehicule/getall'
         },
         "columns": [
-            { data: 'type', "width": "15%" },
-            { data: 'licensePlate', "width": "15%" },
-            { data: 'vinNumber', "width": "15%" },
-            { data: 'insurenceDate', "width": "15%" },
-            { data: 'hasITP', "width": "15%" },
-            { data: 'itpExpirationDate', "width": "15%" },
-            { data: 'insuranceExpirationDate', "width": "15%" },
-            { data: 'hasVinieta', "width": "15%" },
-            { data: 'vinietaExpirationDate', "width": "15%" },
-            { data: 'imageUrl', "width": "15%" },
-            { data: 'employees.fullName', "width": "15%" },
+            { data: 'type', "width": "10%" },
+            { data: 'licensePlate', "width": "10%" },
+            { data: 'vinNumber', "width": "10%" },
+            { data: 'insurenceDate', "width": "10%" },
+            { data: 'hasITP', "width": "10%" },
+            { data: 'itpExpirationDate', "width": "10%" },
+            { data: 'insuranceExpirationDate', "width": "10%" },
+            { data: 'hasVinieta', "width": "10%" },
+            { data: 'vinietaExpirationDate', "width": "10%" },
+            { data: 'imageUrl', "width": "10%" },
+            { data: 'employees.fullName', "width": "10%" },
             {
                 data: 'id',
                 "render": function (data) {
@@ -29,7 +29,7 @@ function loadDataTable() {
                       <a onClick = Delete('/admin/autovehicule/delete/${data}') class="btn btn-danger mx-2">  <i class="bi bi-trash3"></i>Delete </a>
                            </div>`
                 },
-                "width": "25%"
+                "width": "10%"
             }
         ]
     })
