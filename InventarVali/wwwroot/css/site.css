@@ -173,6 +173,50 @@ footer {
             footer .social-icons a:hover {
                 color: #f4f7fc;
             }
+@media(max-width:991px) {
+    html {
+        font-size: 55%;
+    }
+
+    .header {
+        padding: 1.5rem 2rem;
+    }
+}
+
+@media(max-width:768px) {
+    .topnav {
+        display: inline-block;
+    }
+}
+
+
+.topnav {
+    background-color: gray;
+    overflow: hidden;
+    margin: 1px;
+    border-radius: 10px;
+}
+
+    .topnav a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 30px 16px;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+        .topnav a:hover {
+            background-color: light-gray;
+            color: red;
+            transition: 1s;
+        }
+
+        .topnav a.active {
+            background-color: red;
+            color: white;
+            border-radius: 10px;
+        }
 
 @media (max-width: 600px) {
     table {

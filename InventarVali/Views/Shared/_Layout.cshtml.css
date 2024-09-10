@@ -38,11 +38,82 @@ button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
 }
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+.header {
+    position: absolute;
+    overflow: hidden;
+    background-color: #f1f1f1;
 }
+
+    .header a {
+        float: left;
+        color: black;
+        text-align: center;
+        padding: 12px;
+        text-decoration: none;
+        font-size: 18px;
+        line-height: 25px;
+        border-radius: 4px;
+    }
+
+        .header a.logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .header a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+.header-right {
+    float: right;
+}
+.footer {
+    background-color: #4A90E2;
+    color: #fff;
+    text-align: center;
+    margin-top: 2%;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    overflow: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 99;
+}
+
+    footer p {
+        margin: 5px 0;
+    }
+
+    footer a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+    footer .social-icons {
+        margin-top: 10px;
+    }
+
+        footer .social-icons a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            left: 0px;
+        }
+
+            footer .social-icons a:hover {
+                color: #f4f7fc;
+            }
