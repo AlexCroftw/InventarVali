@@ -3,6 +3,8 @@ using InventarVali.DataAccess.Repository;
 using InventarVali.DataAccess.Repository.IRepository;
 using InventarVali.Models;
 using InventarVali.Models.ViewModel;
+using InventarVali.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace InventarVali.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class EmployeeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
