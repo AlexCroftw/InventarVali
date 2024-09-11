@@ -4,6 +4,8 @@ using InventarVali.DataAccess.Repository.IRepository;
 using InventarVali.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using InventarVali.Utility;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace InventarVali
 {
@@ -18,10 +20,12 @@ namespace InventarVali
             builder.Services.AddDbContext<ApplicationDbContext>(options => 
             options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             builder.Services.AddRazorPages();
+            builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             builder.Services.AddAutoMapper(typeof(MappingConfig));
+           
 
             var app = builder.Build();
 
