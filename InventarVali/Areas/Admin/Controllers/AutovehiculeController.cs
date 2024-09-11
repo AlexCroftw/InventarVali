@@ -130,7 +130,7 @@ namespace InventarVali.Areas.Admin.Controllers
             {
                 return Json(new { success = false, message = "Error while deleting" });
             }
-                
+
             var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, autovehiculeToBeDeleted.ImageUrl.TrimStart('\\'));
 
             if (System.IO.File.Exists(oldImagePath))
