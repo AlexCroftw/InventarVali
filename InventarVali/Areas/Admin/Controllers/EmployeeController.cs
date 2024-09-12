@@ -109,6 +109,7 @@ namespace InventarVali.Areas.Admin.Controllers
            
             _unitOfWork.Employee.Remove(employeeToBeDeleted);
             _unitOfWork.Save();
+            TempData["success"] = "Employee was deleted successfully";
 
             return Json(new { success = true, message = "Deleted Successfully" });
         }
