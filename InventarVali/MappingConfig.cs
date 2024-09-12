@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 namespace InventarVali.Models
 {
     public class MappingConfig : Profile
-    {
+    {   
         public MappingConfig()
         {
-            CreateMap<Autovehicule,AutovehiculeVM>().ReverseMap();
+            CreateMap<Autovehicule, AutovehiculeVM>().ForMember(x => x.InsurenceDate, opt => opt.MapFrom(src => src.InsurenceDate.ToString("dd/MM/yyyy"))).ReverseMap();
             CreateMap<AutovehiculeVM, AutovehiculeDetailsVM>().ReverseMap();
             CreateMap<Autovehicule, AutovehiculeDetailsVM>().ReverseMap();
             CreateMap<Employees, EmployeesVM>().ReverseMap();

@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace InventarVali.Models.ViewModel
 {
@@ -19,8 +20,7 @@ namespace InventarVali.Models.ViewModel
         public string LicensePlate { get; set; }
 
         public string VinNumber { get; set; }
-        [DataType(DataType.Date)]
-        public DateTime? InsurenceDate { get; set; }
+        public string InsurenceDate { get; set; }
 
         public bool? HasITP { get; set; }
         [DataType(DataType.Date)]

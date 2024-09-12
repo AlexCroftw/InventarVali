@@ -87,8 +87,7 @@ namespace InventarVali.Areas.Admin.Controllers
 
                     model.ImageUrl = @"\images\autovehicule\" + fileName;
                 }
-                model.ITPExpirationDate.ToString();
-
+                
                 if (model.Id == 0)
                 {
                     _unitOfWork.Autovehicule.Add(model);
