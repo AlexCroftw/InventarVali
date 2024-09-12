@@ -134,14 +134,20 @@ namespace InventarVali.Areas.Admin.Controllers
                 return Json(new { success = false, message = "Error while deleting" });
             }
 
-            var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, autovehiculeToBeDeleted.ImageUrl.TrimStart('\\'));
-
-            if (System.IO.File.Exists(oldImagePath))
+            if (!string.IsNullOrEmpty(autovehiculeToBeDeleted.ImageUrl))
             {
-                System.IO.File.Delete(oldImagePath);
+                var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, autovehiculeToBeDeleted.ImageUrl.TrimStart('\\'));
+
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
             }
+            
             _unitOfWork.Autovehicule.Remove(autovehiculeToBeDeleted);
             _unitOfWork.Save();
+
+            TempData["success"] = "Autovehicule was deleted successfully";
 
             return Json(new { success = true, message = "Deleted Successfully" });
         }

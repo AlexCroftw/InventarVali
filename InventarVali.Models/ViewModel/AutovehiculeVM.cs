@@ -19,17 +19,17 @@ namespace InventarVali.Models.ViewModel
         public string LicensePlate { get; set; }
 
         public string VinNumber { get; set; }
-
+        [DataType(DataType.Date)]
         public DateTime? InsurenceDate { get; set; }
 
         public bool? HasITP { get; set; }
-
+        [DataType(DataType.Date)]
         public DateTime? ITPExpirationDate { get; set; }
-
+        [DataType(DataType.Date)]
         public DateTime? InsuranceExpirationDate { get; set; }
 
         public bool? HasVinieta { get; set; }
-
+        [DataType(DataType.Date)]
         public DateTime? VinietaExpirationDate { get; set; }
         public int? EmployeeId { get; set; }
 
