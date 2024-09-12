@@ -13,9 +13,9 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card shadow-lg">
-                    <div class="card-header text-center bg-black text-white">
+                    <div class="card-header bg-black text-white">
                         <div class="row">
-                            <div class="col-10 text-center">
+                            <div class="col-12 text-center">
                                 <h2 class="text-white py-2">@(Model.Computer.Id != 0 ? "Update " : "Create ") Computer  <i class="bi bi-laptop"></i></h2>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                                             <input type="file" name="file" class="form-control border-0 shadow">     
                                         </div>
                                         <div class="row pt-2">
-                                            <div class="col-6 col-md-3">
+                                            <div class="col-6">
                                                 @if (Model.Computer.Id != 0)
                                                 {
                                                     <button type="submit" class="btn btn-primary form-control">Update</button>
@@ -70,7 +70,7 @@
                                                 }
 
                                             </div>
-                                            <div class="col-6 col-md-5">
+                                            <div class="col-6">
 
                                                 <a asp-controller="Computer" asp-action="Index" class="btn btn-outline-primary border form-control">
                                                     Back to List
