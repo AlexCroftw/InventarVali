@@ -10,5 +10,8 @@ namespace InventarVali.Utility
     {
         public const string Role_Employee = "Employee";
         public const string Role_Admin = "Admin";
+
+
+        public const string SessionOverall = "SessionOverall";
     }
 }
