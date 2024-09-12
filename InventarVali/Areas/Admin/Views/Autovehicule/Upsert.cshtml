@@ -86,11 +86,11 @@
                                             <span asp-validation-for="Autovehicule.InsuranceExpirationDate" class="text-danger"></span>
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label asp-for="Autovehicule.EmployeesVM.FullName" class="ms-2"></label>
+                                            <label asp-for="Autovehicule.Employees.FullName" class="ms-2"></label>
                                             <select asp-for="Autovehicule.EmployeeId" asp-items="@Model.EmployeeList" class="form-control border-0 shadow">
                                                 <option disabled selected>---Select Employee---</option>
                                             </select>
-                                            <span asp-validation-for="Autovehicule.EmployeesVM.FullName" class="text-danger"></span>
+                                            <span asp-validation-for="Autovehicule.Employees.FullName" class="text-danger"></span>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label asp-for="Autovehicule.ImageUrl" class="ms-2"></label>

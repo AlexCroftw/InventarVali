@@ -120,7 +120,8 @@ namespace InventarVali.Areas.Admin.Controllers
         public IActionResult Getall()
         {
             List<Autovehicule> objAutovehiculeList = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
-            return Json(new { data = objAutovehiculeList });
+            var autovehicule = _mapper.Map<List<AutovehiculeVM>>(objAutovehiculeList);
+            return Json(new { data = autovehicule });
         }
 
         [HttpDelete]

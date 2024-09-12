@@ -12,7 +12,11 @@ namespace InventarVali.Models
     {   
         public MappingConfig()
         {
-            CreateMap<Autovehicule, AutovehiculeVM>().ForMember(x => x.InsurenceDate, opt => opt.MapFrom(src => src.InsurenceDate.ToString("dd/MM/yyyy"))).ReverseMap();
+
+            CreateMap<Autovehicule, AutovehiculeVM>().ForMember(x => x.InsurenceDate, opt => opt.MapFrom(src => src.InsurenceDate.HasValue? src.InsurenceDate.Value.ToString("dd/MM/yyyy") : string.Empty)).
+                ForMember(x => x.ITPExpirationDate, opt => opt.MapFrom(src => src.ITPExpirationDate.HasValue ? src.ITPExpirationDate.Value.ToString("dd/MM/yyyy") : string.Empty)).
+                ForMember(x => x.InsuranceExpirationDate, opt => opt.MapFrom(src => src.InsuranceExpirationDate.HasValue ? src.InsuranceExpirationDate.Value.ToString("dd/MM/yyyy") : string.Empty)).
+                ForMember(x => x.VinietaExpirationDate, opt => opt.MapFrom(src => src.VinietaExpirationDate.HasValue ? src.VinietaExpirationDate.Value.ToString("dd/MM/yyyy") : string.Empty)).ReverseMap();
             CreateMap<AutovehiculeVM, AutovehiculeDetailsVM>().ReverseMap();
             CreateMap<Autovehicule, AutovehiculeDetailsVM>().ReverseMap();
             CreateMap<Employees, EmployeesVM>().ReverseMap();
