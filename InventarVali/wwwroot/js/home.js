@@ -13,7 +13,7 @@ function loadDataTable() {
             { data: 'type', "width": "15%" },
             { data: 'licensePlate', "width": "15%" },
             { data: 'model', "width": "15%" },
-            { data: 'fullName', "width": "15%" }
+            { data: 'fullName', "width": "15%" } 
         ]
     })
 

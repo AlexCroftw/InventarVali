@@ -15,5 +15,6 @@ namespace InventarVali.Models.ViewModel
         public string Model { get; set; }
         public string Description { get; set; }
         public string? SerialNumber { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }
