@@ -28,6 +28,7 @@ function loadDataTable() {
 
 }
 
+
 function Delete(url) {
     Swal.fire({
         title: "Are you sure you want to delete this?",
