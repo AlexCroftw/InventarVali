@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace InventarVali.Models.ViewModel
         public string Type { get; set; }
         public string Model { get; set; }
         public string Description { get; set; }
+        [DisplayName("Serial Number")]
         public string? SerialNumber { get; set; }
         [ValidateNever]
         public string? ImageUrl { get; set; }
