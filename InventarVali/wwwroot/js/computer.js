@@ -43,6 +43,22 @@ function loadDataTable() {
                 exportOptions: {
                     columns: ':visible:not(:last-child)'
                 }
+            },
+            {
+                extend: 'csv',
+                text: 'Export in CSV',
+                className: 'btn btn-default',
+                exportOptions: {
+                    columns: ':visible:not(:last-child)'
+                }
+            },
+            {
+                extend: 'print',
+                text: 'Print Records',
+                className: 'btn btn-default',
+                exportOptions: {
+                    columns: ':visible:not(:last-child)'
+                }
             }
              
         ],

@@ -22,7 +22,38 @@ function loadDataTable() {
 
             dom: 'Bfltip',
             "buttons": [
-                'excel', 'pdf', 'print'
+                {
+                    extend: 'excel',
+                    text: 'Export in Excel',
+                    className: 'btn btn-default',
+                    exportOptions: {
+                        columns: ':visible:not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Export in PDF',
+                    className: 'btn btn-default',
+                    exportOptions: {
+                        columns: ':visible:not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'csv',
+                    text: 'Export in CSV',
+                    className: 'btn btn-default',
+                    exportOptions: {
+                        columns: ':visible:not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'print',
+                    text: 'Print Records',
+                    className: 'btn btn-default',
+                    exportOptions: {
+                        columns: ':visible:not(:last-child)'
+                    }
+                }
             ],
             language: {
                 search: "",
