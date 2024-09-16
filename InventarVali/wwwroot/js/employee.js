@@ -23,6 +23,10 @@ function loadDataTable() {
                 },
                 "width": "25%"
             }
+        ],
+        dom: 'Bfrtip',
+        "buttons": [
+            'excel', 'pdf', 'print'
         ]
     })
 

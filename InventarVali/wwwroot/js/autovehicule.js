@@ -32,6 +32,10 @@ function loadDataTable() {
                 },
                 "width": "10%"
             }
+        ],
+        dom: 'Bfrtip',
+        "buttons": [
+            'excel', 'pdf', 'print'
         ]
         
     })
