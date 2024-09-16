@@ -37,12 +37,10 @@ function loadDataTable() {
         dom: 'Bfltip',
         "buttons": [
             {
-
-                caption: "Inventar KMRE",
                 extend: 'excel',
                 messageTop:
                     'The information in this table is copyright to Komora Engineering.',
-                text: 'Export in Excel',
+                text: '<i class="bi bi-file-earmark-excel"></i> EXCEL',
                 className: 'btn btn-default',
                 exportOptions: {
                     columns: ':visible:not(:last-child)'
@@ -52,7 +50,7 @@ function loadDataTable() {
                 extend: 'pdf',
                 messageTop:
                     'The information in this table is copyright to Komora Engineering.',
-                text: 'Export in PDF',
+                text: '<i class="bi bi-filetype-pdf"></i> PDF',
                 className: 'btn btn-default',
                 exportOptions: {
                     columns: ':visible:not(:last-child)'
@@ -62,7 +60,7 @@ function loadDataTable() {
                 extend: 'csv',
                 messageTop:
                     'The information in this table is copyright to Komora Engineering.',
-                text: 'Export in CSV',
+                text: '<i class="bi bi-filetype-csv"></i> CSV',
                 className: 'btn btn-default',
                 exportOptions: {
                     columns: ':visible:not(:last-child)'
@@ -70,9 +68,7 @@ function loadDataTable() {
             },
             {
                 extend: 'print',
-                messageTop:
-                    'The information in this table is copyright to Komora Engineering.',
-                text: 'Print Records',
+                text: '<i class="bi bi-printer"></i> PRINT',
                 className: 'btn btn-default',
                 exportOptions: {
                     columns: ':visible:not(:last-child)'
