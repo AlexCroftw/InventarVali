@@ -20,10 +20,15 @@ function loadDataTable() {
             { data: 'fullName', "width": "15%" } 
             ],
 
-            dom: 'Bfrtip',
+            dom: 'Bfltip',
             "buttons": [
                 'excel', 'pdf', 'print'
-            ]
+            ],
+            language: {
+                search: "",
+                searchPlaceholder: "Search records"
+            }
+            
         
     })
 

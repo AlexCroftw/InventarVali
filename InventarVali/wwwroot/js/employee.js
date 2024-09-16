@@ -21,13 +21,36 @@ function loadDataTable() {
                       <a onClick = Delete('/admin/employee/delete/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash3"> </i> Delete </a>
                            </div>`
                 },
-                "width": "25%"
+                "width": "25%",
+                "className": 'noExport'
             }
         ],
-        dom: 'Bfrtip',
+        dom: 'Bfltip',
         "buttons": [
-            'excel', 'pdf', 'print'
-        ]
+            {
+                extend: 'excel',
+                text: 'Export in Excel',
+                className: 'btn btn-default',
+                exportOptions: {
+                    columns: ':visible:not(:last-child)'
+                }
+            },
+            {
+                extend: 'pdf',
+                text: 'Export in PDF',
+                className: 'btn btn-default',
+                exportOptions: {
+                    columns: ':visible:not(:last-child)'
+                }
+            }
+        ],
+        "exportOptions": {
+            columns: ":visible:not(.noExport)"
+        },
+        "language": {
+            search: "",
+            searchPlaceholder: "Search records"
+        }
     })
 
 }

@@ -20,23 +20,45 @@ function loadDataTable() {
             { data: 'insuranceExpirationDate', "width": "10%" },
             { data: 'hasVinieta', "width": "10%" },
             { data: 'vinietaExpirationDate', "width": "10%" },
-            { data: 'imageUrl', "width": "10%" },
             { data: 'employees.fullName', "width": "10%" },
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-75 btn-group" role="group">
-                      <a href = "/admin/autovehicule/upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i>Edit> </a>
-                      <a onClick = Delete('/admin/autovehicule/delete/${data}') class="btn btn-danger mx-2">  <i class="bi bi-trash3"></i>Delete </a>
+                      <a href = "/admin/autovehicule/upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit </a>
+                      <a onClick = Delete('/admin/autovehicule/delete/${data}') class="btn btn-danger mx-2">  <i class="bi bi-trash3"></i> Delete </a>
                            </div>`
                 },
-                "width": "10%"
+                "width": "10%",
+                "className": 'noExport'
             }
         ],
-        dom: 'Bfrtip',
+        dom: 'Bfltip',
         "buttons": [
-            'excel', 'pdf', 'print'
-        ]
+            {
+                extend: 'excel',
+                text: 'Export in Excel',
+                className: 'btn btn-default',
+                exportOptions: {
+                    columns: ':visible:not(:last-child)'
+                }
+            },
+            {
+                extend: 'pdf',
+                text: 'Export in PDF',
+                className: 'btn btn-default',
+                exportOptions: {
+                    columns: ':visible:not(:last-child)'
+                }
+            }
+        ],
+        "exportOptions": {
+            columns: ":visible:not(.noExport)"
+        },
+        "language": {
+            search: "",
+            searchPlaceholder: "Search records"
+        }
         
     })
     

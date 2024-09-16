@@ -13,7 +13,6 @@ function loadDataTable() {
             { data: 'model', "width": "15%" },
             { data: 'description', "width": "15%" },
             { data: 'serialNumber', "width": "15%" },
-            { data: 'imageUrl', "width": "15%" },
             { data: 'employees.fullName', "width": "15%" },
             {
                 data: 'id',
@@ -23,13 +22,36 @@ function loadDataTable() {
                       <a onClick = Delete('/admin/computer/delete/${data}') class="btn btn-danger mx-2">  <i class="bi bi-trash3"></i>Delete </a>
                            </div>`
                 },
-                "width": "25%"
+                "width": "25%",
+                "className": 'noExport'
             }
         ],
-        dom: 'Bfrtip',
+        dom: 'Bfltip',
         "buttons": [
-            'excel', 'pdf', 'print'
-        ]
+            {
+                extend: 'excel',
+                text: 'Export in Excel',
+                className: 'btn btn-default',
+                exportOptions: {
+                    columns: ':visible:not(:last-child)'
+                }
+            },
+            {
+                extend: 'pdf',
+                text: 'Export in PDF',
+                className: 'btn btn-default',
+                exportOptions: {
+                    columns: ':visible:not(:last-child)'
+                }
+            }
+             
+        ],
+
+       
+        "language": {
+            search: "",
+            searchPlaceholder: "Search records"
+        }
     })
 
 }
