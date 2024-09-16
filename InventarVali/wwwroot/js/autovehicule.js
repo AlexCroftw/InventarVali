@@ -33,10 +33,15 @@ function loadDataTable() {
                 "className": 'noExport'
             }
         ],
+        
         dom: 'Bfltip',
         "buttons": [
             {
+
+                caption: "Inventar KMRE",
                 extend: 'excel',
+                messageTop:
+                    'The information in this table is copyright to Komora Engineering.',
                 text: 'Export in Excel',
                 className: 'btn btn-default',
                 exportOptions: {
@@ -45,6 +50,8 @@ function loadDataTable() {
             },
             {
                 extend: 'pdf',
+                messageTop:
+                    'The information in this table is copyright to Komora Engineering.',
                 text: 'Export in PDF',
                 className: 'btn btn-default',
                 exportOptions: {
@@ -53,6 +60,8 @@ function loadDataTable() {
             },
             {
                 extend: 'csv',
+                messageTop:
+                    'The information in this table is copyright to Komora Engineering.',
                 text: 'Export in CSV',
                 className: 'btn btn-default',
                 exportOptions: {
@@ -61,6 +70,8 @@ function loadDataTable() {
             },
             {
                 extend: 'print',
+                messageTop:
+                    'The information in this table is copyright to Komora Engineering.',
                 text: 'Print Records',
                 className: 'btn btn-default',
                 exportOptions: {
