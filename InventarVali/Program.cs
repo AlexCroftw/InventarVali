@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using InventarVali.Utility;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using InventarVali.DataAccess.DBInitializer;
+using InventarVali.Utility.Services;
 
 namespace InventarVali
 {
@@ -37,7 +38,7 @@ namespace InventarVali
             });
             builder.Services.AddScoped<IDBInitializer,DBInitializer>();
             builder.Services.AddRazorPages();
-            builder.Services.AddScoped<IEmailSender, EmailSender>();
+            builder.Services.AddScoped<IMyEmailSender, MyEmailSender>();
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             builder.Services.AddAutoMapper(typeof(MappingConfig));
            

@@ -12,6 +12,7 @@ using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
 using InventarVali.Utility;
+using InventarVali.Utility.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -33,15 +34,16 @@ namespace InventarVali.Areas.Identity.Pages.Account
         private readonly IUserStore<IdentityUser> _userStore;
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly IMyEmailSender _myEmailSender;
+
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             RoleManager<IdentityRole> roleManager,
-            ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            ILogger<RegisterModel> logger, IMyEmailSender myEmailSender)
+
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -49,7 +51,8 @@ namespace InventarVali.Areas.Identity.Pages.Account
             _roleManager = roleManager;
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
+            _myEmailSender = myEmailSender;
+
         }
 
         /// <summary>
@@ -158,7 +161,7 @@ namespace InventarVali.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                      _myEmailSender.SendEmail(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
