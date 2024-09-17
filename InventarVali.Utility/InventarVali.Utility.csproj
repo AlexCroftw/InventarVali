@@ -12,4 +12,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\InventarVali.Models\InventarVali.Models.csproj" />
+  </ItemGroup>
+
 </Project>

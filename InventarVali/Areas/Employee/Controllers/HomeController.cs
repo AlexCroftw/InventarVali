@@ -37,6 +37,10 @@ namespace InventarVali.Areas.Employee.Controllers
             combinedData.AddRange(combinedDataAuatovehicule);
             combinedData.AddRange(combinedDataComputer);
 
+            //Test Email Sending
+
+
+
             return View(combinedData); 
         }
 
