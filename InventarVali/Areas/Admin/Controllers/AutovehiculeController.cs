@@ -36,11 +36,29 @@ namespace InventarVali.Areas.Admin.Controllers
                     TimeSpan diff = date.InsuranceExpirationDate.Value - now;
                     if (diff.Days <= 14) 
                     {
-                        _myEmailSender.SendEmail("alexcroitoru3@yahoo.com", "Insurance Expiration Date", $"Please be informed that insurence for {date.LicensePlate} is expiring " +
+                        _myEmailSender.SendEmail("alex.croitoru@kmre.ro", $"Insurance Expiration Date  {now}", $"Please be informed that insurence for {date.LicensePlate} is expiring " +
                             $" in {diff.Days} days. Please Take Action ");
                     }
                 }
-             }
+                if (date.ITPExpirationDate.HasValue)
+                {
+                    TimeSpan diff = date.ITPExpirationDate.Value - now;
+                    if (diff.Days <= 14)
+                    {
+                        _myEmailSender.SendEmail("alex.croitoru@kmre.ro", $"ITP Expiration  Date  {now}", $"Please be informed that ITP for {date.LicensePlate} is expiring " +
+                            $" in {diff.Days} days. Please Take Action ");
+                    }
+                }
+                if (date.VinietaExpirationDate.HasValue)
+                {
+                    TimeSpan diff = date.VinietaExpirationDate.Value - now;
+                    if (diff.Days <= 14)
+                    {
+                        _myEmailSender.SendEmail("alex.croitoru@kmre.ro", $"Vinieta Expiration Date  {now}", $"Please be informed that Vinieta for {date.LicensePlate} is expiring " +
+                            $" in {diff.Days} days. Please Take Action ");
+                    }
+                }
+            }
 
             var autovehicule = _mapper.Map<List<AutovehiculeVM>>(objAutovehiculeslist);
             return View(autovehicule);
