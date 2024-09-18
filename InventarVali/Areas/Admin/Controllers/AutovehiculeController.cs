@@ -19,24 +19,28 @@ namespace InventarVali.Areas.Admin.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IMapper _mapper;
         private readonly IMyEmailSender _myEmailSender;
-        public AutovehiculeController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, IMapper mapper, IMyEmailSender myEmailSender)
+        private readonly IConfiguration _config;
+
+        public AutovehiculeController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, IMapper mapper, IMyEmailSender myEmailSender, IConfiguration config)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
             _mapper = mapper;
             _myEmailSender = myEmailSender;
+            _config = config;
         }
         public IActionResult Index()
-        {  var now = DateTime.Now;
+        {  
             List<Autovehicule> objAutovehiculeslist = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
-             foreach (var date in objAutovehiculeslist)
+            var now = DateTime.Now;
+            foreach (var date in objAutovehiculeslist)
              {
                 if (date.InsuranceExpirationDate.HasValue)
                 {
                     TimeSpan diff = date.InsuranceExpirationDate.Value - now;
                     if (diff.Days <= 14) 
                     {
-                        _myEmailSender.SendEmail("alex.croitoru@kmre.ro", $"Insurance Expiration Date  {now}", $"Please be informed that insurence for {date.LicensePlate} is expiring " +
+                        _myEmailSender.SendEmail(_config.GetSection("EmailToSendTo").Value, $"Insurance Expiration Date  {now}", $"Please be informed that insurence for {date.LicensePlate} is expiring " +
                             $" in {diff.Days} days. Please Take Action ");
                     }
                 }
@@ -45,7 +49,7 @@ namespace InventarVali.Areas.Admin.Controllers
                     TimeSpan diff = date.ITPExpirationDate.Value - now;
                     if (diff.Days <= 14)
                     {
-                        _myEmailSender.SendEmail("alex.croitoru@kmre.ro", $"ITP Expiration  Date  {now}", $"Please be informed that ITP for {date.LicensePlate} is expiring " +
+                        _myEmailSender.SendEmail(_config.GetSection("EmailToSendTo").Value, $"ITP Expiration  Date  {now}", $"Please be informed that ITP for {date.LicensePlate} is expiring " +
                             $" in {diff.Days} days. Please Take Action ");
                     }
                 }
@@ -54,7 +58,7 @@ namespace InventarVali.Areas.Admin.Controllers
                     TimeSpan diff = date.VinietaExpirationDate.Value - now;
                     if (diff.Days <= 14)
                     {
-                        _myEmailSender.SendEmail("alex.croitoru@kmre.ro", $"Vinieta Expiration Date  {now}", $"Please be informed that Vinieta for {date.LicensePlate} is expiring " +
+                        _myEmailSender.SendEmail(_config.GetSection("EmailToSendTo").Value, $"Vinieta Expiration Date  {now}", $"Please be informed that Vinieta for {date.LicensePlate} is expiring " +
                             $" in {diff.Days} days. Please Take Action ");
                     }
                 }
