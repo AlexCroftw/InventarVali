@@ -3,6 +3,7 @@ using InventarVali.DataAccess.Repository.IRepository;
 using InventarVali.Models;
 using InventarVali.Models.ViewModel;
 using InventarVali.Utility;
+using InventarVali.Utility.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -17,15 +18,30 @@ namespace InventarVali.Areas.Admin.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IMapper _mapper;
-        public AutovehiculeController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, IMapper mapper)
+        private readonly IMyEmailSender _myEmailSender;
+        public AutovehiculeController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, IMapper mapper, IMyEmailSender myEmailSender)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
             _mapper = mapper;
+            _myEmailSender = myEmailSender;
         }
         public IActionResult Index()
-        {   
+        {  var now = DateTime.Now;
             List<Autovehicule> objAutovehiculeslist = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
+             foreach (var date in objAutovehiculeslist)
+             {
+                if (date.InsuranceExpirationDate.HasValue)
+                {
+                    TimeSpan diff = date.InsuranceExpirationDate.Value - now;
+                    if (diff.Days <= 14) 
+                    {
+                        _myEmailSender.SendEmail("alexcroitoru3@yahoo.com", "Insurance Expiration Date", $"Please be informed that insurence for {date.LicensePlate} is expiring " +
+                            $" in {diff.Days} days. Please Take Action ");
+                    }
+                }
+             }
+
             var autovehicule = _mapper.Map<List<AutovehiculeVM>>(objAutovehiculeslist);
             return View(autovehicule);
         }
