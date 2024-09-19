@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
-using InventarVali.DataAccess.Repository;
 using InventarVali.DataAccess.Repository.IRepository;
 using InventarVali.Models;
 using InventarVali.Models.ViewModel;
 using InventarVali.Utility;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -28,10 +26,10 @@ namespace InventarVali.Areas.Admin.Controllers
             var employeesVM = _mapper.Map<List<EmployeesVM>>(employeesList);
             return View(employeesVM);
         }
-        
+
         public IActionResult Upsert(int? id)
         {
-            
+
             EmployeesVM employeesVM = new();
 
             if (id == 0 || id == null)
@@ -50,7 +48,7 @@ namespace InventarVali.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert (EmployeesVM employeeVM, int? id)
+        public IActionResult Upsert(EmployeesVM employeeVM, int? id)
         {
             var employee = _mapper.Map<Employees>(employeeVM);
             if (employee.FirstName == employee.LastName)
@@ -58,18 +56,18 @@ namespace InventarVali.Areas.Admin.Controllers
                 ModelState.AddModelError("error", "First name cannot be the same as Last name");
                 return BadRequest();
             }
-            if (employee.Email ==  null)
+            if (employee.Email == null)
             {
                 employee.Email = "n/a";
-            } 
+            }
 
             employee.FullName = employee.FirstName + " " + employee.LastName;
 
             if (ModelState.IsValid)
             {
-                if (employee.Id == 0) 
+                if (employee.Id == 0)
                 {
-                     _unitOfWork.Employee.Add(employee);
+                    _unitOfWork.Employee.Add(employee);
                 }
                 else
                 {
@@ -79,14 +77,14 @@ namespace InventarVali.Areas.Admin.Controllers
                 TempData["Success"] = "The employee was created successfully";
                 return RedirectToAction("Index", "Employee");
             }
-            else 
+            else
             {
                 return View();
             }
-            
+
         }
 
-       
+
 
         #region API CALLS
         [HttpGet]
@@ -106,7 +104,7 @@ namespace InventarVali.Areas.Admin.Controllers
             {
                 return Json(new { success = false, message = "Error while deleting" });
             }
-           
+
             _unitOfWork.Employee.Remove(employeeToBeDeleted);
             _unitOfWork.Save();
             TempData["success"] = "Employee was deleted successfully";

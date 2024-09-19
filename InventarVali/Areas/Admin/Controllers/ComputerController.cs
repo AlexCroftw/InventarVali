@@ -24,12 +24,12 @@ namespace InventarVali.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Computer> objComputerList = _unitOfWork.Computer.GetAll(includeProperties : "Employees").ToList();
+            List<Computer> objComputerList = _unitOfWork.Computer.GetAll(includeProperties: "Employees").ToList();
             var computerVM = _mapper.Map<List<ComputerVM>>(objComputerList);
             return View(computerVM);
         }
 
-        public IActionResult Upsert(int? id) 
+        public IActionResult Upsert(int? id)
         {
             ComputerDetailsVM computerDetailswVM = new()
             {
@@ -40,7 +40,7 @@ namespace InventarVali.Areas.Admin.Controllers
                 }),
                 Computer = new ComputerVM()
             };
-           
+
             if (id == null || id == 0)
             {
                 //Create
@@ -56,11 +56,11 @@ namespace InventarVali.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(ComputerDetailsVM computerDetailsVM, IFormFile file) 
+        public IActionResult Upsert(ComputerDetailsVM computerDetailsVM, IFormFile file)
         {
-            
+
             if (ModelState.IsValid)
-             {
+            {
                 var model = _mapper.Map<Computer>(computerDetailsVM.Computer);
 
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
@@ -69,7 +69,7 @@ namespace InventarVali.Areas.Admin.Controllers
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     string computerPath = Path.Combine(wwwRootPath, @"images\computer");
 
-                   
+
 
                     if (!string.IsNullOrEmpty(model.ImageUrl))
                     {
@@ -87,9 +87,9 @@ namespace InventarVali.Areas.Admin.Controllers
                         file.CopyTo(fileStream);
                     }
 
-                     model.ImageUrl = @"\images\computer\" + fileName;
+                    model.ImageUrl = @"\images\computer\" + fileName;
                 }
-                
+
 
                 if (model.Id == 0)
                 {
@@ -108,7 +108,7 @@ namespace InventarVali.Areas.Admin.Controllers
             }
             else
             {
-                
+
                 computerDetailsVM.EmployeeList = _unitOfWork.Employee.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.FullName,
@@ -122,7 +122,7 @@ namespace InventarVali.Areas.Admin.Controllers
 
         #region API CALLS
         [HttpGet]
-        public IActionResult Getall() 
+        public IActionResult Getall()
         {
             List<Computer> objComputerList = _unitOfWork.Computer.GetAll(includeProperties: "Employees").ToList();
             return Json(new { data = objComputerList });
@@ -146,11 +146,11 @@ namespace InventarVali.Areas.Admin.Controllers
                 }
 
             }
-            
+
             _unitOfWork.Computer.Remove(computerToBeDeleted);
             _unitOfWork.Save();
             TempData["success"] = "Computer was deleted successfully";
-            return Json(new {success = true, message = "Deleted Successfully"});
+            return Json(new { success = true, message = "Deleted Successfully" });
         }
         #endregion
     }

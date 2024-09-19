@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventarVali.Models
 {
@@ -21,16 +16,16 @@ namespace InventarVali.Models
         public string VinNumber { get; set; }
         [DataType(DataType.Date)]
         public DateTime? InsurenceDate { get; set; }
-       
+
         public bool? HasITP { get; set; }
         [DataType(DataType.Date)]
         public DateTime? ITPExpirationDate { get; set; }
         [DataType(DataType.Date)]
         public DateTime? InsuranceExpirationDate { get; set; }
-      
+
         public bool? HasVinieta { get; set; }
         [DataType(DataType.Date)]
-        public DateTime? VinietaExpirationDate { get;set; }
+        public DateTime? VinietaExpirationDate { get; set; }
         public int? EmployeeId { get; set; }
         [ForeignKey("EmployeeId")]
         [ValidateNever]

@@ -1,19 +1,8 @@
-﻿using InventarVali.Models.ViewModel;
-using InventarVali.Utility.Services;
-using MailKit.Net.Smtp;
+﻿using InventarVali.Utility.Services;
 using MailKit.Security;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 using MimeKit.Text;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 namespace InventarVali.Utility

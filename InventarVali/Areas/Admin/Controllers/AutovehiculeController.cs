@@ -30,15 +30,15 @@ namespace InventarVali.Areas.Admin.Controllers
             _config = config;
         }
         public IActionResult Index()
-        {  
+        {
             List<Autovehicule> objAutovehiculeslist = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
             var now = DateTime.Now;
             foreach (var date in objAutovehiculeslist)
-             {
+            {
                 if (date.InsuranceExpirationDate.HasValue)
                 {
                     TimeSpan diff = date.InsuranceExpirationDate.Value - now;
-                    if (diff.Days <= 14) 
+                    if (diff.Days <= 14)
                     {
                         _myEmailSender.SendEmail(_config.GetSection("EmailToSendTo").Value, $"Insurance Expiration Date  {now}", $"Please be informed that insurence for {date.LicensePlate} is expiring " +
                             $" in {diff.Days} days. Please Take Action ");
@@ -68,7 +68,7 @@ namespace InventarVali.Areas.Admin.Controllers
             return View(autovehicule);
         }
 
-        public IActionResult Upsert(int? id) 
+        public IActionResult Upsert(int? id)
         {
             AutovehiculeDetailsVM autovehiculeVM = new()
             {
@@ -85,7 +85,7 @@ namespace InventarVali.Areas.Admin.Controllers
                 //Create
                 return View(autovehiculeVM);
             }
-            else 
+            else
             {
 
                 //Update
@@ -93,21 +93,21 @@ namespace InventarVali.Areas.Admin.Controllers
                 autovehiculeVM.Autovehicule = _mapper.Map<AutovehiculeVM>(autovehicule);
                 return View(autovehiculeVM);
             }
-            
+
         }
         [HttpPost]
-        public IActionResult Upsert(AutovehiculeDetailsVM autovehiculeVM, IFormFile? file) 
+        public IActionResult Upsert(AutovehiculeDetailsVM autovehiculeVM, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
                 var model = _mapper.Map<Autovehicule>(autovehiculeVM.Autovehicule);
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
-                if (file != null) 
+                if (file != null)
                 {
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     string autovehiculePath = Path.Combine(wwwRootPath, @"images\autovehicule");
 
-                    if (!string.IsNullOrEmpty(model.ImageUrl)) 
+                    if (!string.IsNullOrEmpty(model.ImageUrl))
                     {
                         //Delete old img
                         var oldimgPath = Path.Combine(wwwRootPath, model.ImageUrl.TrimStart('\\'));
@@ -125,25 +125,25 @@ namespace InventarVali.Areas.Admin.Controllers
 
                     model.ImageUrl = @"\images\autovehicule\" + fileName;
                 }
-                
+
                 if (model.Id == 0)
                 {
                     _unitOfWork.Autovehicule.Add(model);
                 }
-                else 
+                else
                 {
                     _unitOfWork.Autovehicule.Update(model);
 
                 }
-                
+
                 _unitOfWork.Save();
                 TempData["success"] = "Autovehicule was created successfully";
 
                 return RedirectToAction("Index", "Autovehicule");
             }
-            else 
+            else
             {
-                autovehiculeVM.EmployeeList = _unitOfWork.Employee.GetAll().Select(u => new SelectListItem 
+                autovehiculeVM.EmployeeList = _unitOfWork.Employee.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.FullName,
                     Value = u.Id.ToString()
@@ -152,7 +152,7 @@ namespace InventarVali.Areas.Admin.Controllers
             }
         }
 
-       
+
         #region API CALL
         [HttpGet]
         public IActionResult Getall()
@@ -180,7 +180,7 @@ namespace InventarVali.Areas.Admin.Controllers
                     System.IO.File.Delete(oldImagePath);
                 }
             }
-            
+
             _unitOfWork.Autovehicule.Remove(autovehiculeToBeDeleted);
             _unitOfWork.Save();
 

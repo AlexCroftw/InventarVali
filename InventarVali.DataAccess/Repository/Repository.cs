@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using InventarVali.DataAccess.Data;
+﻿using InventarVali.DataAccess.Data;
 using InventarVali.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 namespace InventarVali.DataAccess.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
@@ -44,7 +39,7 @@ namespace InventarVali.DataAccess.Repository
             if (!string.IsNullOrEmpty(includeProperties))
             {
                 foreach (var includeProp in includeProperties
-                    .Split(new char[] {','},StringSplitOptions.RemoveEmptyEntries))
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     query = query.Include(includeProp);
                 }

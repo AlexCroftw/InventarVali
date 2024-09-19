@@ -1,6 +1,4 @@
 using AutoMapper;
-using InventarVali.DataAccess.Data;
-using InventarVali.DataAccess.Repository;
 using InventarVali.DataAccess.Repository.IRepository;
 using InventarVali.Models;
 using InventarVali.Models.ViewModel;
@@ -18,7 +16,7 @@ namespace InventarVali.Areas.Employee.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
- 
+
 
         public HomeController(ILogger<HomeController> logger, IMapper mapper, IUnitOfWork unitOfWork)
         {
@@ -33,7 +31,7 @@ namespace InventarVali.Areas.Employee.Controllers
             var autovehiculeList = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
             var computerList = _unitOfWork.Computer.GetAll(includeProperties: "Employees").ToList();
             var combinedDataAuatovehicule = _mapper.Map<List<CombinedDataViewModel>>(autovehiculeList);
-            var combinedDataComputer = _mapper.Map <List<CombinedDataViewModel>>(computerList);
+            var combinedDataComputer = _mapper.Map<List<CombinedDataViewModel>>(computerList);
             combinedData.AddRange(combinedDataAuatovehicule);
             combinedData.AddRange(combinedDataComputer);
 
@@ -41,7 +39,7 @@ namespace InventarVali.Areas.Employee.Controllers
 
 
 
-            return View(combinedData); 
+            return View(combinedData);
         }
 
         public IActionResult Privacy()
@@ -52,7 +50,7 @@ namespace InventarVali.Areas.Employee.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier }); 
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         [HttpGet]

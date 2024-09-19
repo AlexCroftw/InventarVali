@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventarVali.Models
 {
@@ -21,7 +16,7 @@ namespace InventarVali.Models
         [ForeignKey("EmployeeId")]
         [ValidateNever]
         public Employees Employees { get; set; }
-        
+
 
     }
 }

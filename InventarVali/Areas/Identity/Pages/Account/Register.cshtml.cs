@@ -3,26 +3,18 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
 using InventarVali.Utility;
 using InventarVali.Utility.Services;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Text.Encodings.Web;
 
 namespace InventarVali.Areas.Identity.Pages.Account
 {
@@ -107,7 +99,7 @@ namespace InventarVali.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-            public string? Role {  get; set; }
+            public string? Role { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
         }
@@ -115,7 +107,7 @@ namespace InventarVali.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            
+
             Input = new()
             {
                 RoleList = _roleManager.Roles.Select(sr => sr.Name).Select(i => new SelectListItem
@@ -148,7 +140,7 @@ namespace InventarVali.Areas.Identity.Pages.Account
                     {
                         await _userManager.AddToRoleAsync(user, Input.Role);
                     }
-                    else 
+                    else
                     {
                         await _userManager.AddToRoleAsync(user, SD.Role_Employee);
                     }
@@ -161,8 +153,8 @@ namespace InventarVali.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                      _myEmailSender.SendEmail(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    _myEmailSender.SendEmail(Input.Email, "Confirm your email",
+                      $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -174,10 +166,10 @@ namespace InventarVali.Areas.Identity.Pages.Account
                         {
                             TempData["success"] = "New User Created Successfully";
                         }
-                        else 
-                         {
+                        else
+                        {
                             await _signInManager.SignInAsync(user, isPersistent: false);
-                        }                      
+                        }
                         return LocalRedirect(returnUrl);
                     }
                 }
