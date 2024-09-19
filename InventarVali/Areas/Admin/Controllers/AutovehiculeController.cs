@@ -63,7 +63,6 @@ namespace InventarVali.Areas.Admin.Controllers
                     }
                 }
             }
-
             var autovehicule = _mapper.Map<List<AutovehiculeVM>>(objAutovehiculeslist);
             return View(autovehicule);
         }
