@@ -67,6 +67,28 @@ namespace InventarVali.Areas.Admin.Controllers
             return View(autovehicule);
         }
 
+             /// <summary>
+             /// This will be to GET a fgile/img for insurence when you click on the item itself
+             /// </summary>
+             /// <param name="id"></param>
+             /// <returns>
+             /// Returns View with insurence file/img
+             /// </returns>
+        public IActionResult GetInsurence(int id) 
+        {
+            if (id == null || id == 0) 
+            {
+                return NotFound();
+            }
+
+            var autovehicule = _unitOfWork.Autovehicule.Get(x => x.Id == id);
+
+            var model = _mapper.Map<AutovehiculeVM>(autovehicule);
+
+            return View(model);
+
+        }
+
         public IActionResult Upsert(int? id)
         {
             AutovehiculeDetailsVM autovehiculeVM = new()
