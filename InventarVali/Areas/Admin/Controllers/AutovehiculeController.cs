@@ -31,6 +31,7 @@ namespace InventarVali.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
+            //CronJobs
             List<Autovehicule> objAutovehiculeslist = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
             var now = DateTime.Now;
             foreach (var date in objAutovehiculeslist)
