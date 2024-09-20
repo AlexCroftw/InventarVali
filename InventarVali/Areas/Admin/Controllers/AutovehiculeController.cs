@@ -72,7 +72,7 @@ namespace InventarVali.Areas.Admin.Controllers
              /// </summary>
              /// <param name="id"></param>
              /// <returns>
-             /// Returns View with insurence file/img
+             ///  
              /// </returns>
         public IActionResult GetInsurence(int id) 
         {
