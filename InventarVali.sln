@@ -5,11 +5,13 @@ VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventarVali", "InventarVali\InventarVali.csproj", "{5E2DBA5F-E77A-4C19-977E-01FD6A597EF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventarVali.DataAccess", "InventarVali.DataAccess\InventarVali.DataAccess.csproj", "{C1B71151-27BF-4BE1-A474-3388E79AC97D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventarVali.DataAccess", "InventarVali.DataAccess\InventarVali.DataAccess.csproj", "{C1B71151-27BF-4BE1-A474-3388E79AC97D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventarVali.Models", "InventarVali.Models\InventarVali.Models.csproj", "{986672AA-D5FD-4F99-80B6-B41462045336}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventarVali.Models", "InventarVali.Models\InventarVali.Models.csproj", "{986672AA-D5FD-4F99-80B6-B41462045336}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventarVali.Utility", "InventarVali.Utility\InventarVali.Utility.csproj", "{96B4E935-CAC6-4134-9080-018C77270A57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventarVali.Utility", "InventarVali.Utility\InventarVali.Utility.csproj", "{96B4E935-CAC6-4134-9080-018C77270A57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{3C6FD7B4-7E83-4AB3-ACD7-A63A98FE8968}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{96B4E935-CAC6-4134-9080-018C77270A57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96B4E935-CAC6-4134-9080-018C77270A57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96B4E935-CAC6-4134-9080-018C77270A57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C6FD7B4-7E83-4AB3-ACD7-A63A98FE8968}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C6FD7B4-7E83-4AB3-ACD7-A63A98FE8968}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C6FD7B4-7E83-4AB3-ACD7-A63A98FE8968}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C6FD7B4-7E83-4AB3-ACD7-A63A98FE8968}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,6 +7,7 @@ using InventarVali.Utility;
 using InventarVali.Utility.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Infrastructure;
 
 namespace InventarVali
 {
@@ -35,13 +36,12 @@ namespace InventarVali
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+            builder.Services.AddInfrastrucutre();
             builder.Services.AddScoped<IDBInitializer, DBInitializer>();
             builder.Services.AddRazorPages();
             builder.Services.AddScoped<IMyEmailSender, MyEmailSender>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddAutoMapper(typeof(MappingConfig));
-
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
