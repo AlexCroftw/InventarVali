@@ -18,7 +18,10 @@ namespace Infrastructure
                 .WithSimpleSchedule(schedule =>
                 schedule.WithIntervalInSeconds(5).RepeatForever()));
             });
-            services.AddQuartzHostedService();
+            services.AddQuartzHostedService(options => 
+            {
+                options.WaitForJobsToComplete = true;
+            });
         }
     }
 }

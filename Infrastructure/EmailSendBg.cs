@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure
 {
+    [DisallowConcurrentExecution]
     public class EmailSendBg : IJob
     {
         private readonly IUnitOfWork _unitOfWork;
