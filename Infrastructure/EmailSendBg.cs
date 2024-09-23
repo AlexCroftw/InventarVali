@@ -24,8 +24,6 @@ namespace Infrastructure
 
         public Task Execute(IJobExecutionContext context)
         {
-            ///TODO 
-            ///Make the service send the email only once 
             List<Autovehicule> objAutovehiculeslist = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
 
             var now = DateTime.Now;
