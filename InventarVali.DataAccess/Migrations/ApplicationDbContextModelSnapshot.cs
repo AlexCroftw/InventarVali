@@ -73,7 +73,7 @@ namespace InventarVali.DataAccess.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Autovehicule");
+                    b.ToTable("Autovehicule", (string)null);
 
                     b.HasData(
                         new
@@ -139,7 +139,7 @@ namespace InventarVali.DataAccess.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Computers");
+                    b.ToTable("Computers", (string)null);
 
                     b.HasData(
                         new
@@ -188,7 +188,7 @@ namespace InventarVali.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
 
                     b.HasData(
                         new
