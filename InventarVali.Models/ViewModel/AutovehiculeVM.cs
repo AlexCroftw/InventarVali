@@ -34,6 +34,8 @@ namespace InventarVali.Models.ViewModel
         public string? ImageUrl { get; set; }
         [ValidateNever]
         public EmployeesVM Employees { get; set; }
+        [DisplayName("Insurence Doc")]
+        public string? InsurenceDoc { get; set; }
 
     }
 }

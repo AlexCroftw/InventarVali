@@ -32,6 +32,8 @@ namespace InventarVali.Models
         public Employees Employees { get; set; }
         [ValidateNever]
         public string? ImageUrl { get; set; }
+        [ValidateNever]
+        public string? InsurenceDoc { get; set; }
 
     }
 }

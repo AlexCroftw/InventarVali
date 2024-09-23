@@ -7,6 +7,7 @@ using InventarVali.Utility.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 
 namespace InventarVali.Areas.Admin.Controllers
@@ -87,35 +88,64 @@ namespace InventarVali.Areas.Admin.Controllers
 
         }
         [HttpPost]
-        public IActionResult Upsert(AutovehiculeDetailsVM autovehiculeVM, IFormFile? file)
+        public IActionResult Upsert(AutovehiculeDetailsVM autovehiculeVM, List<IFormFile?> file)
         {
             if (ModelState.IsValid)
             {
                 var model = _mapper.Map<Autovehicule>(autovehiculeVM.Autovehicule);
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
-                if (file != null)
+
+                foreach (var item in file) 
                 {
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    string autovehiculePath = Path.Combine(wwwRootPath, @"images\autovehicule");
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(item.FileName);
 
-                    if (!string.IsNullOrEmpty(model.ImageUrl))
+                    if (item != null && item.FileName.Contains("jpeg")  || item.FileName.Contains("png"))
                     {
-                        //Delete old img
-                        var oldimgPath = Path.Combine(wwwRootPath, model.ImageUrl.TrimStart('\\'));
+                        string autovehiculeImgPath = Path.Combine(wwwRootPath, @"images\autovehicule");
 
-                        if (System.IO.File.Exists(oldimgPath))
+                        if (!string.IsNullOrEmpty(model.ImageUrl))
                         {
-                            System.IO.File.Delete(oldimgPath);
+                            //Delete old img
+                            var oldimgPath = Path.Combine(wwwRootPath, model.ImageUrl.TrimStart('\\'));
+
+                            if (System.IO.File.Exists(oldimgPath))
+                            {
+                                System.IO.File.Delete(oldimgPath);
+                            }
                         }
-                    }
 
-                    using (var fileStream = new FileStream(Path.Combine(autovehiculePath, fileName), FileMode.Create))
+                        //Create File Img
+                        using (var fileStream = new FileStream(Path.Combine(autovehiculeImgPath, fileName), FileMode.Create))
+                        {
+                            item.CopyTo(fileStream);
+                        }
+                        model.ImageUrl = @"\images\autovehicule\" + fileName;
+                    }
+                    else if (item != null && item.FileName.Contains("docx") || item.FileName.Contains("pdf")) 
                     {
-                        file.CopyTo(fileStream);
-                    }
+                        string autovehiculeImgPath = Path.Combine(wwwRootPath, @"files\autovehicule");
 
-                    model.ImageUrl = @"\images\autovehicule\" + fileName;
+                        if (!string.IsNullOrEmpty(model.InsurenceDoc))
+                        {
+                            //Delete old img
+                            var oldimgPath = Path.Combine(wwwRootPath, model.ImageUrl.TrimStart('\\'));
+
+                            if (System.IO.File.Exists(oldimgPath))
+                            {
+                                System.IO.File.Delete(oldimgPath);
+                            }
+                        }
+
+                        //Create File Img
+                        using (var fileStream = new FileStream(Path.Combine(autovehiculeImgPath, fileName), FileMode.Create))
+                        {
+                            item.CopyTo(fileStream);
+                        }
+                        model.InsurenceDoc = @"\files\autovehicule\" + fileName;
+                    }
                 }
+
+                
 
                 if (model.Id == 0)
                 {
