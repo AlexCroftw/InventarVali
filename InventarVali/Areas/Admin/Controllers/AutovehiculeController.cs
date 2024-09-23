@@ -38,13 +38,6 @@ namespace InventarVali.Areas.Admin.Controllers
             return View(autovehicule);
         }
 
-             /// <summary>
-             /// This will be to GET a fgile/img for insurence when you click on the item itself
-             /// </summary>
-             /// <param name="id"></param>
-             /// <returns>
-             ///  
-             /// </returns>
         public IActionResult GetInsurenceDoc(int id) 
         {
             if (id == null || id == 0) 
@@ -97,7 +90,8 @@ namespace InventarVali.Areas.Admin.Controllers
 
                 foreach (var item in file) 
                 {
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(item.FileName);
+                    //Guid.NewGuid().ToString()
+                    string fileName =  model.LicensePlate + Path.GetExtension(item.FileName);
 
                     if (item != null && item.FileName.Contains("jpeg")  || item.FileName.Contains("png"))
                     {
@@ -128,7 +122,7 @@ namespace InventarVali.Areas.Admin.Controllers
                         if (!string.IsNullOrEmpty(model.InsurenceDoc))
                         {
                             //Delete old img
-                            var oldimgPath = Path.Combine(wwwRootPath, model.ImageUrl.TrimStart('\\'));
+                            var oldimgPath = Path.Combine(wwwRootPath, model.InsurenceDoc.TrimStart('\\'));
 
                             if (System.IO.File.Exists(oldimgPath))
                             {
