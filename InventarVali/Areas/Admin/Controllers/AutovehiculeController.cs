@@ -7,7 +7,6 @@ using InventarVali.Utility.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic;
 
 
 namespace InventarVali.Areas.Admin.Controllers
@@ -38,9 +37,9 @@ namespace InventarVali.Areas.Admin.Controllers
             return View(autovehicule);
         }
 
-        public IActionResult GetInsurenceDoc(int? id) 
+        public IActionResult GetInsurenceDoc(int? id)
         {
-            if (id == null || id == 0) 
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
@@ -88,12 +87,12 @@ namespace InventarVali.Areas.Admin.Controllers
                 var model = _mapper.Map<Autovehicule>(autovehiculeVM.Autovehicule);
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
 
-                foreach (var item in file) 
+                foreach (var item in file)
                 {
                     //Guid.NewGuid().ToString()
-                    string fileName =  model.LicensePlate + Path.GetExtension(item.FileName);
+                    string fileName = model.LicensePlate + Path.GetExtension(item.FileName);
 
-                    if (item != null && item.FileName.Contains("jpeg")  || item.FileName.Contains("png"))
+                    if (item != null && item.FileName.Contains("jpeg") || item.FileName.Contains("png"))
                     {
                         string autovehiculeImgPath = Path.Combine(wwwRootPath, @"images\autovehicule");
 
@@ -115,7 +114,7 @@ namespace InventarVali.Areas.Admin.Controllers
                         }
                         model.ImageUrl = @"\images\autovehicule\" + fileName;
                     }
-                    else if (item != null && item.FileName.Contains("docx") || item.FileName.Contains("pdf")) 
+                    else if (item != null && item.FileName.Contains("docx") || item.FileName.Contains("pdf"))
                     {
                         string autovehiculeImgPath = Path.Combine(wwwRootPath, @"files\autovehicule");
 
@@ -139,7 +138,7 @@ namespace InventarVali.Areas.Admin.Controllers
                     }
                 }
 
-                
+
 
                 if (model.Id == 0)
                 {

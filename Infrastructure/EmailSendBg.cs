@@ -4,11 +4,6 @@ using InventarVali.Utility.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Quartz;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure
 {
@@ -19,7 +14,7 @@ namespace Infrastructure
         private readonly IMyEmailSender _myEmailSender;
         private readonly IConfiguration _config;
         private readonly ILogger<EmailSendBg> _logger;
-        public EmailSendBg(IUnitOfWork unitOfWork, IMyEmailSender myEmailSender, IConfiguration config,ILogger<EmailSendBg> logger)
+        public EmailSendBg(IUnitOfWork unitOfWork, IMyEmailSender myEmailSender, IConfiguration config, ILogger<EmailSendBg> logger)
         {
             _config = config;
             _unitOfWork = unitOfWork;

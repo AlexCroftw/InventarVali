@@ -1,3 +1,4 @@
+using Infrastructure;
 using InventarVali.DataAccess.Data;
 using InventarVali.DataAccess.DBInitializer;
 using InventarVali.DataAccess.Repository;
@@ -7,7 +8,6 @@ using InventarVali.Utility;
 using InventarVali.Utility.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Infrastructure;
 
 namespace InventarVali
 {

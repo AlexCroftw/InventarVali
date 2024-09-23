@@ -5,9 +5,9 @@ namespace Infrastructure
 {
     public static class DependecyInjection
     {
-        public static void AddInfrastrucutre(this IServiceCollection services) 
+        public static void AddInfrastrucutre(this IServiceCollection services)
         {
-            services.AddQuartz(options => 
+            services.AddQuartz(options =>
             {
                 var jobkey = JobKey.Create(nameof(EmailSendBg));
                 options
@@ -18,7 +18,7 @@ namespace Infrastructure
                 .WithSimpleSchedule(schedule =>
                 schedule.WithIntervalInHours(24).RepeatForever()));
             });
-            services.AddQuartzHostedService(options => 
+            services.AddQuartzHostedService(options =>
             {
                 options.WaitForJobsToComplete = true;
             });
