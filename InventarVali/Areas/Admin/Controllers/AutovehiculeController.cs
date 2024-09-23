@@ -38,7 +38,7 @@ namespace InventarVali.Areas.Admin.Controllers
             return View(autovehicule);
         }
 
-        public IActionResult GetInsurenceDoc(int id) 
+        public IActionResult GetInsurenceDoc(int? id) 
         {
             if (id == null || id == 0) 
             {
