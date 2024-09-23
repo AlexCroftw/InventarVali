@@ -45,7 +45,7 @@ namespace InventarVali.Areas.Admin.Controllers
              /// <returns>
              ///  
              /// </returns>
-        public IActionResult GetInsurence(int id) 
+        public IActionResult GetInsurenceDoc(int id) 
         {
             if (id == null || id == 0) 
             {

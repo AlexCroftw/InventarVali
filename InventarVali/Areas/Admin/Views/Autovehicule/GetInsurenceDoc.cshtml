@@ -1,0 +1,34 @@
+﻿@model AutovehiculeVM
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<div class="col-12 text-center">
+    <h2 class="text-black py-2"> Insurence for @Model.LicensePlate </h2>
+</div>
+</head>
+
+<style>
+    .pdf {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+    }
+
+    .pdf,
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    </style>
+
+<body>
+    
+    <iframe class="pdf"
+            src="@Model.InsurenceDoc"
+            width="800" height="500">
+    </iframe>
+</body>
+
