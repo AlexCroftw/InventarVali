@@ -9,8 +9,6 @@ namespace InventarVali.Areas.Employee.Controllers
 {
     [Area("Employee")]
 
-    ///TODO 
-    ///Add a file export button/script using JS
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

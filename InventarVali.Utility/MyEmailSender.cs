@@ -23,14 +23,14 @@ namespace InventarVali.Utility
             email.Subject = subject;
             email.Body = new TextPart(TextFormat.Html) { Text = htmlMessage };
 
-            using (var smtp = new SmtpClient()) 
+            using (var smtp = new SmtpClient())
             {
                 smtp.Connect(_config.GetSection("EmailHost").Value, 465, SecureSocketOptions.SslOnConnect);
                 smtp.Authenticate(_config.GetSection("EmailUsername").Value, _config.GetSection("EmailPassword").Value);
                 smtp.Send(email);
                 smtp.Disconnect(true);
             };
-            
+
         }
     }
 }

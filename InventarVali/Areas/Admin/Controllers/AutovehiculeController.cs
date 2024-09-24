@@ -48,7 +48,7 @@ namespace InventarVali.Areas.Admin.Controllers
 
             var model = _mapper.Map<AutovehiculeVM>(autovehicule);
 
-            if (string.IsNullOrEmpty(model.InsurenceDoc)) 
+            if (string.IsNullOrEmpty(model.InsurenceDoc))
             {
                 return NotFound();
             }
