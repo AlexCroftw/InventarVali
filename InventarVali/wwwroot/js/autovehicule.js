@@ -11,16 +11,6 @@ function loadDataTable() {
             url: '/admin/autovehicule/getall'
         },
         "columns": [
-            { data: 'type', "width": "10%" },
-            { data: 'licensePlate', "width": "10%" },
-            { data: 'vinNumber', "width": "10%" },
-            { data: 'insurenceDate', "width": "10%" },
-            { data: 'hasITP', "width": "10%" },
-            { data: 'itpExpirationDate', "width": "10%" },
-            { data: 'insuranceExpirationDate', "width": "10%" },
-            { data: 'hasVinieta', "width": "10%" },
-            { data: 'vinietaExpirationDate', "width": "10%" },
-            { data: 'employees.fullName', "width": "30%" },
             {
                 data: 'id',
                 "render": function (data) {
@@ -32,7 +22,17 @@ function loadDataTable() {
                 },
                 "width": "10%",
                 "className": 'noExport'
-            }
+            },
+            { data: 'type', "width": "10%" },
+            { data: 'licensePlate', "width": "10%" },
+            { data: 'vinNumber', "width": "10%" },
+            { data: 'insurenceDate', "width": "10%" },
+            { data: 'hasITP', "width": "10%" },
+            { data: 'itpExpirationDate', "width": "10%" },
+            { data: 'insuranceExpirationDate', "width": "10%" },
+            { data: 'hasVinieta', "width": "10%" },
+            { data: 'vinietaExpirationDate', "width": "10%" },
+            { data: 'employees.fullName', "width": "30%" }
         ],
         
         dom: 'Bfltip',
@@ -44,7 +44,7 @@ function loadDataTable() {
                 text: '<i class="bi bi-file-earmark-excel"></i> EXCEL',
                 className: 'btn btn-default',
                 exportOptions: {
-                    columns: ':visible:not(:last-child)'
+                    columns: ':visible:not(:first-child)'
                 }
             },
             {
@@ -54,7 +54,7 @@ function loadDataTable() {
                 text: '<i class="bi bi-filetype-pdf"></i> PDF',
                 className: 'btn btn-default',
                 exportOptions: {
-                    columns: ':visible:not(:last-child)'
+                    columns: ':visible:not(:first-child)'
                 }
             },
             {
@@ -64,7 +64,7 @@ function loadDataTable() {
                 text: '<i class="bi bi-filetype-csv"></i> CSV',
                 className: 'btn btn-default',
                 exportOptions: {
-                    columns: ':visible:not(:last-child)'
+                    columns: ':visible:not(:first-child)'
                 }
             },
             {
@@ -72,7 +72,7 @@ function loadDataTable() {
                 text: '<i class="bi bi-printer"></i> PRINT',
                 className: 'btn btn-default',
                 exportOptions: {
-                    columns: ':visible:not(:last-child)'
+                    columns: ':visible:not(:first-child)'
                 }
             }
         ],

@@ -9,10 +9,6 @@ function loadDataTable() {
             url: '/admin/employee/getall'
         },
         "columns": [
-            { data: 'firstName', "width": "15%" },
-            { data: 'lastName', "width": "15%" },
-            { data: 'email', "width": "15%" },
-            { data: 'fullName', "width": "15%" },
             {
                 data: 'id',
                 "render": function (data) {
@@ -23,7 +19,11 @@ function loadDataTable() {
                 },
                 "width": "25%",
                 "className": 'noExport'
-            }
+            },
+            { data: 'firstName', "width": "15%" },
+            { data: 'lastName', "width": "15%" },
+            { data: 'email', "width": "15%" },
+            { data: 'fullName', "width": "15%" }
         ],
         dom: 'Bfltip',
         "buttons": [
@@ -34,7 +34,7 @@ function loadDataTable() {
                 text: '<i class="bi bi-file-earmark-excel"></i> EXCEL',
                 className: 'btn btn-default',
                 exportOptions: {
-                    columns: ':visible:not(:last-child)'
+                    columns: ':visible:not(:first-child)'
                 }
             },
             {
@@ -44,7 +44,7 @@ function loadDataTable() {
                 text: '<i class="bi bi-filetype-pdf"></i> PDF',
                 className: 'btn btn-default',
                 exportOptions: {
-                    columns: ':visible:not(:last-child)'
+                    columns: ':visible:not(:first-child)'
                 }
             },
             {
@@ -54,7 +54,7 @@ function loadDataTable() {
                 text: '<i class="bi bi-filetype-csv"></i> CSV',
                 className: 'btn btn-default',
                 exportOptions: {
-                    columns: ':visible:not(:last-child)'
+                    columns: ':visible:not(:first-child)'
                 }
             },
             {
@@ -62,7 +62,7 @@ function loadDataTable() {
                 text: '<i class="bi bi-printer"></i> PRINT',
                 className: 'btn btn-default',
                 exportOptions: {
-                    columns: ':visible:not(:last-child)'
+                    columns: ':visible:not(:first-child)'
                 }
             }
         ],

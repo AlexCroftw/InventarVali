@@ -9,11 +9,6 @@ function loadDataTable() {
             url: '/admin/computer/getall'
         },
         "columns": [
-            { data: 'type', "width": "15%" },
-            { data: 'model', "width": "15%" },
-            { data: 'description', "width": "15%" },
-            { data: 'serialNumber', "width": "15%" },
-            { data: 'employees.fullName', "width": "15%" },
             {
                 data: 'id',
                 "render": function (data) {
@@ -24,7 +19,12 @@ function loadDataTable() {
                 },
                 "width": "25%",
                 "className": 'noExport'
-            }
+            },
+            { data: 'type', "width": "15%" },
+            { data: 'model', "width": "15%" },
+            { data: 'description', "width": "15%" },
+            { data: 'serialNumber', "width": "15%" },
+            { data: 'employees.fullName', "width": "15%" }
         ],
         dom: 'Bfltip',
         "buttons": [
@@ -35,7 +35,7 @@ function loadDataTable() {
                 text: '<i class="bi bi-file-earmark-excel"></i> EXCEL',
                 className: 'btn btn-default',
                 exportOptions: {
-                    columns: ':visible:not(:last-child)'
+                    columns: ':visible:not(:first-child)'
                 }
             },
             {
@@ -45,7 +45,7 @@ function loadDataTable() {
                 text: '<i class="bi bi-filetype-pdf"></i> PDF',
                 className: 'btn btn-default',
                 exportOptions: {
-                    columns: ':visible:not(:last-child)'
+                    columns: ':visible:not(:first-child)'
                 }
             },
             {
@@ -55,7 +55,7 @@ function loadDataTable() {
                 text: '<i class="bi bi-filetype-csv"></i> CSV',
                 className: 'btn btn-default',
                 exportOptions: {
-                    columns: ':visible:not(:last-child)'
+                    columns: ':visible:not(:first-child)'
                 }
             },
             {
@@ -63,7 +63,7 @@ function loadDataTable() {
                 text: '<i class="bi bi-printer"></i> PRINT',
                 className: 'btn btn-default',
                 exportOptions: {
-                    columns: ':visible:not(:last-child)'
+                    columns: ':visible:not(:first-child)'
                 }
             }
         ],
