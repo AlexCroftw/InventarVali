@@ -2,6 +2,7 @@
 using InventarVali.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace InventarVali.DataAccess.DBInitializer
 {
@@ -10,12 +11,14 @@ namespace InventarVali.DataAccess.DBInitializer
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _db;
+        private readonly IConfiguration _config;
 
-        public DBInitializer(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext db)
+        public DBInitializer(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext db, IConfiguration config)
         {
             _db = db;
             _userManager = userManager;
             _roleManager = roleManager;
+            _config = config;
         }
 
 
@@ -38,12 +41,12 @@ namespace InventarVali.DataAccess.DBInitializer
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
                 _userManager.CreateAsync(new IdentityUser
                 {
-                    UserName = "newadmin@kme.com",
-                    Email = "newadmin@kme.com",
+                    UserName = _config.GetSection("DefaultEmailAddress").Value,
+                    Email = _config.GetSection("DefaultEmailAddress").Value,
 
-                }, "Admin123*").GetAwaiter().GetResult();
+                }, _config.GetSection("DefaultEmailPassword").Value).GetAwaiter().GetResult();
 
-                IdentityUser user = _db.Users.FirstOrDefault(u => u.Email == "newadmin@kme.com");
+                IdentityUser user = _db.Users.FirstOrDefault(u => u.Email == _config.GetSection("DefaultEmailAddress").Value);
                 _userManager.AddToRoleAsync(user, SD.Role_Admin).GetAwaiter().GetResult();
             }
 
