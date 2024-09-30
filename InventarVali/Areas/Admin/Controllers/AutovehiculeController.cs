@@ -38,6 +38,7 @@ namespace InventarVali.Areas.Admin.Controllers
 
         public IActionResult GetInsurenceDoc(int? id)
         {
+            
             if (id == null || id == 0)
             {
                 return NotFound();
