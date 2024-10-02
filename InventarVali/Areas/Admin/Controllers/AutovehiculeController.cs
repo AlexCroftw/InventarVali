@@ -31,7 +31,6 @@ namespace InventarVali.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            //CronJobs
             List<Autovehicule> objAutovehiculeslist = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
             var autovehicule = _mapper.Map<List<AutovehiculeVM>>(objAutovehiculeslist);
             return View(autovehicule);
@@ -39,6 +38,7 @@ namespace InventarVali.Areas.Admin.Controllers
 
         public IActionResult GetInsurenceDoc(int? id)
         {
+            
             if (id == null || id == 0)
             {
                 return NotFound();
@@ -142,7 +142,6 @@ namespace InventarVali.Areas.Admin.Controllers
                         model.InsurenceDoc = @"\files\autovehicule\" + fileName;
                     }
                 }
-
 
 
                 if (model.Id == 0)

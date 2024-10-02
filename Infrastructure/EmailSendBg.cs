@@ -32,7 +32,7 @@ namespace Infrastructure
                 if (date.InsuranceExpirationDate.HasValue)
                 {
                     TimeSpan diff = date.InsuranceExpirationDate.Value - now;
-                    if (diff.Days <= 14)
+                    if (diff.Days <= 14 && diff.Days >= 0)
                     {
                         _myEmailSender.SendEmail(_config.GetSection("EmailToSendTo").Value, $"Insurance Expiration Date  {now}", $"Please be informed that insurence for {date.LicensePlate} is expiring " +
                             $" in {diff.Days} days. Please Take Action ");
@@ -41,7 +41,7 @@ namespace Infrastructure
                 if (date.ITPExpirationDate.HasValue)
                 {
                     TimeSpan diff = date.ITPExpirationDate.Value - now;
-                    if (diff.Days <= 14)
+                    if (diff.Days <= 14 && diff.Days >= 0)
                     {
                         _myEmailSender.SendEmail(_config.GetSection("EmailToSendTo").Value, $"ITP Expiration  Date  {now}", $"Please be informed that ITP for {date.LicensePlate} is expiring " +
                             $" in {diff.Days} days. Please Take Action ");
@@ -50,7 +50,7 @@ namespace Infrastructure
                 if (date.VinietaExpirationDate.HasValue)
                 {
                     TimeSpan diff = date.VinietaExpirationDate.Value - now;
-                    if (diff.Days <= 14)
+                    if (diff.Days <= 14 && diff.Days >= 0)
                     {
                         _myEmailSender.SendEmail(_config.GetSection("EmailToSendTo").Value, $"Vinieta Expiration Date  {now}", $"Please be informed that Vinieta for {date.LicensePlate} is expiring " +
                             $" in {diff.Days} days. Please Take Action ");
