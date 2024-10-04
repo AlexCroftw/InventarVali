@@ -111,3 +111,42 @@ function Delete(url) {
         }
     });
 }
+
+$(document).ready(function () {
+    var ITPCheck = $('input#chkbxITP[type=checkbox]');
+    var shITPDate = $('#ITPDate');
+    var ITPLabel = $('#ITPLabel')
+    // check for default status 
+    if (ITPCheck.attr('checked') !== undefined) {
+        shITPDate.show();
+        ITPLabel.show();
+    }
+    else {
+        shITPDate.hide();
+        ITPLabel.hide();
+    }
+
+    ITPCheck.change(function () {
+        shITPDate.toggle();
+        ITPLabel.toggle();
+    });
+}); 
+
+$(document).ready(function () {
+    var VinietaCheck = $('input#chkbxVinieta[type=checkbox]');
+    var shVinietaDate = $('#VinietaDate');
+    var VinietaLabel =$('#VinietaLabel')
+    // check for default status 
+    if (VinietaCheck.attr('checked') !== undefined) {
+        shVinietaDate.show();
+        VinietaLabel.show();
+    }
+    else {
+        shVinietaDate.hide();
+        VinietaLabel.hide();
+    }
+    VinietaCheck.change(function () {
+        shVinietaDate.toggle();
+        VinietaLabel.toggle();
+    });
+}); 

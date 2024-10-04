@@ -15,13 +15,12 @@ namespace InventarVali.Models.ViewModel
         public string VinNumber { get; set; }
 
         [DisplayName("Insurance Start Date")]
-        //[DataType(DataType.Date)]
-        //[DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:MM/dd/yyyy}")]
         public string ?InsurenceDate { get; set; }
         [DataType(DataType.Date)]
         public DateTime DisplayInsurenceDate { get; set; }
         [DisplayName("ITP")]
         public string? HasITP { get; set; }
+        public bool DisplayHasITP { get; set; }
 
         [DisplayName("ITP Expiration Date")]
         public string? ITPExpirationDate { get; set; }
@@ -34,6 +33,7 @@ namespace InventarVali.Models.ViewModel
         public DateTime DisplayInsuranceExpirationDate { get; set; }
         [DisplayName("Vinieta")]
         public string? HasVinieta { get; set; }
+        public bool DisplayHasVinieta { get; set; }
 
         [DisplayName("Vinieta Expiration Date")]
         public string? VinietaExpirationDate { get; set; }

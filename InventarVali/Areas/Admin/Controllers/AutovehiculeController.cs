@@ -114,6 +114,16 @@ namespace InventarVali.Areas.Admin.Controllers
                 {
                     autovehiculeVM.Autovehicule.DisplayVinietaExpirationDate = DateTime.Now.AddDays(365);
                 }
+                //Display Bool Value
+                if (autovehiculeVM.Autovehicule.HasITP == "Yes")
+                {
+                    autovehiculeVM.Autovehicule.DisplayHasITP = true;
+                }
+                if (autovehiculeVM.Autovehicule.HasVinieta == "Yes")
+                {
+                    autovehiculeVM.Autovehicule.DisplayHasVinieta = true;
+                }
+
                 return View(autovehiculeVM);
             }
 
@@ -123,6 +133,8 @@ namespace InventarVali.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                autovehiculeVM.Autovehicule.HasITP = autovehiculeVM.Autovehicule.DisplayHasITP.ToString();
+                autovehiculeVM.Autovehicule.HasVinieta = autovehiculeVM.Autovehicule.DisplayHasVinieta.ToString();
                 autovehiculeVM.Autovehicule.InsurenceDate = autovehiculeVM.Autovehicule.DisplayInsurenceDate.ToLongDateString();
                 autovehiculeVM.Autovehicule.InsuranceExpirationDate = autovehiculeVM.Autovehicule.DisplayInsuranceExpirationDate.ToLongDateString();
                 autovehiculeVM.Autovehicule.ITPExpirationDate = autovehiculeVM.Autovehicule.DisplayITPExpirationDate.ToLongDateString();
