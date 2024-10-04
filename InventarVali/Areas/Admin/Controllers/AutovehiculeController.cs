@@ -68,9 +68,13 @@ namespace InventarVali.Areas.Admin.Controllers
                 }),
                 Autovehicule = new AutovehiculeVM()
             };
-
+            
             if (id == null || id == 0)
             {
+                autovehiculeVM.Autovehicule.DisplayInsurenceDate = DateTime.Now;
+                autovehiculeVM.Autovehicule.DisplayInsuranceExpirationDate = DateTime.Now.AddDays(365);
+                autovehiculeVM.Autovehicule.DisplayITPExpirationDate = DateTime.Now.AddDays(365);
+                autovehiculeVM.Autovehicule.DisplayVinietaExpirationDate = DateTime.Now.AddDays(365);
                 //Create
                 return View(autovehiculeVM);
             }
@@ -94,10 +98,7 @@ namespace InventarVali.Areas.Admin.Controllers
                 {
                     autovehiculeVM.Autovehicule.DisplayInsuranceExpirationDate = DateTime.Parse(autovehiculeVM.Autovehicule.InsuranceExpirationDate);
                 }
-                else
-                {
-                    autovehiculeVM.Autovehicule.DisplayInsuranceExpirationDate = DateTime.Now.AddDays(365);
-                }
+                
                 if (!String.IsNullOrEmpty(autovehiculeVM.Autovehicule.ITPExpirationDate))
                 {
                     autovehiculeVM.Autovehicule.DisplayITPExpirationDate = DateTime.Parse(autovehiculeVM.Autovehicule.ITPExpirationDate);
