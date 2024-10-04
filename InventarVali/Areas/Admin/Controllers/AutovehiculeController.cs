@@ -69,13 +69,12 @@ namespace InventarVali.Areas.Admin.Controllers
                 Autovehicule = new AutovehiculeVM()
             };
 
-            double DaysInAYear = DateTime.IsLeapYear(DateTime.Now.Year) ? 366 : 365;
             if (id == null || id == 0)
             {
                 autovehiculeVM.Autovehicule.DisplayInsurenceDate = DateTime.Now;
-                autovehiculeVM.Autovehicule.DisplayInsuranceExpirationDate = DateTime.Now.AddDays(DaysInAYear);
-                autovehiculeVM.Autovehicule.DisplayITPExpirationDate = DateTime.Now.AddDays(DaysInAYear);
-                autovehiculeVM.Autovehicule.DisplayVinietaExpirationDate = DateTime.Now.AddDays(DaysInAYear);
+                autovehiculeVM.Autovehicule.DisplayInsuranceExpirationDate = DateTime.Now.AddYears(1);
+                autovehiculeVM.Autovehicule.DisplayITPExpirationDate = DateTime.Now.AddYears(1);
+                autovehiculeVM.Autovehicule.DisplayVinietaExpirationDate = DateTime.Now.AddYears(1);
                 //Create
                 return View(autovehiculeVM);
             }
@@ -85,50 +84,7 @@ namespace InventarVali.Areas.Admin.Controllers
                 //Update
                 var autovehicule = _unitOfWork.Autovehicule.Get(o => o.Id == id);
                 autovehiculeVM.Autovehicule = _mapper.Map<AutovehiculeVM>(autovehicule);
-
-                //Displays Date
-                if (!String.IsNullOrEmpty(autovehiculeVM.Autovehicule.InsurenceDate))
-                {
-                    autovehiculeVM.Autovehicule.DisplayInsurenceDate = DateTime.Parse(autovehiculeVM.Autovehicule.InsurenceDate);   
-                }
-                else 
-                {
-                    autovehiculeVM.Autovehicule.DisplayInsurenceDate = DateTime.Now;
-                }
-                if (!String.IsNullOrEmpty(autovehiculeVM.Autovehicule.InsuranceExpirationDate))
-                {
-                    autovehiculeVM.Autovehicule.DisplayInsuranceExpirationDate = DateTime.Parse(autovehiculeVM.Autovehicule.InsuranceExpirationDate);
-                }
-                else 
-                {
-                    autovehiculeVM.Autovehicule.DisplayInsuranceExpirationDate = DateTime.Now;
-                }
-                
-                if (!String.IsNullOrEmpty(autovehiculeVM.Autovehicule.ITPExpirationDate))
-                {
-                    autovehiculeVM.Autovehicule.DisplayITPExpirationDate = DateTime.Parse(autovehiculeVM.Autovehicule.ITPExpirationDate);
-                }
-                else
-                {
-                    autovehiculeVM.Autovehicule.DisplayITPExpirationDate = DateTime.Now.AddDays(DaysInAYear);
-                }
-                if (!String.IsNullOrEmpty(autovehiculeVM.Autovehicule.VinietaExpirationDate))
-                {
-                    autovehiculeVM.Autovehicule.DisplayVinietaExpirationDate = DateTime.Parse(autovehiculeVM.Autovehicule.VinietaExpirationDate);
-                }
-                else
-                {
-                    autovehiculeVM.Autovehicule.DisplayVinietaExpirationDate = DateTime.Now.AddDays(DaysInAYear);
-                }
                 //Display Bool Value
-                if (autovehiculeVM.Autovehicule.HasITP == "Yes")
-                {
-                    autovehiculeVM.Autovehicule.DisplayHasITP = true;
-                }
-                if (autovehiculeVM.Autovehicule.HasVinieta == "Yes")
-                {
-                    autovehiculeVM.Autovehicule.DisplayHasVinieta = true;
-                }
 
                 return View(autovehiculeVM);
             }
@@ -139,13 +95,8 @@ namespace InventarVali.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                autovehiculeVM.Autovehicule.HasITP = autovehiculeVM.Autovehicule.DisplayHasITP.ToString();
-                autovehiculeVM.Autovehicule.HasVinieta = autovehiculeVM.Autovehicule.DisplayHasVinieta.ToString();
-                autovehiculeVM.Autovehicule.InsurenceDate = autovehiculeVM.Autovehicule.DisplayInsurenceDate.ToLongDateString();
-                autovehiculeVM.Autovehicule.InsuranceExpirationDate = autovehiculeVM.Autovehicule.DisplayInsuranceExpirationDate.ToLongDateString();
-                autovehiculeVM.Autovehicule.ITPExpirationDate = autovehiculeVM.Autovehicule.DisplayITPExpirationDate.ToLongDateString();
-                autovehiculeVM.Autovehicule.VinietaExpirationDate = autovehiculeVM.Autovehicule.DisplayVinietaExpirationDate.ToLongDateString();
-
+                
+              
                 var model = _mapper.Map<Autovehicule>(autovehiculeVM.Autovehicule);
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
 

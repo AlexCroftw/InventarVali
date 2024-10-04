@@ -40,13 +40,15 @@
                                         <div class="form-group mb-3">
                                             <label asp-for="Autovehicule.HasITP" class="ms-2">Please Check the box if ITP is Available --></label>
                                             <input asp-for="Autovehicule.DisplayHasITP" id="chkbxITP" type="checkbox">
+                                            <input asp-for="Autovehicule.HasITP" hidden class="form-control border-0 shadow">
                                             <span asp-validation-for="Autovehicule.HasITP" class="text-danger"></span>
                                         </div>
                           
                                         <div class="form-group mb-3" >
                                             <label asp-for="Autovehicule.ITPExpirationDate" id="ITPLabel" class="ms-2"></label>
                                             <input asp-for="Autovehicule.DisplayITPExpirationDate" id="ITPDate" class="form-control border-0 shadow">
-                                             <span asp-validation-for="Autovehicule.ITPExpirationDate" class="text-danger"></span>
+                                            <input asp-for="Autovehicule.ITPExpirationDate" hidden class="form-control border-0 shadow">
+                                            <span asp-validation-for="Autovehicule.ITPExpirationDate" class="text-danger"></span>
                                          </div>
                                         
 
@@ -58,21 +60,25 @@
                                         <div class="form-group mb-3">
                                             <label asp-for="Autovehicule.HasVinieta" class="ms-2">Please Check the box if Vinieta is Available --></label>
                                             <input asp-for="Autovehicule.DisplayHasVinieta" id="chkbxVinieta" type="checkbox">
+                                            <input asp-for="Autovehicule.HasVinieta" hidden class="form-control border-0 shadow" />
                                             <span asp-validation-for="Autovehicule.HasVinieta" class="text-danger"></span>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label asp-for="Autovehicule.VinietaExpirationDate" id="VinietaLabel" class="ms-2"></label>
                                             <input asp-for="Autovehicule.DisplayVinietaExpirationDate" id="VinietaDate" class="form-control border-0 shadow">
+                                            <input asp-for="Autovehicule.VinietaExpirationDate" hidden class="form-control border-0 shadow">
                                             <span asp-validation-for="Autovehicule.VinietaExpirationDate" class="text-danger"></span>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label asp-for="Autovehicule.InsurenceDate" class="ms-2"></label>
                                             <input asp-for="Autovehicule.DisplayInsurenceDate" class="form-control border-0 shadow">
+                                            <input asp-for="Autovehicule.InsurenceDate" hidden class="form-control border-0 shadow">
                                             <span asp-validation-for="Autovehicule.InsurenceDate" class="text-danger"></span>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label asp-for="Autovehicule.InsuranceExpirationDate" class="ms-2"></label>
                                             <input asp-for="Autovehicule.DisplayInsuranceExpirationDate" class="form-control border-0 shadow">
+                                            <input asp-for="Autovehicule.InsuranceExpirationDate" hidden class="form-control border-0 shadow">
                                             <span asp-validation-for="Autovehicule.InsuranceExpirationDate" class="text-danger"></span>
                                         </div>
                                         <div class="form-group mb-3">
