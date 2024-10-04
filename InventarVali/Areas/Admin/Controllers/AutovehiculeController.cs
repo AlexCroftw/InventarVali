@@ -68,13 +68,14 @@ namespace InventarVali.Areas.Admin.Controllers
                 }),
                 Autovehicule = new AutovehiculeVM()
             };
-            
+
+            double DaysInAYear = DateTime.IsLeapYear(DateTime.Now.Year) ? 366 : 365;
             if (id == null || id == 0)
             {
                 autovehiculeVM.Autovehicule.DisplayInsurenceDate = DateTime.Now;
-                autovehiculeVM.Autovehicule.DisplayInsuranceExpirationDate = DateTime.Now.AddDays(365);
-                autovehiculeVM.Autovehicule.DisplayITPExpirationDate = DateTime.Now.AddDays(365);
-                autovehiculeVM.Autovehicule.DisplayVinietaExpirationDate = DateTime.Now.AddDays(365);
+                autovehiculeVM.Autovehicule.DisplayInsuranceExpirationDate = DateTime.Now.AddDays(DaysInAYear);
+                autovehiculeVM.Autovehicule.DisplayITPExpirationDate = DateTime.Now.AddDays(DaysInAYear);
+                autovehiculeVM.Autovehicule.DisplayVinietaExpirationDate = DateTime.Now.AddDays(DaysInAYear);
                 //Create
                 return View(autovehiculeVM);
             }
@@ -105,7 +106,7 @@ namespace InventarVali.Areas.Admin.Controllers
                 }
                 else
                 {
-                    autovehiculeVM.Autovehicule.DisplayITPExpirationDate = DateTime.Now.AddDays(365);
+                    autovehiculeVM.Autovehicule.DisplayITPExpirationDate = DateTime.Now.AddDays(DaysInAYear);
                 }
                 if (!String.IsNullOrEmpty(autovehiculeVM.Autovehicule.VinietaExpirationDate))
                 {
@@ -113,7 +114,7 @@ namespace InventarVali.Areas.Admin.Controllers
                 }
                 else
                 {
-                    autovehiculeVM.Autovehicule.DisplayVinietaExpirationDate = DateTime.Now.AddDays(365);
+                    autovehiculeVM.Autovehicule.DisplayVinietaExpirationDate = DateTime.Now.AddDays(DaysInAYear);
                 }
                 //Display Bool Value
                 if (autovehiculeVM.Autovehicule.HasITP == "Yes")
