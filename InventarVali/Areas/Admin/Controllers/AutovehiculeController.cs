@@ -99,6 +99,10 @@ namespace InventarVali.Areas.Admin.Controllers
                 {
                     autovehiculeVM.Autovehicule.DisplayInsuranceExpirationDate = DateTime.Parse(autovehiculeVM.Autovehicule.InsuranceExpirationDate);
                 }
+                else 
+                {
+                    autovehiculeVM.Autovehicule.DisplayInsuranceExpirationDate = DateTime.Now;
+                }
                 
                 if (!String.IsNullOrEmpty(autovehiculeVM.Autovehicule.ITPExpirationDate))
                 {
