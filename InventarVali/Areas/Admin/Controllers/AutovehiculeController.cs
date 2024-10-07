@@ -71,10 +71,10 @@ namespace InventarVali.Areas.Admin.Controllers
 
             if (id == null || id == 0)
             {
-                autovehiculeVM.Autovehicule.DisplayInsurenceDate = DateTime.Now;
-                autovehiculeVM.Autovehicule.DisplayInsuranceExpirationDate = DateTime.Now.AddYears(1);
-                autovehiculeVM.Autovehicule.DisplayITPExpirationDate = DateTime.Now.AddYears(1);
-                autovehiculeVM.Autovehicule.DisplayVinietaExpirationDate = DateTime.Now.AddYears(1);
+                autovehiculeVM.Autovehicule.InsurenceDate = DateTime.Now;
+                autovehiculeVM.Autovehicule.InsuranceExpirationDate = DateTime.Now.AddYears(1);
+                autovehiculeVM.Autovehicule.ITPExpirationDate = DateTime.Now.AddYears(1);
+                autovehiculeVM.Autovehicule.VinietaExpirationDate = DateTime.Now.AddYears(1);
                 //Create
                 return View(autovehiculeVM);
             }

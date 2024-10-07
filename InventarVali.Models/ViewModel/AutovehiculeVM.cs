@@ -15,30 +15,31 @@ namespace InventarVali.Models.ViewModel
         public string VinNumber { get; set; }
 
         [DisplayName("Insurance Start Date")]
-        public string ?InsurenceDate { get; set; }
+
+        public string ? DisplayInsurenceDate { get; set; }
         [DataType(DataType.Date)]
-        public DateTime DisplayInsurenceDate { get; set; }
+        public DateTime InsurenceDate { get; set; }
         [DisplayName("ITP")]
-        public string? HasITP { get; set; }
-        public bool DisplayHasITP { get; set; }
+        public string? DisplayHasITP { get; set; }
+        public bool HasITP { get; set; }
 
         [DisplayName("ITP Expiration Date")]
-        public string? ITPExpirationDate { get; set; }
+        public string? DisplayITPExpirationDate { get; set; }
         [DataType(DataType.Date)]
-        public DateTime DisplayITPExpirationDate { get; set; }
+        public DateTime ITPExpirationDate { get; set; }
 
         [DisplayName("Insurance Expiration Date")]
-        public string? InsuranceExpirationDate { get; set; }
+        public string? DisplayInsuranceExpirationDate { get; set; }
         [DataType(DataType.Date)]
-        public DateTime DisplayInsuranceExpirationDate { get; set; }
+        public DateTime InsuranceExpirationDate { get; set; }
         [DisplayName("Vinieta")]
-        public string? HasVinieta { get; set; }
-        public bool DisplayHasVinieta { get; set; }
+        public string? DisplayHasVinieta { get; set; }
+        public bool HasVinieta { get; set; }
 
         [DisplayName("Vinieta Expiration Date")]
-        public string? VinietaExpirationDate { get; set; }
+        public string? DisplayVinietaExpirationDate { get; set; }
         [DataType(DataType.Date)]
-        public DateTime DisplayVinietaExpirationDate { get; set; }
+        public DateTime VinietaExpirationDate { get; set; }
         public int? EmployeeId { get; set; }
 
         public string? ImageUrl { get; set; }

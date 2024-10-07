@@ -26,12 +26,12 @@ function loadDataTable() {
             { data: 'type', "width": "10%" },
             { data: 'licensePlate', "width": "10%" },
             { data: 'vinNumber', "width": "10%" },
-            { data: 'insurenceDate', "width": "10%" },
-            { data: 'hasITP', "width": "10%" },
-            { data: 'itpExpirationDate', "width": "10%" },
-            { data: 'insuranceExpirationDate', "width": "10%" },
-            { data: 'hasVinieta', "width": "10%" },
-            { data: 'vinietaExpirationDate', "width": "10%" },
+            { data: 'displayInsurenceDate', "width": "10%" },
+            { data: 'displayHasITP', "width": "10%" },
+            { data: 'displayITPExpirationDate', "width": "10%" },
+            { data: 'displayInsuranceExpirationDate', "width": "10%" },
+            { data: 'displayHasVinieta', "width": "10%" },
+            { data: 'displayVinietaExpirationDate', "width": "10%" },
             { data: 'employees.fullName', "width": "30%" }
         ],
         

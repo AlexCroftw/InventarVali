@@ -8,25 +8,20 @@ namespace InventarVali.Models
 
         public MappingConfig()
         {
+
+            CreateMap<Autovehicule, AutovehiculeVM>().
+                ForMember(x => x.DisplayInsurenceDate, opt => opt.MapFrom(src => src.InsurenceDate.HasValue ? src.InsurenceDate.Value.
+                                                                                                        ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy"))).
+                ForMember(x => x.DisplayITPExpirationDate, opt => opt.MapFrom(src => src.ITPExpirationDate.HasValue ? src.ITPExpirationDate.Value.
+                                                                                                        ToString("dd/MM/yyyy") : DateTime.Now.AddYears(1).ToString("dd/MM/yyyy"))).
+                ForMember(x => x.DisplayInsuranceExpirationDate, opt => opt.MapFrom(src => src.InsuranceExpirationDate.HasValue ? src.InsuranceExpirationDate.Value.
+                                                                                                        ToString("dd/MM/yyyy") : DateTime.Now.AddYears(1).ToString("dd/MM/yyyy"))).
+                ForMember(x => x.DisplayVinietaExpirationDate, opt => opt.MapFrom(src => src.VinietaExpirationDate.HasValue ? src.VinietaExpirationDate.Value.
+                                                                                                        ToString("dd/MM/yyyy") : DateTime.Now.AddYears(1).ToString("dd/MM/yyyy"))).
+                ForMember(x => x.DisplayHasITP, opt => opt.MapFrom(src => src.HasITP == true ? "Yes" : "No")). //GetValueorDefault
+                ForMember(x => x.DisplayHasVinieta, opt => opt.MapFrom(src => src.HasVinieta == true ? "Yes" : "No"))
+                .ReverseMap();
        
-            CreateMap<Autovehicule, AutovehiculeVM>().ForMember(x => x.InsurenceDate, opt => opt.MapFrom(src => src.InsurenceDate.HasValue ? src.InsurenceDate.Value.ToString("dd/MM/yyyy") : string.Empty)).
-                ForMember(x => x.ITPExpirationDate, opt => opt.MapFrom(src => src.ITPExpirationDate.HasValue ? src.ITPExpirationDate.Value.ToString("dd/MM/yyyy") : string.Empty)).
-                ForMember(x => x.InsuranceExpirationDate, opt => opt.MapFrom(src => src.InsuranceExpirationDate.HasValue ? src.InsuranceExpirationDate.Value.ToString("dd/MM/yyyy") : string.Empty)).
-                ForMember(x => x.VinietaExpirationDate, opt => opt.MapFrom(src => src.VinietaExpirationDate.HasValue ? src.VinietaExpirationDate.Value.ToString("dd/MM/yyyy") : string.Empty)).
-                ForMember(x => x.HasITP, opt => opt.MapFrom(src => src.HasITP == true ? "Yes" : "No")). //GetValueorDefault
-                ForMember(x => x.HasVinieta, opt => opt.MapFrom(src => src.HasVinieta == true ? "Yes" : "No")).
-                ForMember(x => x.DisplayInsurenceDate, opt => opt.MapFrom(src => src.InsurenceDate.HasValue? src.InsurenceDate.Value : DateTime.Now)).
-                ForMember(x => x.DisplayInsuranceExpirationDate, opt => opt.MapFrom(src => src.InsuranceExpirationDate.HasValue? src.InsuranceExpirationDate.Value : DateTime.Now.AddYears(1))).
-                ForMember(x => x.DisplayITPExpirationDate, opt => opt.MapFrom(src => src.ITPExpirationDate.HasValue? src.ITPExpirationDate.Value : DateTime.Now.AddYears(1))).
-                ForMember(x => x.DisplayVinietaExpirationDate,opt => opt.MapFrom(src => src.VinietaExpirationDate.HasValue? src.VinietaExpirationDate.Value : DateTime.Now.AddYears(1))).
-                ForMember(x => x.DisplayHasITP, opt => opt.MapFrom(src => src.HasITP ?? false)).
-                ForMember(x => x.DisplayHasVinieta, opt => opt.MapFrom(src => src.HasVinieta ?? false)).ReverseMap().
-                ForMember(x => x.VinietaExpirationDate,opt => opt.MapFrom(src => src.DisplayVinietaExpirationDate)).
-                ForMember(x => x.HasVinieta,opt => opt.MapFrom(src => src.DisplayHasVinieta)).
-                ForMember(x => x.HasITP, opt => opt.MapFrom(src => src.DisplayHasITP)).
-                ForMember(x => x.InsuranceExpirationDate, opt => opt.MapFrom(src => src.DisplayInsuranceExpirationDate)).
-                ForMember(x => x.InsurenceDate, opt => opt.MapFrom(src => src.DisplayInsurenceDate)).
-                ForMember(x => x.ITPExpirationDate,opt => opt.MapFrom(src => src.DisplayITPExpirationDate));
 
             CreateMap<AutovehiculeVM, AutovehiculeDetailsVM>().ReverseMap();
             CreateMap<Autovehicule, AutovehiculeDetailsVM>().ReverseMap();
