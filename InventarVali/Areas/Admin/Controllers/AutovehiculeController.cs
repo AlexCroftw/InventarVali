@@ -52,7 +52,7 @@ namespace InventarVali.Areas.Admin.Controllers
 
             if (string.IsNullOrEmpty(model.InsurenceDoc))
             {
-                return NotFound();
+                return NotFound("The current Entity does not have a valid PDF file attached to it");
             }
 
             return View(model);
@@ -128,7 +128,7 @@ namespace InventarVali.Areas.Admin.Controllers
                         }
                         model.ImageUrl = @"\images\autovehicule\" + fileName;
                     }
-                    else if (item != null && item.FileName.Contains("docx") || item.FileName.Contains("pdf"))
+                    else if (item != null &&  item.FileName.Contains("pdf"))
                     {
                         string autovehiculeImgPath = Path.Combine(wwwRootPath, @"files\autovehicule");
 
