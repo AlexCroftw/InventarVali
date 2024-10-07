@@ -187,17 +187,36 @@ namespace InventarVali.Areas.Admin.Controllers
             bool valid = Regex.IsMatch(autovehicule.LicensePlate, @"^[A-Z]{1,3}\s\d{1,3}\s[A-Z]{3}$");
             if (!valid)
             {
-                return Json($"License {autovehicule.LicensePlate} has an invalid format. Format: VL-05-ESK");
+                return Json($"License {autovehicule.LicensePlate} has an invalid format. Format ex: VL-05-ESK");
             }
             //Verify if Plate is unique
             List<Autovehicule> objAutovehiculeslist = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
             var autovehiculeVMList = _mapper.Map<List<AutovehiculeVM>>(objAutovehiculeslist);
-            foreach (var item in autovehiculeVMList) 
-            {
-                if (item.LicensePlate == autovehicule.LicensePlate) 
+
+                foreach (var item in autovehiculeVMList)
                 {
-                    return Json($"{autovehicule.LicensePlate} is already taken ");
+                    if (item.LicensePlate == autovehicule.LicensePlate)
+                    {
+                        return Json($"{autovehicule.LicensePlate} is already taken ");
+                    }
                 }
+
+            return Json(true);
+        }
+
+        /// <summary>
+        /// Fix This bugg where the validator for Insurence Doc does not work, possibly add IFileFormat Param
+        /// </summary>
+        /// <param name="autovehicule"></param>
+        /// <returns></returns>
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult VerifyInsurance(AutovehiculeVM autovehicule, IFormFile file) 
+        {
+           autovehicule.InsurenceDoc =  autovehicule.LicensePlate + Path.GetExtension(file.FileName);
+
+            if (autovehicule.InsurenceDoc.EndsWith(".pdf")) 
+            {
+                return Json("The file you are trying to upload is not a PDF, Please upload a PDF");
             }
             return Json(true);
         }

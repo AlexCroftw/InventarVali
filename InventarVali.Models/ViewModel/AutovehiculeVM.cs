@@ -50,6 +50,7 @@ namespace InventarVali.Models.ViewModel
         [ValidateNever]
         public EmployeesVM Employees { get; set; }
         [DisplayName("Insurence Doc")]
+        [Remote(action: "VerifyInsurance",controller:"autovehicule")]
         public string? InsurenceDoc { get; set; }
 
     }
