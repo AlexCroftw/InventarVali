@@ -189,7 +189,16 @@ namespace InventarVali.Areas.Admin.Controllers
             {
                 return Json($"License {autovehicule.LicensePlate} has an invalid format. Format: VL-05-ESK");
             }
-
+            //Verify if Plate is unique
+            List<Autovehicule> objAutovehiculeslist = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
+            var autovehiculeVMList = _mapper.Map<List<AutovehiculeVM>>(objAutovehiculeslist);
+            foreach (var item in autovehiculeVMList) 
+            {
+                if (item.LicensePlate == autovehicule.LicensePlate) 
+                {
+                    return Json($"{autovehicule.LicensePlate} is already taken ");
+                }
+            }
             return Json(true);
         }
 

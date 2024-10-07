@@ -110,7 +110,7 @@ namespace InventarVali.Areas.Admin.Controllers
             {
                 if (employee.FullName == fullName) 
                 {
-                    return Json($"This combination of {employee.FirstName} + {employee.LastName} is already taken ");
+                    return Json($"This combination of {employee.FirstName}  {employee.LastName} is already taken ");
                 }
             }
 
