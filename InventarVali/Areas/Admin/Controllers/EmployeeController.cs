@@ -84,7 +84,39 @@ namespace InventarVali.Areas.Admin.Controllers
 
         }
 
+        #region VALIDATORS
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult VerifyEmail(EmployeesVM employeesVM )
+        {
+            List<Employees> employeesList = _unitOfWork.Employee.GetAll().ToList();
+            var employees = _mapper.Map<List<EmployeesVM>>(employeesList);
+            foreach (var employee in employeesList) 
+            {
+                if (employeesVM.Email == employee.Email) 
+                {
+                    return Json($"This email {employeesVM.Email} is already taken");
+                }
+            }
+            return Json(true);
+        }
 
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult VerifyName (string firstName, string lastName)
+        {
+            var fullName = firstName + " " + lastName;
+            List<Employees> employeesList = _unitOfWork.Employee.GetAll().ToList();
+            var employees = _mapper.Map<List<EmployeesVM>>(employeesList);
+            foreach (var employee in employeesList) 
+            {
+                if (employee.FullName == fullName) 
+                {
+                    return Json($"This combination of {employee.FirstName} + {employee.LastName} is already taken ");
+                }
+            }
+
+            return Json(true);
+        }
+        #endregion
 
         #region API CALLS
         [HttpGet]

@@ -7,6 +7,8 @@ using InventarVali.Utility.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 
 namespace InventarVali.Areas.Admin.Controllers
@@ -56,7 +58,6 @@ namespace InventarVali.Areas.Admin.Controllers
             return View(model);
 
         }
-
         public IActionResult Upsert(int? id)
         {
             AutovehiculeDetailsVM autovehiculeVM = new()
@@ -178,6 +179,21 @@ namespace InventarVali.Areas.Admin.Controllers
             }
         }
 
+
+        #region VALIDATORS
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult VerifyPlate(AutovehiculeVM autovehicule)
+        {
+            bool valid = Regex.IsMatch(autovehicule.LicensePlate, @"^[A-Z]{1,3}\s\d{1,3}\s[A-Z]{3}$");
+            if (!valid)
+            {
+                return Json($"License {autovehicule.LicensePlate} has an invalid format. Format: VL-05-ESK");
+            }
+
+            return Json(true);
+        }
+
+        #endregion
 
         #region API CALL
         [HttpGet]

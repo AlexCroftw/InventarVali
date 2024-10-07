@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,11 +9,14 @@ namespace InventarVali.Models.ViewModel
     public class AutovehiculeVM
     {
         public int Id { get; set; }
-
         public string Type { get; set; }
+        [MaxLength(10)]
         [DisplayName("License Plate")]
+        [Remote(action:"VerifyPlate",controller:"autovehicule")]
         public string LicensePlate { get; set; }
         [DisplayName("VIN Number")]
+        [MaxLength(17)]
+        [Remote(action: "VerifyVin", controller: "autovehicule")]
         public string VinNumber { get; set; }
 
         [DisplayName("Insurance Start Date")]
