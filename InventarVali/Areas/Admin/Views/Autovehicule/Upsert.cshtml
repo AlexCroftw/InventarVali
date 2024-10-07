@@ -19,6 +19,7 @@
                             </div>
                         </div>
                     </div>
+                    <h2 class="text-center text-dark"> Please make sure that all the @(Model.Autovehicule.Id != 0 ? "Changes are " :"Information is ") correct before saving</h2>
                     <div class="card-body">
                         <form method="post" class="row" enctype="multipart/form-data">
                             <input asp-for="@Model.Autovehicule.Id" hidden />
