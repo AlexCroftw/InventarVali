@@ -85,6 +85,7 @@ namespace InventarVali.Areas.Admin.Controllers
                 //Update
                 var autovehicule = _unitOfWork.Autovehicule.Get(o => o.Id == id);
                 autovehiculeVM.Autovehicule = _mapper.Map<AutovehiculeVM>(autovehicule);
+
                 //Display Bool Value
 
                 return View(autovehiculeVM);
@@ -184,22 +185,16 @@ namespace InventarVali.Areas.Admin.Controllers
         [AcceptVerbs("GET", "POST")]
         public IActionResult VerifyPlate(AutovehiculeVM autovehicule)
         {
-            bool valid = Regex.IsMatch(autovehicule.LicensePlate, @"^[A-Z]{1,3}\s\d{1,3}\s[A-Z]{3}$");
+            bool valid = Regex.IsMatch(autovehicule.LicensePlate, @"^[A-Za-z]{1,3}\s\d{1,3}\s[A-Za-z]{3}$");
             if (!valid)
             {
                 return Json($"License {autovehicule.LicensePlate} has an invalid format. Format ex: VL-05-ESK");
             }
-            //Verify if Plate is unique
-            List<Autovehicule> objAutovehiculeslist = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
-            var autovehiculeVMList = _mapper.Map<List<AutovehiculeVM>>(objAutovehiculeslist);
-
-                foreach (var item in autovehiculeVMList)
-                {
-                    if (item.LicensePlate == autovehicule.LicensePlate)
-                    {
-                        return Json($"{autovehicule.LicensePlate} is already taken ");
-                    }
-                }
+            var model = _unitOfWork.Autovehicule.Get(x => x.LicensePlate == autovehicule.LicensePlate && x.Id !=autovehicule.Id);
+            if (model != null) 
+            {
+                return Json($"License {autovehicule.LicensePlate} is already taken");
+            }
 
             return Json(true);
         }

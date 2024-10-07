@@ -12,7 +12,7 @@ namespace InventarVali.Models.ViewModel
         public string Type { get; set; }
         [MaxLength(10)]
         [DisplayName("License Plate")]
-        [Remote(action:"VerifyPlate",controller:"autovehicule")]
+        [Remote(action:"VerifyPlate",controller:"autovehicule",AdditionalFields ="Id")]
         public string LicensePlate { get; set; }
         [DisplayName("VIN Number")]
         [StringLength(17,MinimumLength =17,ErrorMessage ="VIN Number need to be 17 characters long")]
