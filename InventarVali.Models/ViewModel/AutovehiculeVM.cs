@@ -45,7 +45,7 @@ namespace InventarVali.Models.ViewModel
         [DataType(DataType.Date)]
         public DateTime VinietaExpirationDate { get; set; }
         public int? EmployeeId { get; set; }
-
+        [DisplayName("Image")]
         public string? ImageUrl { get; set; }
         [ValidateNever]
         public EmployeesVM Employees { get; set; }

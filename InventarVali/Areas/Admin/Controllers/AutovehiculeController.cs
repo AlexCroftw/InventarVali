@@ -92,13 +92,13 @@ namespace InventarVali.Areas.Admin.Controllers
             }
 
         }
+
         [HttpPost]
         public IActionResult Upsert(AutovehiculeDetailsVM autovehiculeVM, List<IFormFile?> file)
         {
             if (ModelState.IsValid)
             {
                 
-              
                 var model = _mapper.Map<Autovehicule>(autovehiculeVM.Autovehicule);
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
 
@@ -107,7 +107,7 @@ namespace InventarVali.Areas.Admin.Controllers
                     //Guid.NewGuid().ToString()
                     string fileName = model.LicensePlate + Path.GetExtension(item.FileName);
 
-                    if (item != null && item.FileName.Contains("jpeg") || item.FileName.Contains("png"))
+                    if (item != null && item.FileName.EndsWith("jpeg") || item.FileName.EndsWith("png"))
                     {
                         string autovehiculeImgPath = Path.Combine(wwwRootPath, @"images\autovehicule");
 
@@ -129,7 +129,7 @@ namespace InventarVali.Areas.Admin.Controllers
                         }
                         model.ImageUrl = @"\images\autovehicule\" + fileName;
                     }
-                    else if (item != null &&  item.FileName.Contains("pdf"))
+                    else if (item != null && item.FileName.EndsWith(".pdf"))
                     {
                         string autovehiculeImgPath = Path.Combine(wwwRootPath, @"files\autovehicule");
 
@@ -151,6 +151,12 @@ namespace InventarVali.Areas.Admin.Controllers
                         }
                         model.InsurenceDoc = @"\files\autovehicule\" + fileName;
                     }
+                    else 
+                    {
+                        TempData["error"] = "Incorect File Format, File can only be PDF and Image can only be PNG or JPEG";
+                        return RedirectToAction("Upsert", "Autovehicule");
+                    }
+                    
                 }
 
 
@@ -199,22 +205,7 @@ namespace InventarVali.Areas.Admin.Controllers
             return Json(true);
         }
 
-        /// <summary>
-        /// Fix This bugg where the validator for Insurence Doc does not work, possibly add IFileFormat Param
-        /// </summary>
-        /// <param name="autovehicule"></param>
-        /// <returns></returns>
-        [AcceptVerbs("GET", "POST")]
-        public IActionResult VerifyInsurance(AutovehiculeVM autovehicule, IFormFile file) 
-        {
-           autovehicule.InsurenceDoc =  autovehicule.LicensePlate + Path.GetExtension(file.FileName);
-
-            if (autovehicule.InsurenceDoc.EndsWith(".pdf")) 
-            {
-                return Json("The file you are trying to upload is not a PDF, Please upload a PDF");
-            }
-            return Json(true);
-        }
+        
 
         #endregion
 
