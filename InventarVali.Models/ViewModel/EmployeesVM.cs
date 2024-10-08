@@ -10,13 +10,12 @@ namespace InventarVali.Models.ViewModel
     {
         public int Id { get; set; }
         [DisplayName("First Name")]
-        [Remote(action: "VerifyName", controller: "employee", AdditionalFields = nameof(LastName))]
+        [Remote(action: "VerifyName", controller: "employee", AdditionalFields ="LastName,Id")]
         public string FirstName { get; set; }
         [DisplayName("Last Name")]
-        [Remote(action: "VerifyName", controller: "employee", AdditionalFields = nameof(FirstName))]
         public string LastName { get; set; }
         [DataType(DataType.EmailAddress)]
-        [Remote(action: "VerifyEmail", controller:"employee")]
+        [Remote(action: "VerifyEmail", controller:"employee",AdditionalFields ="Id")]
         public string? Email { get; set; }
 
         [DisplayName("Full Name")]

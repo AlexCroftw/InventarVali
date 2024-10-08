@@ -86,32 +86,30 @@ namespace InventarVali.Areas.Admin.Controllers
 
         #region VALIDATORS
         [AcceptVerbs("GET", "POST")]
-        public IActionResult VerifyEmail(EmployeesVM employeesVM )
+        public IActionResult VerifyEmail( string email,int id)
         {
-            List<Employees> employeesList = _unitOfWork.Employee.GetAll().ToList();
-            var employees = _mapper.Map<List<EmployeesVM>>(employeesList);
-            foreach (var employee in employeesList) 
+            var employee = _unitOfWork.Employee.Get(x => x.Email == email && x.Id != id);
+            if (employee != null) 
             {
-                if (employeesVM.Email == employee.Email) 
-                {
-                    return Json($"This email {employeesVM.Email} is already taken");
-                }
+                return Json($"This {email} is already taken");
             }
+
             return Json(true);
         }
 
         [AcceptVerbs("GET", "POST")]
-        public IActionResult VerifyName (string firstName, string lastName)
+        public IActionResult VerifyName (string firstName,string lastName,int id)
         {
-            var fullName = firstName + " " + lastName;
-            List<Employees> employeesList = _unitOfWork.Employee.GetAll().ToList();
-            var employees = _mapper.Map<List<EmployeesVM>>(employeesList);
-            foreach (var employee in employeesList) 
+   
+            //List<Employees> employeesList = _unitOfWork.Employee.GetAll().ToList();
+            //var employees = _mapper.Map<List<EmployeesVM>>(employeesList);
+            string fullName = firstName + " " + lastName;
+            
+            var employeeModel = _unitOfWork.Employee.Get(x => x.FullName == fullName && x.Id !=id);
+
+            if (employeeModel != null) 
             {
-                if (employee.FullName == fullName) 
-                {
-                    return Json($"This combination of {employee.FirstName}  {employee.LastName} is already taken ");
-                }
+                return Json($"This name {fullName} is already taken ");
             }
 
             return Json(true);
