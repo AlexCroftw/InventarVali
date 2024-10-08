@@ -51,11 +51,7 @@ namespace InventarVali.Areas.Admin.Controllers
         public IActionResult Upsert(EmployeesVM employeeVM, int? id)
         {
             var employee = _mapper.Map<Employees>(employeeVM);
-            if (employee.FirstName == employee.LastName)
-            {
-                ModelState.AddModelError("error", "First name cannot be the same as Last name");
-                return BadRequest();
-            }
+           
             if (employee.Email == null)
             {
                 employee.Email = "n/a";
@@ -100,16 +96,16 @@ namespace InventarVali.Areas.Admin.Controllers
         [AcceptVerbs("GET", "POST")]
         public IActionResult VerifyName (string firstName,string lastName,int id)
         {
-   
-            //List<Employees> employeesList = _unitOfWork.Employee.GetAll().ToList();
-            //var employees = _mapper.Map<List<EmployeesVM>>(employeesList);
-            string fullName = firstName + " " + lastName;
-            
-            var employeeModel = _unitOfWork.Employee.Get(x => x.FullName == fullName && x.Id !=id);
 
+            string fullName = firstName + " " + lastName; 
+            var employeeModel = _unitOfWork.Employee.Get(x => x.FullName == fullName && x.Id !=id);
             if (employeeModel != null) 
             {
                 return Json($"This name {fullName} is already taken ");
+            }
+            if (firstName == lastName)
+            {
+                return Json($" First Name cannot be the same as Last Name");
             }
 
             return Json(true);

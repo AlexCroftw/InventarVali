@@ -10,9 +10,15 @@ namespace InventarVali.Models.ViewModel
     {
         public int Id { get; set; }
         [DisplayName("First Name")]
-        [Remote(action: "VerifyName", controller: "employee", AdditionalFields ="LastName,Id")]
+        [StringLength(10)]
+        [RegularExpression(@"^[A-Za-z]{1,10}$",
+            ErrorMessage ="Name must not contain characters or digits")]
+        [Remote(action: "VerifyName", controller:"employee", AdditionalFields ="LastName,Id")]
         public string FirstName { get; set; }
         [DisplayName("Last Name")]
+        [StringLength(10)]
+        [RegularExpression(@"^[A-Za-z]{1,10}$",
+            ErrorMessage = "Name must not contain characters or digits")]
         public string LastName { get; set; }
         [DataType(DataType.EmailAddress)]
         [Remote(action: "VerifyEmail", controller:"employee",AdditionalFields ="Id")]
