@@ -1,10 +1,10 @@
-﻿@model List<CombinedDataViewModel>
+﻿@model CombinedDataViewModel
 
 <div class="text-center">
-    <h1 class="text-black py-2"> Basic Info Table  </h1>
+    <h1 class="text-black py-2"> View of all current items  </h1>
 </div>
-
-<table id="tblData" class="table table-bordered table-striped" style="width:100%">
+<h3 class="text-center text-black"> Basic Autovehicle Table</h3>
+<table id="Table_1" class="table table-bordered table-striped" style="width:100%">
     <thead>
         <tr>
             <th>
@@ -13,26 +13,58 @@
             <th>
                 License Plate
             </th>
-            <th>
-                Computer Model
-            </th>
-            <th>
-                Employee
-            </th>
+           
         </tr>
     </thead>
 </table>
+<h3 class="text-center text-black"> Basic Computer Table </h3>
 
+<table id="Table_2" class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Type
+            </th>
+            <th>
+                Description
+            </th>
+           
+        </tr>
+    </thead>
+</table>
+<h2 class="text-center text-black"> Autovehicule</h2>
 <div class="row pb-3">
-    @foreach (var viewModel in Model)
+    @foreach (var viewModel in Model.Autovehicule)
     {
         <div class="col-lg-3 col-sm-6">
             <div class=" row pb-2">
                <div class="col-12 p-1">
-                   <div class="card border-0 p-3 shadow border-top border-5 rounded"> @viewModel.Type  @viewModel.LicensePlate  @viewModel.Model
-                        <img src="@viewModel.ImageUrl" class="card-img-top rounded" />
+                   <div class="card border-0 p-3 shadow border-top border-5 rounded"> @viewModel.Type  @viewModel.LicensePlate.
+
+
+                    <a href="/Admin/Autovehicule/upsert?id=@viewModel.Id" class="btn btn-primary"> <img src="@viewModel.ImageUrl" class="card-img-top rounded" /></a>
+                         
+                        
                    </div>
                </div>
+            </div>
+        </div>
+    }
+</div>
+<h2 class="text-center text-black"> Computers</h2>
+<div class="row pb-3">
+    @foreach (var viewModel in Model.Computer)
+    {
+        <div class="col-lg-3 col-sm-6">
+            <div class=" row pb-2">
+                <div class="col-12 p-1">
+                    <div class="card border-0 p-3 shadow border-top border-5 rounded">
+                        @viewModel.Model
+
+                        <a href="/Admin/Computer/upsert?id=@viewModel.Id" class="btn btn-primary"> <img src="@viewModel.ImageUrl" class="card-img-top rounded" /></a>
+
+                    </div>
+                </div>
             </div>
         </div>
     }
@@ -43,7 +75,8 @@
 
 
 
+
+
 @section Scripts {
     <script src="~/js/home.js"></script>
-    
 }

@@ -25,18 +25,12 @@ namespace InventarVali.Areas.Employee.Controllers
 
         public IActionResult Index()
         {
-            List<CombinedDataViewModel> combinedData = new List<CombinedDataViewModel>();
+            CombinedDataViewModel combinedData = new CombinedDataViewModel();
             var autovehiculeList = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
-            var computerList = _unitOfWork.Computer.GetAll(includeProperties: "Employees").ToList();
-            var combinedDataAuatovehicule = _mapper.Map<List<CombinedDataViewModel>>(autovehiculeList);
-            var combinedDataComputer = _mapper.Map<List<CombinedDataViewModel>>(computerList);
-            combinedData.AddRange(combinedDataAuatovehicule);
-            combinedData.AddRange(combinedDataComputer);
-
-            //Test Email Sending
-
-
-
+            var computerList = _unitOfWork.Computer.GetAll(includeProperties: "Employees").ToList();  
+            combinedData.Autovehicule = autovehiculeList;
+            combinedData.Computer = computerList;
+           
             return View(combinedData);
         }
 
@@ -52,17 +46,23 @@ namespace InventarVali.Areas.Employee.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAllAutovehicule()
         {
-            List<CombinedDataViewModel> combinedData = new List<CombinedDataViewModel>();
+            CombinedDataViewModel combinedData = new CombinedDataViewModel();
             var autovehiculeList = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
-            var computerList = _unitOfWork.Computer.GetAll(includeProperties: "Employees").ToList();
-            var combinedDataAuatovehicule = _mapper.Map<List<CombinedDataViewModel>>(autovehiculeList);
-            var combinedDataComputer = _mapper.Map<List<CombinedDataViewModel>>(computerList);
-            combinedData.AddRange(combinedDataAuatovehicule);
-            combinedData.AddRange(combinedDataComputer);
+            combinedData.Autovehicule = autovehiculeList;
 
-            return Json(new { data = combinedData });
+            return Json(new { data = combinedData.Autovehicule });
+        }
+
+        [HttpGet]
+        public IActionResult GetAllComputers()
+        {
+            CombinedDataViewModel combinedData = new CombinedDataViewModel();
+            var computerList = _unitOfWork.Computer.GetAll(includeProperties: "Employees").ToList();
+            combinedData.Computer = computerList;
+
+            return Json(new { data = combinedData.Computer });
         }
     }
 

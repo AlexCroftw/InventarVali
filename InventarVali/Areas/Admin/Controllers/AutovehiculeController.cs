@@ -23,7 +23,8 @@ namespace InventarVali.Areas.Admin.Controllers
         private readonly IMyEmailSender _myEmailSender;
         private readonly IConfiguration _config;
 
-        public AutovehiculeController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, IMapper mapper, IMyEmailSender myEmailSender, IConfiguration config)
+        public AutovehiculeController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, IMapper mapper,
+                                      IMyEmailSender myEmailSender, IConfiguration config)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
@@ -37,6 +38,8 @@ namespace InventarVali.Areas.Admin.Controllers
             var autovehicule = _mapper.Map<List<AutovehiculeVM>>(objAutovehiculeslist);
             return View(autovehicule);
         }
+
+
 
         public IActionResult GetInsurenceDoc(int? id)
         {

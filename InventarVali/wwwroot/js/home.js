@@ -6,18 +6,16 @@ $(document).ready(function () {
 
 
 function loadDataTable() {
-    dataTable = $('#tblData').DataTable(
+    dataTable = $('#Table_1').DataTable(
 
         {
-        "ajax": {
-            url: '/employee/home/getall'
+            "ajax": {
+                url: '/employee/home/getallautovehicule',
             },
 
-        "columns": [
-            { data: 'type', "width": "15%" },
-            { data: 'licensePlate', "width": "15%" },
-            { data: 'model', "width": "15%" },
-            { data: 'fullName', "width": "15%" } 
+            "columns": [
+                { data: 'type', "width": "15%" },
+                { data: 'licensePlate', "width": "15%" },
             ],
 
             dom: 'Bfltip',
@@ -64,9 +62,11 @@ function loadDataTable() {
             language: {
                 search: "",
                 searchPlaceholder: "Search records"
-            }
-            
-        
-    })
+            },
+        }
+    
+    )
 
 }
+
+
