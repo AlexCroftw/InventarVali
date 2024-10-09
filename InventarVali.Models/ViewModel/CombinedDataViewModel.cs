@@ -2,7 +2,7 @@
 {
     public class CombinedDataViewModel
     {
-        public List<Autovehicule> Autovehicule { get; set; }
-        public List<Computer> Computer { get; set; }
+        public List<AutovehiculeVM> Autovehicule { get; set; }
+        public List<ComputerVM> Computer { get; set; }
     }
 }

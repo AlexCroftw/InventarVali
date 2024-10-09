@@ -27,10 +27,11 @@ namespace InventarVali.Areas.Employee.Controllers
         {
             CombinedDataViewModel combinedData = new CombinedDataViewModel();
             var autovehiculeList = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
-            var computerList = _unitOfWork.Computer.GetAll(includeProperties: "Employees").ToList();  
-            combinedData.Autovehicule = autovehiculeList;
-            combinedData.Computer = computerList;
-           
+            var computerList = _unitOfWork.Computer.GetAll(includeProperties: "Employees").ToList();
+
+            combinedData.Autovehicule = _mapper.Map<List<AutovehiculeVM>>(autovehiculeList);
+            combinedData.Computer = _mapper.Map<List<ComputerVM>>(computerList);
+
             return View(combinedData);
         }
 
@@ -50,7 +51,6 @@ namespace InventarVali.Areas.Employee.Controllers
         {
             CombinedDataViewModel combinedData = new CombinedDataViewModel();
             var autovehiculeList = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
-            combinedData.Autovehicule = autovehiculeList;
 
             return Json(new { data = combinedData.Autovehicule });
         }
@@ -60,7 +60,7 @@ namespace InventarVali.Areas.Employee.Controllers
         {
             CombinedDataViewModel combinedData = new CombinedDataViewModel();
             var computerList = _unitOfWork.Computer.GetAll(includeProperties: "Employees").ToList();
-            combinedData.Computer = computerList;
+            combinedData.Computer = _mapper.Map<List<ComputerVM>>(computerList);
 
             return Json(new { data = combinedData.Computer });
         }

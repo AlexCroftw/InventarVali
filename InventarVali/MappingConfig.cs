@@ -27,8 +27,7 @@ namespace InventarVali.Models
             CreateMap<Autovehicule, AutovehiculeDetailsVM>().ReverseMap();
             CreateMap<Employees, EmployeesVM>().ReverseMap();
             CreateMap<Computer, ComputerVM>().ReverseMap();
-            CreateMap<Autovehicule, CombinedDataViewModel>().ReverseMap();
-            CreateMap<Computer, CombinedDataViewModel>();
+
 
 
 
