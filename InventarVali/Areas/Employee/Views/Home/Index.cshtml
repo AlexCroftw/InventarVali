@@ -32,43 +32,7 @@
         </tr>
     </thead>
 </table>
-<h2 class="text-center text-black"> Autovehicule</h2>
-<div class="row pb-3">
-    @foreach (var viewModel in Model.Autovehicule)
-    {
-        <div class="col-lg-3 col-sm-6">
-            <div class=" row pb-2">
-               <div class="col-12 p-1">
-                   <div class="card border-0 p-3 shadow border-top border-5 rounded"> @viewModel.Type  @viewModel.LicensePlate.
 
-
-                    <a href="/Admin/Autovehicule/upsert?id=@viewModel.Id" class="btn btn-primary"> <img src="@viewModel.ImageUrl" class="card-img-top rounded" /></a>
-                         
-                        
-                   </div>
-               </div>
-            </div>
-        </div>
-    }
-</div>
-<h2 class="text-center text-black"> Computers</h2>
-<div class="row pb-3">
-    @foreach (var viewModel in Model.Computer)
-    {
-        <div class="col-lg-3 col-sm-6">
-            <div class=" row pb-2">
-                <div class="col-12 p-1">
-                    <div class="card border-0 p-3 shadow border-top border-5 rounded">
-                        @viewModel.Model
-
-                        <a href="/Admin/Computer/upsert?id=@viewModel.Id" class="btn btn-primary"> <img src="@viewModel.ImageUrl" class="card-img-top rounded" /></a>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-</div>
 
 
 

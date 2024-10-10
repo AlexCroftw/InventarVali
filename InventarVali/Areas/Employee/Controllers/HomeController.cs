@@ -35,6 +35,16 @@ namespace InventarVali.Areas.Employee.Controllers
             return View(combinedData);
         }
 
+
+        public IActionResult DetailsAutovehicule(AutovehiculeVM model, int id) 
+        {
+            var autovehicule = _unitOfWork.Autovehicule.Get(x => x.Id == id);
+            model = _mapper.Map<AutovehiculeVM>(autovehicule);
+
+            return View(model);
+        }
+
+
         public IActionResult Privacy()
         {
             return View();
@@ -56,7 +66,7 @@ namespace InventarVali.Areas.Employee.Controllers
             return Json(new { data = combinedData.Autovehicule });
         }
 
-       
+        
 
 
         [HttpGet]

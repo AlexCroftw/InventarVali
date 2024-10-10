@@ -1,0 +1,60 @@
+﻿@model AutovehiculeVM
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <div class="col-12 text-center">
+        <h2 class="text-black py-2">Autovehicule @Model.LicensePlate </h2>
+    </div>
+</head>
+
+<body>
+    <div style="overflow-x:auto;">
+        <table id="Table_1" class=" table table-bordered table-striped " style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Actions
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                    <th>
+                        License Plate
+                    </th>
+                    <th>
+                        VIN Number
+                    </th>
+                    <th>
+                        Insurance Start Date
+                    </th>
+                    <th>
+                        ITP
+                    </th>
+                    <th>
+                        ITP Expiration Date
+                    </th>
+                    <th>
+                        Insurance Expiration Date
+                    </th>
+                    <th>
+                        Vinieta
+                    </th>
+                    <th>
+                        Vinieta Expiration Date
+                    </th>
+                    <th>
+                        Employee
+                    </th>
+
+                </tr>
+            </thead>
+
+        </table>
+    </div>
+</body>
+
+@section Scripts {
+    <script src="~/js/home.js"></script>
+}
