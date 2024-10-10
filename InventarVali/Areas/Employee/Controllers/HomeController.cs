@@ -51,9 +51,13 @@ namespace InventarVali.Areas.Employee.Controllers
         {
             CombinedDataViewModel combinedData = new CombinedDataViewModel();
             var autovehiculeList = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
+            combinedData.Autovehicule = _mapper.Map<List<AutovehiculeVM>>(autovehiculeList);
 
             return Json(new { data = combinedData.Autovehicule });
         }
+
+       
+
 
         [HttpGet]
         public IActionResult GetAllComputers()

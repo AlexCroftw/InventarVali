@@ -110,7 +110,7 @@ namespace InventarVali.Areas.Admin.Controllers
                     //Guid.NewGuid().ToString()
                     string fileName = model.LicensePlate + Path.GetExtension(item.FileName);
 
-                    if (item != null && item.FileName.EndsWith("jpeg") || item.FileName.EndsWith("png"))
+                    if (item != null && item.FileName.EndsWith("jpg") || item.FileName.EndsWith("png"))
                     {
                         string autovehiculeImgPath = Path.Combine(wwwRootPath, @"images\autovehicule");
 
@@ -156,8 +156,8 @@ namespace InventarVali.Areas.Admin.Controllers
                     }
                     else 
                     {
-                        TempData["error"] = "Incorect File Format, File can only be PDF and Image can only be PNG or JPEG";
-                        return RedirectToAction("Upsert", "Autovehicule");
+                        TempData["error"] = "Incorect File Format, File can only be PDF and Image can only be PNG or JPG";
+                        return RedirectToAction("Index", "Autovehicule");
                     }
                     
                 }
