@@ -81,6 +81,24 @@ $(document).ready(function () {
                 url: '/employee/home/getallcomputers',
             },
 
+            "destroy": true,
+            "deferRender": true,
+            "columnDefs": [{
+                "targets": 0, //<-- index of column that should be rendered as link
+                render: function (data, type, row, meta) {
+                    if (type === 'display') {
+                        return $('<a>')
+                            .attr('href', `/employee/home/detailscomputer?id=${row.id}`)
+                            .text(data)
+                            .wrap('<div></div>')
+                            .parent()
+                            .html();
+                    } else {
+                        return data;
+                    }
+                }
+            }],
+
             "columns": [
                 { data: 'type', "width": "15%" },
                 { data: 'description', "width": "15%" },

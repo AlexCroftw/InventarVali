@@ -36,12 +36,19 @@ namespace InventarVali.Areas.Employee.Controllers
         }
 
 
-        public IActionResult DetailsAutovehicule(AutovehiculeVM model, int id) 
+        public IActionResult DetailsAutovehicule(AutovehiculeVM autovehicleVM, int id) 
         {
-            var autovehicule = _unitOfWork.Autovehicule.Get(x => x.Id == id);
-            model = _mapper.Map<AutovehiculeVM>(autovehicule);
+            var autovehicule = _unitOfWork.Autovehicule.Get(x => x.Id == id, includeProperties: "Employees");
+            autovehicleVM = _mapper.Map<AutovehiculeVM>(autovehicule);
 
-            return View(model);
+            return View(autovehicleVM);
+        }
+        public IActionResult DetailsComputer(ComputerVM computerVM, int id)
+        {
+            var computer = _unitOfWork.Computer.Get(x => x.Id ==id, includeProperties: "Employees");
+            computerVM = _mapper.Map<ComputerVM>(computer);
+
+            return View(computerVM);
         }
 
 

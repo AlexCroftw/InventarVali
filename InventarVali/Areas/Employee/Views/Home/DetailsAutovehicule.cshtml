@@ -11,12 +11,9 @@
 
 <body>
     <div style="overflow-x:auto;">
-        <table id="Table_1" class=" table table-bordered table-striped " style="width:100%">
+        <table  class=" table table-bordered table-striped " style="width:100%">
             <thead>
-                <tr>
-                    <th>
-                        Actions
-                    </th>
+                <tr>                  
                     <th>
                         Type
                     </th>
@@ -50,11 +47,39 @@
 
                 </tr>
             </thead>
-
+            <tbody>
+                <tr>
+                    <td>
+                        @Model.Type
+                    </td>
+                    <td>
+                        @Model.LicensePlate
+                    </td>
+                    <td> 
+                        @Model.VinNumber
+                    </td>
+                    <td>
+                        @Model.DisplayInsurenceDate
+                    </td>
+                    <td>
+                        @Model.DisplayInsuranceExpirationDate
+                    </td>
+                    <td> 
+                        @Model.DisplayHasITP
+                    </td>
+                    <td>
+                        @Model.DisplayITPExpirationDate
+                    </td>
+                    <td>
+                        @Model.DisplayHasVinieta
+                    </td>
+                    <td>
+                        @Model.DisplayVinietaExpirationDate
+                    </td>
+                    <td>
+                        @Model.Employees.FullName
+                    </td>
+                </tr>  
+            </tbody>
         </table>
-    </div>
 </body>
-
-@section Scripts {
-    <script src="~/js/home.js"></script>
-}

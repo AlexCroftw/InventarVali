@@ -1,0 +1,56 @@
+﻿@model ComputerVM
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <div class="col-12 text-center">
+        <h2 class="text-black py-2">Computer @Model.Type </h2>
+    </div>
+</head>
+
+<body>
+    <div style="overflow-x:auto;">
+        <table class=" table table-bordered table-striped " style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Type
+                    </th>
+                    <th>
+                        Model
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Serial Number
+                    </th>
+                    <th>
+                        Employee
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Model.Type
+                    </td>
+                    <td>
+                        @Model.Model
+                    </td>
+                    <td>
+                        @Model.Description
+                    </td>
+                    <td>
+                        @Model.SerialNumber
+                    </td>
+                    <td>
+                        @Model.Employee.FullName
+                    </td>                  
+                </tr>
+            </tbody>
+        </table>
+        </div>
+</body>
