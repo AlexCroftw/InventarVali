@@ -17,6 +17,7 @@ using UglyToad.PdfPig.Writer;
 using UglyToad.PdfPig;
 using Microsoft.Extensions.Options;
 using UglyToad.PdfPig.Content;
+using System.Text;
 
 
 namespace InventarVali.Areas.Admin.Controllers
@@ -224,11 +225,13 @@ namespace InventarVali.Areas.Admin.Controllers
         #region
         public IActionResult PDFReader() 
         {
+            double totalToPay = 0;
             AutovehiculeVM model = new AutovehiculeVM();
             string wwwRootPath = _webHostEnvironment.WebRootPath;
             var sourcePdfPath = Path.Combine(wwwRootPath, @"files\autovehicule\CL 06 PLM.pdf");
             using (var document = PdfDocument.Open(sourcePdfPath))
             {
+                StringBuilder builder = new();
                 foreach (Page page in document.GetPages())               
                 {
                     var letters = page.Letters;
@@ -238,13 +241,19 @@ namespace InventarVali.Areas.Admin.Controllers
 
                     // 2. Segment page
                     var pageSegmenter = DocstrumBoundingBoxes.Instance;
-
                     var textBlocks = pageSegmenter.GetBlocks(words);
+                   
+                    foreach (var textBlock in textBlocks) 
+                    {
+                        builder.AppendLine(textBlock.Text);
+                    }
+                    builder.Append("\n");
                 }
 
-                return View();
-            }
+                string text = builder.ToString();
 
+            }
+            return View();
 
         }
         #endregion
