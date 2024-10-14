@@ -9,6 +9,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using UglyToad.PdfPig.DocumentLayoutAnalysis.PageSegmenter;
+using UglyToad.PdfPig.DocumentLayoutAnalysis.ReadingOrderDetector;
+using UglyToad.PdfPig.DocumentLayoutAnalysis.WordExtractor;
+using UglyToad.PdfPig.Fonts.Standard14Fonts;
+using UglyToad.PdfPig.Writer;
+using UglyToad.PdfPig;
+using Microsoft.Extensions.Options;
+using UglyToad.PdfPig.Content;
 
 
 namespace InventarVali.Areas.Admin.Controllers
@@ -208,8 +216,37 @@ namespace InventarVali.Areas.Admin.Controllers
             return Json(true);
         }
 
-        
 
+
+        #endregion
+
+
+        #region
+        public IActionResult PDFReader() 
+        {
+            AutovehiculeVM model = new AutovehiculeVM();
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+            var sourcePdfPath = Path.Combine(wwwRootPath, @"files\autovehicule\CL 06 PLM.pdf");
+            using (var document = PdfDocument.Open(sourcePdfPath))
+            {
+                foreach (Page page in document.GetPages())               
+                {
+                    var letters = page.Letters;
+                    var wordExtractor = NearestNeighbourWordExtractor.Instance;
+
+                    var words = wordExtractor.GetWords(letters);
+
+                    // 2. Segment page
+                    var pageSegmenter = DocstrumBoundingBoxes.Instance;
+
+                    var textBlocks = pageSegmenter.GetBlocks(words);
+                }
+
+                return View();
+            }
+
+
+        }
         #endregion
 
         #region API CALL

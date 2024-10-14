@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventarVali.Models", "Inve
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventarVali.Utility", "InventarVali.Utility\InventarVali.Utility.csproj", "{96B4E935-CAC6-4134-9080-018C77270A57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{3C6FD7B4-7E83-4AB3-ACD7-A63A98FE8968}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{3C6FD7B4-7E83-4AB3-ACD7-A63A98FE8968}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
