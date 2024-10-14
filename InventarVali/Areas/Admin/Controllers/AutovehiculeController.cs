@@ -242,6 +242,8 @@ namespace InventarVali.Areas.Admin.Controllers
                     // 2. Segment page
                     var pageSegmenter = DocstrumBoundingBoxes.Instance;
                     var textBlocks = pageSegmenter.GetBlocks(words);
+                    var readOrder = UnsupervisedReadingOrderDetector.Instance;
+                    var orderTexBlocks = readOrder.Get(textBlocks);
                    
                     foreach (var textBlock in textBlocks) 
                     {
