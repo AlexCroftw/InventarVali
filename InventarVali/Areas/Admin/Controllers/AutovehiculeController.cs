@@ -234,6 +234,7 @@ namespace InventarVali.Areas.Admin.Controllers
                 StringBuilder builder = new();
                 foreach (Page page in document.GetPages())               
                 {
+                    
                     var letters = page.Letters;
                     var wordExtractor = NearestNeighbourWordExtractor.Instance;
 
@@ -242,9 +243,9 @@ namespace InventarVali.Areas.Admin.Controllers
                     // 2. Segment page
                     var pageSegmenter = DocstrumBoundingBoxes.Instance;
                     var textBlocks = pageSegmenter.GetBlocks(words);
-                    var readOrder = UnsupervisedReadingOrderDetector.Instance;
+                    var readOrder = RenderingReadingOrderDetector.Instance;
                     var orderTexBlocks = readOrder.Get(textBlocks);
-                   
+                    var test = page.Text;
                     foreach (var textBlock in textBlocks) 
                     {
                         builder.AppendLine(textBlock.Text);
