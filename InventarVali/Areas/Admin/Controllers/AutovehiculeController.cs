@@ -119,7 +119,7 @@ namespace InventarVali.Areas.Admin.Controllers
                     //Guid.NewGuid().ToString()
                     string fileName = model.LicensePlate + Path.GetExtension(item.FileName);
 
-                    if (item != null && item.FileName.EndsWith("jpg") || item.FileName.EndsWith("png"))
+                    if (item != null && Path.GetExtension(item.FileName) == ".jpg" || Path.GetExtension(item.FileName) == ".png")
                     {
                         string autovehiculeImgPath = Path.Combine(wwwRootPath, @"images\autovehicule");
 
@@ -141,7 +141,7 @@ namespace InventarVali.Areas.Admin.Controllers
                         }
                         model.ImageUrl = @"\images\autovehicule\" + fileName;
                     }
-                    else if (item != null && item.FileName.EndsWith(".pdf"))
+                    else if (item != null && Path.GetExtension(item.FileName) == ".pdf")
                     {
                         string autovehiculeImgPath = Path.Combine(wwwRootPath, @"files\autovehicule");
 
@@ -219,46 +219,6 @@ namespace InventarVali.Areas.Admin.Controllers
 
 
 
-        #endregion
-
-
-        #region
-        public IActionResult PDFReader() 
-        {
-            double totalToPay = 0;
-            AutovehiculeVM model = new AutovehiculeVM();
-            string wwwRootPath = _webHostEnvironment.WebRootPath;
-            var sourcePdfPath = Path.Combine(wwwRootPath, @"files\autovehicule\CL 06 PLM.pdf");
-            using (var document = PdfDocument.Open(sourcePdfPath))
-            {
-                StringBuilder builder = new();
-                foreach (Page page in document.GetPages())               
-                {
-                    
-                    var letters = page.Letters;
-                    var wordExtractor = NearestNeighbourWordExtractor.Instance;
-
-                    var words = wordExtractor.GetWords(letters);
-
-                    // 2. Segment page
-                    var pageSegmenter = DocstrumBoundingBoxes.Instance;
-                    var textBlocks = pageSegmenter.GetBlocks(words);
-                    var readOrder = RenderingReadingOrderDetector.Instance;
-                    var orderTexBlocks = readOrder.Get(textBlocks);
-                    var test = page.Text;
-                    foreach (var textBlock in textBlocks) 
-                    {
-                        builder.AppendLine(textBlock.Text);
-                    }
-                    builder.Append("\n");
-                }
-
-                string text = builder.ToString();
-
-            }
-            return View();
-
-        }
         #endregion
 
         #region API CALL

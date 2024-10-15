@@ -34,20 +34,20 @@ namespace InventarVali.Areas.Admin.Controllers
 
         public IActionResult Upsert(int? id) 
         {
+            var licensePlate = _unitOfWork.Autovehicule.GetAll().ToList();
+            var licensePLateVM = _mapper.Map<List<AutovehiculeVM>>(licensePlate);
 
             InvoiceDetailsVM invoiceDetailsVM = new()
             {
-                AutovehiculeList = _unitOfWork.Autovehicule.GetAll().Select(u => new SelectListItem
-                {
-                    Text = u.LicensePlate,
-                    Value = u.Id.ToString()
-                }),
+                AutovehiculeVMList = licensePLateVM,
+
                 Invoice = new InvoiceVM()
             };
-
+             
 
             if (id == null || id == 0)
             {
+                invoiceDetailsVM.Invoice.InvoiceDate = DateTime.Now;
                 //Create
                 return View(invoiceDetailsVM);
             }
@@ -71,7 +71,7 @@ namespace InventarVali.Areas.Admin.Controllers
 
                 string fileName = model.InvoiceNumber + Path.GetExtension(file.FileName);
 
-                    if (file != null && Path.GetExtension(file.FileName) != ".pdf")
+                    if (file != null && Path.GetExtension(file.FileName) == ".pdf")
                     {
                         string invoicePdfPath = Path.Combine(wwwRootPath, @"invoice");
 
@@ -97,11 +97,8 @@ namespace InventarVali.Areas.Admin.Controllers
                     else
                     {
                         TempData["error"] = "Incorect File Format, File can only be PDF and Image can only be PNG or JPG";
-                        return RedirectToAction("Index", "Autovehicule");
+                        return RedirectToAction("Index", "Invoice");
                     }
-
-                
-
 
                 if (model.Id == 0)
                 {
@@ -120,11 +117,10 @@ namespace InventarVali.Areas.Admin.Controllers
             }
             else
             {
-                invoiceDetailsVM.AutovehiculeList = _unitOfWork.Autovehicule.GetAll().Select(u => new SelectListItem
-                {
-                    Text = u.LicensePlate,
-                    Value = u.Id.ToString()
-                });
+                var licensePlate = _unitOfWork.Autovehicule.GetAll().ToList();
+                var licensePLateVM = _mapper.Map<List<AutovehiculeVM>>(licensePlate);
+
+                invoiceDetailsVM.AutovehiculeVMList = licensePLateVM;
                 return View(invoiceDetailsVM);
             }
         }

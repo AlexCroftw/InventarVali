@@ -25,7 +25,7 @@
                             <input asp-for="@Model.Invoice.Id" hidden />
                             <input asp-for="@Model.Invoice.InvoiceUrl" hidden />
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-12">
                                     <div class="border p-3">
                                         @* <div asp-validation-summary="ModelOnly"></div> *@
                                         <div class="form-group mb-3">
@@ -33,17 +33,11 @@
                                             <input asp-for="Invoice.InvoiceNumber" class="form-control border-0 shadow" placeholder="ex: xxx/xxxxxxxxxxxxxs">
                                             <span asp-validation-for="Invoice.InvoiceNumber" class="text-danger"></span>
                                         </div>
-                                        <div class="form-group mb-3">
-                                            <label asp-for="Invoice.Autovehicule.LicensePlate" class="ms-2">Enter The License Plate</label>
-                                            <input asp-for="Invoice.Autovehicule.LicensePlate" class="form-control border-0 shadow" placeholder="ex: B 222 KME">
-                                            <span asp-validation-for="Invoice.Autovehicule.LicensePlate" class="text-danger"></span>
-                                        </div>
-                                           
                                         
                                         <div class="form-group mb-3">
-                                            <label asp-for="Invoice.InvoiceDate" class="ms-2"> Enter the Date the Insurence was issued</label>
-                                            <input asp-for="Invoice.DisplayInvoiceDate" class="form-control border-0 shadow">
-                                            <input asp-for="Invoice.InvoiceDate" hidden class="form-control border-0 shadow">
+                                            <label asp-for="Invoice.DisplayInvoiceDate" class="ms-2"> Enter the Date the Insurence was issued</label>
+                                            <input asp-for="Invoice.InvoiceDate" class="form-control border-0 shadow">
+                                            <input asp-for="Invoice.DisplayInvoiceDate" hidden class="form-control border-0 shadow">
                                             <span asp-validation-for="Invoice.InvoiceDate" class="text-danger"></span>
                                         </div>
                                         <div class="form-group mb-3">
@@ -51,15 +45,27 @@
                                             <input asp-for="Invoice.CardNumber" class="form-control border-0 shadow" placeholder="ex: 702xxxxxxxxxx">
                                             <span asp-validation-for="Invoice.CardNumber" class="text-danger"></span>
                                         </div>
-                                        
-                                        <div class="form-group mb-3">
-                                            <label asp-for="Invoice.Autovehicule.LicensePlate" class="ms-2"></label>
-                                            <select asp-for="Invoice.AutovehiculeFKId" asp-items="@Model.AutovehiculeList" class="form-control border-0 shadow">
-                                                <option disabled selected>---Select Employee---</option>
-                                            </select>
-                                            <span asp-validation-for="Invoice.Autovehicule.LicensePlate" class="text-danger"></span>
-                                        </div>
+                                         
+                                        @for (int i = 0; i < Model.AutovehiculeVMList.Count; i++)
+                                        {
+                                             <div class="form-group mb-3">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <label asp-for="Invoice.Autovehicule.LicensePlate" class="ms-2">License Plate</label>
+                                                        <input asp-for="@Model.AutovehiculeVMList[i].LicensePlate" disabled class="form-control border-0 shadow" />
+                                                        <span asp-validation-for="Invoice.Autovehicule.LicensePlate" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label asp-for="Invoice.Price" class="ms-2">Price for fuel</label>
+                                                        <input asp-for="Invoice.Price" class="form-control border-0 shadow" placeholder="240.5">
+                                                        <span asp-validation-for="Invoice.Price" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
                                        
+
+
                                         <div class="form-group mb-3">
                                             Only .pdf
                                             <label asp-for="Invoice.InvoiceUrl" class="ms-2"></label>

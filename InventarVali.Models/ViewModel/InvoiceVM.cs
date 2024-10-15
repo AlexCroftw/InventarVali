@@ -13,6 +13,7 @@ namespace InventarVali.Models.ViewModel
     {
         public int Id { get; set; }
         public string? InvoiceNumber { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? InvoiceDate { get; set; }
         [DataType(DataType.Date)]
         public string? DisplayInvoiceDate { get; set; }

@@ -13,6 +13,6 @@ namespace InventarVali.Models.ViewModel
         public InvoiceVM Invoice { get; set; }
 
         [ValidateNever]
-        public IEnumerable<SelectListItem> AutovehiculeList { get; set; }
+        public List<AutovehiculeVM> AutovehiculeVMList { get; set; }
     }
 }
