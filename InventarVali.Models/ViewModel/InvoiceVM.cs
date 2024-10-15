@@ -7,21 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventarVali.Models
+namespace InventarVali.Models.ViewModel
 {
-    public class Invoice
+    public  class InvoiceVM
     {
-        [Key]
         public int Id { get; set; }
-        public  string? InvoiceNumber { get; set; }
+        public string? InvoiceNumber { get; set; }
         public DateTime? InvoiceDate { get; set; }
+        [DataType(DataType.Date)]
+        public string? DisplayInvoiceDate { get; set; }
+        [DataType(DataType.Currency)]
         public double? Price { get; set; }
+        [DataType(DataType.Currency)]
         public double? TotalPrice { get; set; }
         public string ?CardNumber { get; set; }
         public int? AutovehiculeFKId { get; set; }
-        [ForeignKey("AutovehiculeFKId")]
         [ValidateNever]
         public Autovehicule Autovehicule { get; set; }
-        
     }
 }

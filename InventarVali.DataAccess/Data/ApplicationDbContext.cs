@@ -34,6 +34,7 @@ namespace InventarVali.DataAccess.Data
                     InvoiceNumber = "24/000838503/997",
                     CardNumber = "704310.0109124771",
                     Price = 2000.12,
+                    TotalPrice = 300000.2,
                     InvoiceDate = DateTime
                 .SpecifyKind(DateTime.Parse("02/11/2025"), DateTimeKind.Utc),
                     AutovehiculeFKId = 2

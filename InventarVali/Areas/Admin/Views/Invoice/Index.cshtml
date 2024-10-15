@@ -1,0 +1,61 @@
+﻿@model List<InvoiceVM>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <div  class="col-12 text-center">
+        <h2 class="text-black py-2">Invoice List </h2>
+    </div>
+</head>
+
+<body>
+    <div class="row pb-3">
+        <div class="col-12 text-left">
+            <a asp-controller="Invoice" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-square-fill"></i> Create New Invoice
+            </a>
+        </div>
+    </div>
+    <div style="overflow-x:auto;">
+        <table id="tblData" class=" table table-bordered table-striped " style="width:100%">
+            <thead>
+                <tr>
+                   <th>
+                       Invoice Number
+                   </th>
+                   <th>
+                      Invoice Date
+                   </th>
+                   <th>
+                       Autovehicule
+                   </th>
+                   <th>
+                       Price For Autovehicule
+                   </th>
+                </tr>
+                <tr>
+                    @foreach (var invoice in Model)
+                    {
+                     <td>
+                         @invoice.InvoiceNumber
+                     </td>
+                     <td>
+                         @invoice.DisplayInvoiceDate
+                     </td>
+                     <td>
+                         @invoice.Autovehicule.LicensePlate
+                     </td>
+                     <td>
+                         @invoice.TotalPrice
+                     </td>
+                    }
+                </tr>
+            </thead>
+
+        </table>
+    </div>
+    
+
+</body>
+   

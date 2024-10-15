@@ -3,6 +3,7 @@ using System;
 using InventarVali.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InventarVali.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241015090229_MadeTheInvoiceAttributesNullable")]
+    partial class MadeTheInvoiceAttributesNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,9 +243,6 @@ namespace InventarVali.DataAccess.Migrations
                     b.Property<double?>("Price")
                         .HasColumnType("double precision");
 
-                    b.Property<double?>("TotalPrice")
-                        .HasColumnType("double precision");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AutovehiculeFKId");
@@ -257,8 +257,7 @@ namespace InventarVali.DataAccess.Migrations
                             CardNumber = "704310.0109124771",
                             InvoiceDate = new DateTime(2025, 11, 2, 0, 0, 0, 0, DateTimeKind.Utc),
                             InvoiceNumber = "24/000838503/997",
-                            Price = 2000.1199999999999,
-                            TotalPrice = 300000.20000000001
+                            Price = 2000.1199999999999
                         });
                 });
 
