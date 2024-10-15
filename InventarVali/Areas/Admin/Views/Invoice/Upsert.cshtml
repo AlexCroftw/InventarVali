@@ -1,0 +1,109 @@
+﻿@model InvoiceDetailsVM
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-lg">
+                    <div class="card-header text-center bg-black text-white">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h2 class="text-white py-2">@(Model.Invoice.Id != 0 ? "Update " : "Create ") Invoice  <i class="bi bi-car-front-fill"></i></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="text-center text-dark"> Please make sure that all the @(Model.Invoice.Id != 0 ? "Changes are " : "Information is ") correct before saving</h2>
+                    <div class="card-body">
+                        <form method="post" class="row" enctype="multipart/form-data">
+                            <input asp-for="@Model.Invoice.Id" hidden />
+                            <input asp-for="@Model.Invoice.InvoiceUrl" hidden />
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="border p-3">
+                                        @* <div asp-validation-summary="ModelOnly"></div> *@
+                                        <div class="form-group mb-3">
+                                            <label asp-for="Invoice.InvoiceNumber" class="ms-2">Enter Insurence No </label>
+                                            <input asp-for="Invoice.InvoiceNumber" class="form-control border-0 shadow" placeholder="ex: xxx/xxxxxxxxxxxxxs">
+                                            <span asp-validation-for="Invoice.InvoiceNumber" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label asp-for="Invoice.Autovehicule.LicensePlate" class="ms-2">Enter The License Plate</label>
+                                            <input asp-for="Invoice.Autovehicule.LicensePlate" class="form-control border-0 shadow" placeholder="ex: B 222 KME">
+                                            <span asp-validation-for="Invoice.Autovehicule.LicensePlate" class="text-danger"></span>
+                                        </div>
+                                           
+                                        
+                                        <div class="form-group mb-3">
+                                            <label asp-for="Invoice.InvoiceDate" class="ms-2"> Enter the Date the Insurence was issued</label>
+                                            <input asp-for="Invoice.DisplayInvoiceDate" class="form-control border-0 shadow">
+                                            <input asp-for="Invoice.InvoiceDate" hidden class="form-control border-0 shadow">
+                                            <span asp-validation-for="Invoice.InvoiceDate" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label asp-for="Invoice.CardNumber" class="ms-2">Enter The Card that was used</label>
+                                            <input asp-for="Invoice.CardNumber" class="form-control border-0 shadow" placeholder="ex: 702xxxxxxxxxx">
+                                            <span asp-validation-for="Invoice.CardNumber" class="text-danger"></span>
+                                        </div>
+                                        
+                                        <div class="form-group mb-3">
+                                            <label asp-for="Invoice.Autovehicule.LicensePlate" class="ms-2"></label>
+                                            <select asp-for="Invoice.AutovehiculeFKId" asp-items="@Model.AutovehiculeList" class="form-control border-0 shadow">
+                                                <option disabled selected>---Select Employee---</option>
+                                            </select>
+                                            <span asp-validation-for="Invoice.Autovehicule.LicensePlate" class="text-danger"></span>
+                                        </div>
+                                       
+                                        <div class="form-group mb-3">
+                                            Only .pdf
+                                            <label asp-for="Invoice.InvoiceUrl" class="ms-2"></label>
+                                            <input type="file" name="file" class="form-control border-0 shadow">
+                                        </div>
+                                        <div class="row pt-2">
+                                            <div class="col-6">
+                                                @if (Model.Invoice.Id != 0)
+                                                {
+                                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                                }
+                                                else
+                                                {
+                                                    <button type="submit" class="btn btn-primary form-control">Create</button>
+                                                }
+
+                                            </div>
+                                            <div class="col-6">
+
+                                                <a asp-controller="Invoice" asp-action="Index" class="btn btn-outline-primary border form-control">
+                                                    Back to List
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+@section Scripts {
+
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+   
+}

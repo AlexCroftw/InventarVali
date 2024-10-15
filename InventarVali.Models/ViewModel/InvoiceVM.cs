@@ -21,6 +21,8 @@ namespace InventarVali.Models.ViewModel
         [DataType(DataType.Currency)]
         public double? TotalPrice { get; set; }
         public string ?CardNumber { get; set; }
+        [ValidateNever]
+        public string? InvoiceUrl { get; set; }
         public int? AutovehiculeFKId { get; set; }
         [ValidateNever]
         public Autovehicule Autovehicule { get; set; }

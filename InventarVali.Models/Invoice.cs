@@ -18,6 +18,7 @@ namespace InventarVali.Models
         public double? Price { get; set; }
         public double? TotalPrice { get; set; }
         public string ?CardNumber { get; set; }
+        public string? InvoiceUrl { get; set; }
         public int? AutovehiculeFKId { get; set; }
         [ForeignKey("AutovehiculeFKId")]
         [ValidateNever]

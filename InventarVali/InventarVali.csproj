@@ -39,6 +39,7 @@
     <Folder Include="wwwroot\images\autovehicule\" />
     <Folder Include="wwwroot\images\computer\" />
     <Folder Include="wwwroot\images\KME Logos\" />
+    <Folder Include="wwwroot\invoice\" />
   </ItemGroup>
 
 </Project>
