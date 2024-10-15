@@ -109,9 +109,8 @@ namespace InventarVali.Areas.Admin.Controllers
                     _unitOfWork.Invoice.Update(model);
 
                 }
-
                 _unitOfWork.Save();
-                TempData["success"] = "Autovehicule was created successfully";
+                TempData["success"] = "Invoice  was created successfully";
 
                 return RedirectToAction("Index", "Autovehicule");
             }
