@@ -16,6 +16,7 @@ namespace InventarVali.DataAccess.Data
         public DbSet<Autovehicule> Autovehicule { get; set; }
         public DbSet<Employees> Employees { get; set; }
         public DbSet<Computer> Computers { get; set; }
+        public DbSet<Invoice> Invoice { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -26,6 +27,17 @@ namespace InventarVali.DataAccess.Data
                new Employees { Id = 2, FirstName = "Michael", LastName = "Cox", Email = "test2@email.com", FullName = "Michael Cox" },
                new Employees { Id = 3, FirstName = "Vasile", LastName = "Braconieru", Email = "test4@email.com", FullName = "Vasile Braconieru" }
                );
+            modelBuilder.Entity<Invoice>().HasData(
+                new Invoice
+                {
+                    Id = 1,
+                    InvoiceNumber = "24/000838503/997",
+                    CardNumber = "704310.0109124771",
+                    Price = 2000.12,
+                    InvoiceDate = DateTime
+                .SpecifyKind(DateTime.Parse("02/11/2025"), DateTimeKind.Utc),
+                    AutovehiculeFKId = 2
+                });
             modelBuilder.Entity<Autovehicule>().HasData(
                new Autovehicule
                {
