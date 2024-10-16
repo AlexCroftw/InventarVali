@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using InventarVali.Models.ViewModel;
+using Microsoft.Extensions.ObjectPool;
 
 namespace InventarVali.Models
 {
@@ -30,6 +31,9 @@ namespace InventarVali.Models
                 .ForMember(x => x.Employee, opt => opt.MapFrom(src => src.Employees)).ReverseMap();
             CreateMap<Invoice,InvoiceVM>().ForMember(x => x.DisplayInvoiceDate, opt=> opt.MapFrom(src => src.InvoiceDate.HasValue ? src.InvoiceDate.Value.
                                                                                                          ToString("dd/MM/yyyy"): DateTime.Now.ToString("dd/MM/yyyy"))).ReverseMap();
+
+
+
 
 
 

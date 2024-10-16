@@ -33,7 +33,10 @@ namespace InventarVali.Models
         [ValidateNever]
         public string? ImageUrl { get; set; }
         [ValidateNever]
+        [DataType(DataType.Currency)]
         public string? InsurenceDoc { get; set; }
+        [ValidateNever]
+        public List<Invoice> Invoices { get; set; }
 
     }
 }

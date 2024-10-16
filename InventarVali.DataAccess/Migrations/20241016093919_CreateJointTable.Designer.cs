@@ -3,6 +3,7 @@ using System;
 using InventarVali.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InventarVali.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241016093919_CreateJointTable")]
+    partial class CreateJointTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -252,11 +255,11 @@ namespace InventarVali.DataAccess.Migrations
                     b.Property<string>("InvoiceUrl")
                         .HasColumnType("text");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
+                    b.Property<double?>("Price")
+                        .HasColumnType("double precision");
 
-                    b.Property<decimal?>("TotalPrice")
-                        .HasColumnType("numeric");
+                    b.Property<double?>("TotalPrice")
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
@@ -270,8 +273,8 @@ namespace InventarVali.DataAccess.Migrations
                             InvoiceDate = new DateTime(2025, 11, 2, 0, 0, 0, 0, DateTimeKind.Utc),
                             InvoiceNumber = "24/000838503/997",
                             InvoiceUrl = "",
-                            Price = 200m,
-                            TotalPrice = 300000.2m
+                            Price = 2000.1199999999999,
+                            TotalPrice = 300000.20000000001
                         });
                 });
 

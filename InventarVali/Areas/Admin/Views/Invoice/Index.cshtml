@@ -28,30 +28,36 @@
                       Invoice Date
                    </th>
                    <th>
-                       Autovehicule
+                      Total Price
                    </th>
                    <th>
-                       Price For Autovehicule
+                        Autovehicule
                    </th>
                 </tr>
-                <tr>
-                    @foreach (var invoice in Model)
-                    {
-                     <td>
-                         @invoice.InvoiceNumber
-                     </td>
-                     <td>
-                         @invoice.DisplayInvoiceDate
-                     </td>
-                     <td>
-                         @invoice.Autovehicule.LicensePlate
-                     </td>
-                     <td>
-                         @invoice.TotalPrice
-                     </td>
-                    }
-                </tr>
             </thead>
+            <tbody>
+                @foreach (var invoice in Model)
+                {
+                    <tr>
+                        <td>
+                            @invoice.InvoiceNumber
+                        </td>
+                        <td>
+                            @invoice.DisplayInvoiceDate
+                        </td>
+                        <td>
+                            @invoice.TotalPrice
+                        </td>
+                        <td>
+                            @foreach (var item in invoice.Autovehicule)
+                            {
+                              @item.LicensePlate <lb>,</lb> 
+                            }
+                        </td>
+                    </tr>
+                }
+               
+            </tbody>
 
         </table>
     </div>

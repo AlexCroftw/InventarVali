@@ -13,16 +13,14 @@ namespace InventarVali.Models
     {
         [Key]
         public int Id { get; set; }
-        public  string? InvoiceNumber { get; set; }
+        public string? InvoiceNumber { get; set; }
         public DateTime? InvoiceDate { get; set; }
-        public double? Price { get; set; }
-        public double? TotalPrice { get; set; }
+        public decimal? TotalPrice { get; set; }
+        public decimal Price { get; set; }
         public string ?CardNumber { get; set; }
         public string? InvoiceUrl { get; set; }
-        public int? AutovehiculeFKId { get; set; }
-        [ForeignKey("AutovehiculeFKId")]
         [ValidateNever]
-        public Autovehicule Autovehicule { get; set; }
+        public List<Autovehicule> Autovehicule { get; set; }
         
     }
 }

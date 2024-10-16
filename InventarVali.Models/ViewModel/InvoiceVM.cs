@@ -18,14 +18,13 @@ namespace InventarVali.Models.ViewModel
         [DataType(DataType.Date)]
         public string? DisplayInvoiceDate { get; set; }
         [DataType(DataType.Currency)]
-        public double? Price { get; set; }
+        public decimal? TotalPrice { get; set; }
         [DataType(DataType.Currency)]
-        public double? TotalPrice { get; set; }
+        public List<decimal?> Price { get; set; }
         public string ?CardNumber { get; set; }
         [ValidateNever]
         public string? InvoiceUrl { get; set; }
-        public int? AutovehiculeFKId { get; set; }
         [ValidateNever]
-        public Autovehicule Autovehicule { get; set; }
+        public List <AutovehiculeVM> Autovehicule { get; set; }
     }
 }

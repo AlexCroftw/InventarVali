@@ -1,4 +1,4 @@
-﻿@model InvoiceDetailsVM
+﻿@model InvoiceVM
 
 
 <head>
@@ -15,65 +15,63 @@
                     <div class="card-header text-center bg-black text-white">
                         <div class="row">
                             <div class="col-12 text-center">
-                                <h2 class="text-white py-2">@(Model.Invoice.Id != 0 ? "Update " : "Create ") Invoice  <i class="bi bi-car-front-fill"></i></h2>
+                                <h2 class="text-white py-2">@(Model.Id != 0 ? "Update " : "Create ") Invoice  <i class="bi bi-car-front-fill"></i></h2>
                             </div>
                         </div>
                     </div>
-                    <h2 class="text-center text-dark"> Please make sure that all the @(Model.Invoice.Id != 0 ? "Changes are " : "Information is ") correct before saving</h2>
+                    <h2 class="text-center text-dark"> Please make sure that all the @(Model.Id != 0 ? "Changes are " : "Information is ") correct before saving</h2>
                     <div class="card-body">
                         <form method="post" class="row" enctype="multipart/form-data">
-                            <input asp-for="@Model.Invoice.Id" hidden />
-                            <input asp-for="@Model.Invoice.InvoiceUrl" hidden />
+                            <input asp-for="@Model.Id" hidden />
+                            <input asp-for="@Model.InvoiceUrl" hidden />
                             <div class="row">
                                 <div class="col-12">
                                     <div class="border p-3">
                                         @* <div asp-validation-summary="ModelOnly"></div> *@
                                         <div class="form-group mb-3">
-                                            <label asp-for="Invoice.InvoiceNumber" class="ms-2">Enter Insurence No </label>
-                                            <input asp-for="Invoice.InvoiceNumber" class="form-control border-0 shadow" placeholder="ex: xxx/xxxxxxxxxxxxxs">
-                                            <span asp-validation-for="Invoice.InvoiceNumber" class="text-danger"></span>
+                                            <label asp-for="InvoiceNumber" class="ms-2">Enter Insurence No </label>
+                                            <input asp-for="InvoiceNumber" class="form-control border-0 shadow" placeholder="ex: xxx/xxxxxxxxxxxxxs">
+                                            <span asp-validation-for="InvoiceNumber" class="text-danger"></span>
                                         </div>
                                         
                                         <div class="form-group mb-3">
-                                            <label asp-for="Invoice.DisplayInvoiceDate" class="ms-2"> Enter the Date the Insurence was issued</label>
-                                            <input asp-for="Invoice.InvoiceDate" class="form-control border-0 shadow">
-                                            <input asp-for="Invoice.DisplayInvoiceDate" hidden class="form-control border-0 shadow">
-                                            <span asp-validation-for="Invoice.InvoiceDate" class="text-danger"></span>
+                                            <label asp-for="DisplayInvoiceDate" class="ms-2"> Enter the Date the Insurence was issued</label>
+                                            <input asp-for="InvoiceDate" class="form-control border-0 shadow">
+                                            <input asp-for="DisplayInvoiceDate" hidden class="form-control border-0 shadow">
+                                            <span asp-validation-for="InvoiceDate" class="text-danger"></span>
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label asp-for="Invoice.CardNumber" class="ms-2">Enter The Card that was used</label>
-                                            <input asp-for="Invoice.CardNumber" class="form-control border-0 shadow" placeholder="ex: 702xxxxxxxxxx">
-                                            <span asp-validation-for="Invoice.CardNumber" class="text-danger"></span>
+                                            <label asp-for="CardNumber" class="ms-2">Enter The Card that was used</label>
+                                            <input asp-for="CardNumber" class="form-control border-0 shadow" placeholder="ex: 702xxxxxxxxxx">
+                                            <span asp-validation-for="CardNumber" class="text-danger"></span>
                                         </div>
                                          
-                                        @for (int i = 0; i < Model.AutovehiculeVMList.Count; i++)
+                                        @foreach (var item in Model.Autovehicule)
                                         {
-                                             <div class="form-group mb-3">
+                                            <div class="form-group mb-3">
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <label asp-for="Invoice.Autovehicule.LicensePlate" class="ms-2">License Plate</label>
-                                                        <input asp-for="@Model.AutovehiculeVMList[i].LicensePlate" disabled class="form-control border-0 shadow" />
-                                                        <span asp-validation-for="Invoice.Autovehicule.LicensePlate" class="text-danger"></span>
+                                                        <label asp-for="@item.LicensePlate" class="ms-2">License Plate</label>
+                                                        <input asp-for="@item.LicensePlate" disabled class="form-control border-0 shadow" />
+                                                        <span asp-validation-for="@item.LicensePlate" class="text-danger"></span>
                                                     </div>
                                                     <div class="col-6">
-                                                        <label asp-for="Invoice.Price" class="ms-2">Price for fuel</label>
-                                                        <input asp-for="Invoice.Price" class="form-control border-0 shadow" placeholder="240.5">
-                                                        <span asp-validation-for="Invoice.Price" class="text-danger"></span>
+                                                        <label asp-for="Price" class="ms-2">Price for fuel</label>
+                                                        <input asp-for="Price" class="form-control border-0 shadow" placeholder="240.5">
+                                                        <span asp-validation-for="Price" class="text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         }
                                        
-
-
                                         <div class="form-group mb-3">
                                             Only .pdf
-                                            <label asp-for="Invoice.InvoiceUrl" class="ms-2"></label>
+                                            <label asp-for="@Model.InvoiceUrl" class="ms-2"></label>
                                             <input type="file" name="file" class="form-control border-0 shadow">
                                         </div>
                                         <div class="row pt-2">
                                             <div class="col-6">
-                                                @if (Model.Invoice.Id != 0)
+                                                @if (Model.Id != 0)
                                                 {
                                                     <button type="submit" class="btn btn-primary form-control">Update</button>
                                                 }

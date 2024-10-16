@@ -27,6 +27,13 @@ namespace InventarVali.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Invoice> invoiceList = _unitOfWork.Invoice.GetAll(includeProperties:"Autovehicule").ToList();
+            List<Autovehicule> autovehiculesList = _unitOfWork.Autovehicule.GetAll().ToList();
+
+            foreach (var item in invoiceList) 
+            {
+                item.Autovehicule.AddRange(autovehiculesList);
+            }
+
             var invoiceVM = _mapper.Map<List<InvoiceVM>>(invoiceList);
 
             return View(invoiceVM);
@@ -37,17 +44,15 @@ namespace InventarVali.Areas.Admin.Controllers
             var licensePlate = _unitOfWork.Autovehicule.GetAll().ToList();
             var licensePLateVM = _mapper.Map<List<AutovehiculeVM>>(licensePlate);
 
-            InvoiceDetailsVM invoiceDetailsVM = new()
+            InvoiceVM invoiceDetailsVM = new();
             {
-                AutovehiculeVMList = licensePLateVM,
-
-                Invoice = new InvoiceVM()
-            };
+               invoiceDetailsVM.Autovehicule = licensePLateVM;
+            }
              
 
             if (id == null || id == 0)
             {
-                invoiceDetailsVM.Invoice.InvoiceDate = DateTime.Now;
+                invoiceDetailsVM.InvoiceDate = DateTime.Now;
                 //Create
                 return View(invoiceDetailsVM);
             }
@@ -55,21 +60,29 @@ namespace InventarVali.Areas.Admin.Controllers
             {
                 var invoice = _mapper.Map<InvoiceVM>(invoiceDetailsVM);
 
-                invoiceDetailsVM.Invoice = invoice;
+                invoiceDetailsVM = invoice;
 
                 return View(invoiceDetailsVM);
             }
         }
 
         [HttpPost]
-        public IActionResult Upsert(InvoiceDetailsVM invoiceDetailsVM, IFormFile file) 
+        public IActionResult Upsert(InvoiceVM invoiceDetailsVM, IFormFile file) 
         {
             if (ModelState.IsValid) 
             {
-                var model = _mapper.Map<Invoice>(invoiceDetailsVM.Invoice);
+                var autovehiculeList = _unitOfWork.Autovehicule.GetAll().ToList();
+                var model = _mapper.Map<Invoice>(invoiceDetailsVM);
+                model.Autovehicule.AddRange(autovehiculeList);
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
 
                 string fileName = model.InvoiceNumber + Path.GetExtension(file.FileName);
+
+                model.TotalPrice = 0;
+                //foreach (var item in model.Autovehicule) 
+                //{
+                //    item.PriceDKV = model.Price;
+                //}
 
                     if (file != null && Path.GetExtension(file.FileName) == ".pdf")
                     {
@@ -119,7 +132,7 @@ namespace InventarVali.Areas.Admin.Controllers
                 var licensePlate = _unitOfWork.Autovehicule.GetAll().ToList();
                 var licensePLateVM = _mapper.Map<List<AutovehiculeVM>>(licensePlate);
 
-                invoiceDetailsVM.AutovehiculeVMList = licensePLateVM;
+                invoiceDetailsVM.Autovehicule= licensePLateVM;
                 return View(invoiceDetailsVM);
             }
         }
