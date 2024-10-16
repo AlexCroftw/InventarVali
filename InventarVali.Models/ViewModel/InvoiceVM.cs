@@ -18,7 +18,7 @@ namespace InventarVali.Models.ViewModel
         [DataType(DataType.Date)]
         public string? DisplayInvoiceDate { get; set; }
         [DataType(DataType.Currency)]
-        public decimal? TotalPrice { get; set; }
+        public double? TotalPrice { get; set; }
         [DataType(DataType.Currency)]
         public double Price { get; set; }
         public string ?CardNumber { get; set; }

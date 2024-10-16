@@ -33,7 +33,7 @@ namespace InventarVali.DataAccess.Data
                     Id = 1,
                     InvoiceNumber = "24/000838503/997",
                     CardNumber = "704310.0109124771",
-                    TotalPrice = 300000.2m,
+                    TotalPrice = 300000.2,
                     InvoiceUrl ="",
                     Price = 200,
                     InvoiceDate = DateTime
