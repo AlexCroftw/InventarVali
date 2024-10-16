@@ -16,7 +16,7 @@ namespace InventarVali.Models
         public string? InvoiceNumber { get; set; }
         public DateTime? InvoiceDate { get; set; }
         public decimal? TotalPrice { get; set; }
-        public decimal Price { get; set; }
+        public double Price { get; set; }
         public string ?CardNumber { get; set; }
         public string? InvoiceUrl { get; set; }
         [ValidateNever]

@@ -20,7 +20,7 @@ namespace InventarVali.Models.ViewModel
         [DataType(DataType.Currency)]
         public decimal? TotalPrice { get; set; }
         [DataType(DataType.Currency)]
-        public List<decimal?> Price { get; set; }
+        public double Price { get; set; }
         public string ?CardNumber { get; set; }
         [ValidateNever]
         public string? InvoiceUrl { get; set; }

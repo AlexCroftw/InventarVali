@@ -35,7 +35,7 @@ namespace InventarVali.DataAccess.Data
                     CardNumber = "704310.0109124771",
                     TotalPrice = 300000.2m,
                     InvoiceUrl ="",
-                    Price = 200m,
+                    Price = 200,
                     InvoiceDate = DateTime
                 .SpecifyKind(DateTime.Parse("02/11/2025"), DateTimeKind.Utc),                  
                 });
