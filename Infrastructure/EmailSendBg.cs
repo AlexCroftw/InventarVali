@@ -1,10 +1,11 @@
 ﻿using InventarVali.DataAccess.Repository.IRepository;
 using InventarVali.Models;
 using InventarVali.Utility.Services;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Quartz;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace Infrastructure
 {
@@ -15,16 +16,20 @@ namespace Infrastructure
         private readonly IMyEmailSender _myEmailSender;
         private readonly IConfiguration _config;
         private readonly ILogger<EmailSendBg> _logger;
-        public EmailSendBg(IUnitOfWork unitOfWork, IMyEmailSender myEmailSender, IConfiguration config, ILogger<EmailSendBg> logger)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public EmailSendBg(IUnitOfWork unitOfWork, IMyEmailSender myEmailSender, IConfiguration config, ILogger<EmailSendBg> logger,
+                           IWebHostEnvironment webHostEnvironment )
         {
             _config = config;
             _unitOfWork = unitOfWork;
             _myEmailSender = myEmailSender;
             _logger = logger;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public Task Execute(IJobExecutionContext context)
         {
+            var wwwRoot = _webHostEnvironment.WebRootPath;
             List<Autovehicule> objAutovehiculeslist = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
             List<Invoice> objInvoiceList = _unitOfWork.Invoice.GetAll(includeProperties:"Autovehicule").ToList();
             var now = DateTime.Now;
@@ -36,8 +41,8 @@ namespace Infrastructure
                     TimeSpan diff = invoice.InvoiceDate.Value - now;
                     if (diff.Days <= 14 && diff.Days >= 0) 
                     {
-                        _myEmailSender.SendEmail(_config.GetSection("EmailToSendTo").Value, $"Insurance Expiration Date  {now}", $"Please be informed that the DKV Invoice {invoice.InvoiceNumber} has been issued \r\n" +
-                            $" And it requiers payment if you already paid it please ignore it");
+                        _myEmailSender.SendEmailWithAttachment(_config.GetSection("EmailToSendTo").Value, $"Invoice DKV  {now}", $"Please be informed that the DKV Invoice {invoice.InvoiceNumber} has been issued \r\n" +
+                            $" And it requiers payment if you already paid it please ignore it", Path.Combine(wwwRoot, @"invoice",$"{invoice.InvoiceNumber}.pdf"));
                     }
                 }
             }
