@@ -66,18 +66,15 @@ namespace InventarVali.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(InvoiceVM invoiceDetailsVM, IFormFile file) 
+        public IActionResult Upsert(InvoiceVM invoiceDetailsVM, IFormFile? file) 
         {
             if (ModelState.IsValid) 
             {
-                var autovehiculeList = _unitOfWork.Autovehicule.GetAll().ToList();
                 var model = _mapper.Map<Invoice>(invoiceDetailsVM);
-                model.Autovehicule.AddRange(autovehiculeList);
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
 
-                string fileName = model.InvoiceNumber + Path.GetExtension(file.FileName);
+               
 
-                model.TotalPrice = 0;
                 //foreach (var item in model.Autovehicule) 
                 //{
                 //    item.PriceDKV = model.Price;
@@ -85,7 +82,9 @@ namespace InventarVali.Areas.Admin.Controllers
 
                     if (file != null && Path.GetExtension(file.FileName) == ".pdf")
                     {
-                        string invoicePdfPath = Path.Combine(wwwRootPath, @"invoice");
+                       string fileName = model.InvoiceNumber + Path.GetExtension(file.FileName);
+
+                       string invoicePdfPath = Path.Combine(wwwRootPath, @"invoice");
 
                         if (!string.IsNullOrEmpty(model.InvoiceUrl))
                         {
@@ -106,11 +105,6 @@ namespace InventarVali.Areas.Admin.Controllers
                         model.InvoiceUrl = @"\invoice\" + fileName;
                     }
                    
-                    else
-                    {
-                        TempData["error"] = "Incorect File Format, File can only be PDF and Image can only be PNG or JPG";
-                        return RedirectToAction("Index", "Invoice");
-                    }
 
                 if (model.Id == 0)
                 {
@@ -124,7 +118,7 @@ namespace InventarVali.Areas.Admin.Controllers
                 _unitOfWork.Save();
                 TempData["success"] = "Invoice  was created successfully";
 
-                return RedirectToAction("Index", "Autovehicule");
+                return RedirectToAction("Index", "Invoice");
             }
             else
             {
