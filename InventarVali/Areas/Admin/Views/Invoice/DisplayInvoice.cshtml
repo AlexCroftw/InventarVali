@@ -1,0 +1,30 @@
+﻿@model InvoiceVM
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+<style>
+    .pdf {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+    }
+
+    .pdf,
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<body>
+
+    <iframe class="pdf"
+            src="@Model.InvoiceUrl"
+            width="800" height="500">
+    </iframe>
+</body>

@@ -10,6 +10,24 @@ function loadDataTable() {
         "ajax": {
             url: '/admin/invoice/getall'
         },
+        "destroy": true,
+        "deferRender": true,
+        "columnDefs": [{
+            "targets": 1, //<-- index of column that should be rendered as link
+            render: function (data, type, row, meta) {
+                if (type === 'display') {
+                    return $('<a>')
+                        .attr('href', `/admin/invoice/displayinvoice?id=${row.id}`)
+                        .text(data)
+                        .wrap('<div></div>')
+                        .parent()
+                        .html();
+                } else {
+                    return data;
+                }
+            }
+        }],
+
         "columns": [
             {
                 data: 'id',

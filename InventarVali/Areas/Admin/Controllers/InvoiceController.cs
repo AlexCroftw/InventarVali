@@ -38,6 +38,24 @@ namespace InventarVali.Areas.Admin.Controllers
             return View(invoiceVM);
         }
 
+        public IActionResult DisplayInvoice(int? id) 
+        {
+            if (id == null || id == 0) 
+            {
+                return BadRequest();
+            }
+
+            var invoice = _unitOfWork.Invoice.Get(x => x.Id == id);
+            var invoiceVM = _mapper.Map<InvoiceVM>(invoice);
+
+            if (!String.IsNullOrEmpty(invoiceVM.InvoiceUrl)) 
+            {
+                return View(invoiceVM);
+            }
+
+           return NotFound();
+        }
+
         public IActionResult Upsert(int? id)
         {
             var licensePlate = _unitOfWork.Autovehicule.GetAll().ToList();
