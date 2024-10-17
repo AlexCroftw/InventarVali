@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using InventarVali.Models.ViewModel;
-using Microsoft.Extensions.ObjectPool;
 
 namespace InventarVali.Models
 {
@@ -22,15 +21,15 @@ namespace InventarVali.Models
                 ForMember(x => x.DisplayHasITP, opt => opt.MapFrom(src => src.HasITP == true ? "Yes" : "No")). //GetValueorDefault
                 ForMember(x => x.DisplayHasVinieta, opt => opt.MapFrom(src => src.HasVinieta == true ? "Yes" : "No"))
                 .ReverseMap();
-       
+
 
             CreateMap<AutovehiculeVM, AutovehiculeDetailsVM>().ReverseMap();
             CreateMap<Autovehicule, AutovehiculeDetailsVM>().ReverseMap();
             CreateMap<Employees, EmployeesVM>().ReverseMap();
             CreateMap<Computer, ComputerVM>()
                 .ForMember(x => x.Employee, opt => opt.MapFrom(src => src.Employees)).ReverseMap();
-            CreateMap<Invoice,InvoiceVM>().ForMember(x => x.DisplayInvoiceDate, opt=> opt.MapFrom(src => src.InvoiceDate.HasValue ? src.InvoiceDate.Value.
-                                                                                                         ToString("dd/MM/yyyy"): DateTime.Now.ToString("dd/MM/yyyy"))).ReverseMap();
+            CreateMap<Invoice, InvoiceVM>().ForMember(x => x.DisplayInvoiceDate, opt => opt.MapFrom(src => src.InvoiceDate.HasValue ? src.InvoiceDate.Value.
+                                                                                                         ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy"))).ReverseMap();
 
 
 

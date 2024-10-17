@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 using MimeKit.Text;
-using System.IO;
 using System.Net.Mime;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
@@ -14,7 +13,7 @@ namespace InventarVali.Utility
     {
         private readonly IConfiguration _config;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public MyEmailSender(IConfiguration config ,IWebHostEnvironment webHostEnvironment)
+        public MyEmailSender(IConfiguration config, IWebHostEnvironment webHostEnvironment)
         {
             _config = config;
             _webHostEnvironment = webHostEnvironment;

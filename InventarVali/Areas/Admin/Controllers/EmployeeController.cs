@@ -51,7 +51,7 @@ namespace InventarVali.Areas.Admin.Controllers
         public IActionResult Upsert(EmployeesVM employeeVM, int? id)
         {
             var employee = _mapper.Map<Employees>(employeeVM);
-           
+
             if (employee.Email == null)
             {
                 employee.Email = "n/a";
@@ -82,10 +82,10 @@ namespace InventarVali.Areas.Admin.Controllers
 
         #region VALIDATORS
         [AcceptVerbs("GET", "POST")]
-        public IActionResult VerifyEmail( string email,int id)
+        public IActionResult VerifyEmail(string email, int id)
         {
             var employee = _unitOfWork.Employee.Get(x => x.Email == email && x.Id != id);
-            if (employee != null) 
+            if (employee != null)
             {
                 return Json($"This {email} is already taken");
             }
@@ -94,12 +94,12 @@ namespace InventarVali.Areas.Admin.Controllers
         }
 
         [AcceptVerbs("GET", "POST")]
-        public IActionResult VerifyName (string firstName,string lastName,int id)
+        public IActionResult VerifyName(string firstName, string lastName, int id)
         {
 
-            string fullName = firstName + " " + lastName; 
-            var employeeModel = _unitOfWork.Employee.Get(x => x.FullName == fullName && x.Id !=id);
-            if (employeeModel != null) 
+            string fullName = firstName + " " + lastName;
+            var employeeModel = _unitOfWork.Employee.Get(x => x.FullName == fullName && x.Id != id);
+            if (employeeModel != null)
             {
                 return Json($"This name {fullName} is already taken ");
             }

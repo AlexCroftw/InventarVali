@@ -3,10 +3,9 @@ using InventarVali.DataAccess.Repository.IRepository;
 using InventarVali.Models;
 using InventarVali.Models.ViewModel;
 using InventarVali.Utility;
-using InventarVali.Utility.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace InventarVali.Areas.Admin.Controllers
 {
@@ -18,7 +17,7 @@ namespace InventarVali.Areas.Admin.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IMapper _mapper;
         public InvoiceController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, IMapper mapper)
-                                     
+
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
@@ -26,10 +25,10 @@ namespace InventarVali.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Invoice> invoiceList = _unitOfWork.Invoice.GetAll(includeProperties:"Autovehicule").ToList();
+            List<Invoice> invoiceList = _unitOfWork.Invoice.GetAll(includeProperties: "Autovehicule").ToList();
             List<Autovehicule> autovehiculesList = _unitOfWork.Autovehicule.GetAll().ToList();
 
-            foreach (var item in invoiceList) 
+            foreach (var item in invoiceList)
             {
                 item.Autovehicule.AddRange(autovehiculesList);
             }
@@ -39,16 +38,16 @@ namespace InventarVali.Areas.Admin.Controllers
             return View(invoiceVM);
         }
 
-        public IActionResult Upsert(int? id) 
+        public IActionResult Upsert(int? id)
         {
             var licensePlate = _unitOfWork.Autovehicule.GetAll().ToList();
             var licensePLateVM = _mapper.Map<List<AutovehiculeVM>>(licensePlate);
 
             InvoiceVM invoiceDetailsVM = new();
             {
-               invoiceDetailsVM.Autovehicule = licensePLateVM;
+                invoiceDetailsVM.Autovehicule = licensePLateVM;
             }
-             
+
 
             if (id == null || id == 0)
             {
@@ -66,45 +65,36 @@ namespace InventarVali.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(InvoiceVM invoiceDetailsVM, IFormFile? file) 
+        public IActionResult Upsert(InvoiceVM invoiceDetailsVM, IFormFile? file)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 var model = _mapper.Map<Invoice>(invoiceDetailsVM);
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
 
-               
+                if (file != null && Path.GetExtension(file.FileName) == ".pdf")
+                {
+                    string fileName = model.InvoiceNumber + Path.GetExtension(file.FileName);
 
-                //foreach (var item in model.Autovehicule) 
-                //{
-                //    item.PriceDKV = model.Price;
-                //}
+                    string invoicePdfPath = Path.Combine(wwwRootPath, @"invoice");
 
-                    if (file != null && Path.GetExtension(file.FileName) == ".pdf")
+                    if (!string.IsNullOrEmpty(model.InvoiceUrl))
                     {
-                       string fileName = model.InvoiceNumber + Path.GetExtension(file.FileName);
+                        var oldimgPath = Path.Combine(wwwRootPath, model.InvoiceUrl.TrimStart('\\'));
 
-                       string invoicePdfPath = Path.Combine(wwwRootPath, @"invoice");
-
-                        if (!string.IsNullOrEmpty(model.InvoiceUrl))
+                        if (System.IO.File.Exists(oldimgPath))
                         {
-                            //Delete old file
-                            var oldimgPath = Path.Combine(wwwRootPath, model.InvoiceUrl.TrimStart('\\'));
-
-                            if (System.IO.File.Exists(oldimgPath))
-                            {
-                                System.IO.File.Delete(oldimgPath);
-                            }
+                            System.IO.File.Delete(oldimgPath);
                         }
-
-                        //Create File Img
-                        using (var fileStream = new FileStream(Path.Combine(invoicePdfPath, fileName), FileMode.Create))
-                        {
-                            file.CopyTo(fileStream);
-                        }
-                        model.InvoiceUrl = @"\invoice\" + fileName;
                     }
-                   
+
+                    using (var fileStream = new FileStream(Path.Combine(invoicePdfPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    model.InvoiceUrl = @"\invoice\" + fileName;
+                }
+
 
                 if (model.Id == 0)
                 {
@@ -125,7 +115,7 @@ namespace InventarVali.Areas.Admin.Controllers
                 var licensePlate = _unitOfWork.Autovehicule.GetAll().ToList();
                 var licensePLateVM = _mapper.Map<List<AutovehiculeVM>>(licensePlate);
 
-                invoiceDetailsVM.Autovehicule= licensePLateVM;
+                invoiceDetailsVM.Autovehicule = licensePLateVM;
                 return View(invoiceDetailsVM);
             }
         }
@@ -149,10 +139,10 @@ namespace InventarVali.Areas.Admin.Controllers
 
         [HttpDelete]
 
-        public IActionResult Delete(int? id) 
+        public IActionResult Delete(int? id)
         {
             var invoiceToBeDeleted = _unitOfWork.Invoice.Get(o => o.Id == id);
-            
+
             if (invoiceToBeDeleted == null)
             {
                 return Json(new { success = false, message = "Error while deleting" });

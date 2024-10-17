@@ -1,6 +1,4 @@
-﻿using MimeKit;
-
-namespace InventarVali.Utility.Services
+﻿namespace InventarVali.Utility.Services
 {
     public interface IMyEmailSender
     {

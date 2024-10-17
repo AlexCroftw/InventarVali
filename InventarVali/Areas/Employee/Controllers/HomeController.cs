@@ -36,7 +36,7 @@ namespace InventarVali.Areas.Employee.Controllers
         }
 
 
-        public IActionResult DetailsAutovehicule(AutovehiculeVM autovehicleVM, int id) 
+        public IActionResult DetailsAutovehicule(AutovehiculeVM autovehicleVM, int id)
         {
             var autovehicule = _unitOfWork.Autovehicule.Get(x => x.Id == id, includeProperties: "Employees");
             autovehicleVM = _mapper.Map<AutovehiculeVM>(autovehicule);
@@ -45,7 +45,7 @@ namespace InventarVali.Areas.Employee.Controllers
         }
         public IActionResult DetailsComputer(ComputerVM computerVM, int id)
         {
-            var computer = _unitOfWork.Computer.Get(x => x.Id ==id, includeProperties: "Employees");
+            var computer = _unitOfWork.Computer.Get(x => x.Id == id, includeProperties: "Employees");
             computerVM = _mapper.Map<ComputerVM>(computer);
 
             return View(computerVM);
@@ -70,7 +70,7 @@ namespace InventarVali.Areas.Employee.Controllers
             return Json(new { data = combinedData.Autovehicule });
         }
 
-        
+
 
 
         [HttpGet]

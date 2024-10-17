@@ -42,7 +42,7 @@ namespace InventarVali.Areas.Admin.Controllers
 
         public IActionResult GetInsurenceDoc(int? id)
         {
-            
+
             if (id == null || id == 0)
             {
                 return NotFound();
@@ -100,7 +100,7 @@ namespace InventarVali.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 var model = _mapper.Map<Autovehicule>(autovehiculeVM.Autovehicule);
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
 
@@ -153,12 +153,12 @@ namespace InventarVali.Areas.Admin.Controllers
                         }
                         model.InsurenceDoc = @"\files\autovehicule\" + fileName;
                     }
-                    else 
+                    else
                     {
                         TempData["error"] = "Incorect File Format, File can only be PDF and Image can only be PNG or JPG";
                         return RedirectToAction("Index", "Autovehicule");
                     }
-                    
+
                 }
 
 
@@ -198,8 +198,8 @@ namespace InventarVali.Areas.Admin.Controllers
             {
                 return Json($"License {autovehicule.LicensePlate} has an invalid format. Format ex: VL-05-ESK");
             }
-            var model = _unitOfWork.Autovehicule.Get(x => x.LicensePlate == autovehicule.LicensePlate && x.Id !=autovehicule.Id);
-            if (model != null) 
+            var model = _unitOfWork.Autovehicule.Get(x => x.LicensePlate == autovehicule.LicensePlate && x.Id != autovehicule.Id);
+            if (model != null)
             {
                 return Json($"License {autovehicule.LicensePlate} is already taken");
             }

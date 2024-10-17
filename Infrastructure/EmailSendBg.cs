@@ -18,7 +18,7 @@ namespace Infrastructure
         private readonly ILogger<EmailSendBg> _logger;
         private readonly IWebHostEnvironment _webHostEnvironment;
         public EmailSendBg(IUnitOfWork unitOfWork, IMyEmailSender myEmailSender, IConfiguration config, ILogger<EmailSendBg> logger,
-                           IWebHostEnvironment webHostEnvironment )
+                           IWebHostEnvironment webHostEnvironment)
         {
             _config = config;
             _unitOfWork = unitOfWork;
@@ -31,18 +31,18 @@ namespace Infrastructure
         {
             var wwwRoot = _webHostEnvironment.WebRootPath;
             List<Autovehicule> objAutovehiculeslist = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
-            List<Invoice> objInvoiceList = _unitOfWork.Invoice.GetAll(includeProperties:"Autovehicule").ToList();
+            List<Invoice> objInvoiceList = _unitOfWork.Invoice.GetAll(includeProperties: "Autovehicule").ToList();
             var now = DateTime.Now;
 
-            foreach (var invoice in objInvoiceList) 
+            foreach (var invoice in objInvoiceList)
             {
-                if (invoice.InvoiceDate.HasValue) 
+                if (invoice.InvoiceDate.HasValue)
                 {
                     TimeSpan diff = invoice.InvoiceDate.Value - now;
-                    if (diff.Days <= 14 && diff.Days >= 0) 
+                    if (diff.Days <= 14 && diff.Days >= 0)
                     {
                         _myEmailSender.SendEmailWithAttachment(_config.GetSection("EmailToSendTo").Value, $"Invoice DKV  {now}", $"Please be informed that the DKV Invoice {invoice.InvoiceNumber} has been issued \r\n" +
-                            $" And it requiers payment if you already paid it please ignore it", Path.Combine(wwwRoot, @"invoice",$"{invoice.InvoiceNumber}.pdf"));
+                            $" And it requiers payment if you already paid it please ignore it", Path.Combine(wwwRoot, @"invoice", $"{invoice.InvoiceNumber}.pdf"));
                     }
                 }
             }

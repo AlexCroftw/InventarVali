@@ -12,15 +12,15 @@ namespace InventarVali.Models.ViewModel
         public string Type { get; set; }
         [MaxLength(10)]
         [DisplayName("License Plate")]
-        [Remote(action:"VerifyPlate",controller:"autovehicule",AdditionalFields ="Id")]
+        [Remote(action: "VerifyPlate", controller: "autovehicule", AdditionalFields = "Id")]
         public string LicensePlate { get; set; }
         [DisplayName("VIN Number")]
-        [StringLength(17,MinimumLength =17,ErrorMessage ="VIN Number need to be 17 characters long")]
+        [StringLength(17, MinimumLength = 17, ErrorMessage = "VIN Number need to be 17 characters long")]
         public string VinNumber { get; set; }
 
         [DisplayName("Insurance Start Date")]
 
-        public string ? DisplayInsurenceDate { get; set; }
+        public string? DisplayInsurenceDate { get; set; }
         [DataType(DataType.Date)]
         public DateTime InsurenceDate { get; set; }
         [DisplayName("ITP")]
@@ -50,7 +50,7 @@ namespace InventarVali.Models.ViewModel
         [ValidateNever]
         public EmployeesVM Employees { get; set; }
         [DisplayName("Insurence Doc")]
-        [Remote(action: "VerifyInsurance",controller:"autovehicule")]
+        [Remote(action: "VerifyInsurance", controller: "autovehicule")]
         public string? InsurenceDoc { get; set; }
         [ValidateNever]
         public List<InvoiceVM> Invoice { get; set; }

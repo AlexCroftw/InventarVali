@@ -16,7 +16,7 @@ namespace InventarVali.DataAccess.Repository
             Employee = new EmployeeRepository(_db);
             Autovehicule = new AutovehiculeRepository(_db);
             Computer = new ComputerRepository(_db);
-            Invoice = new  InvoiceRepository(_db);
+            Invoice = new InvoiceRepository(_db);
         }
 
         public void Save()

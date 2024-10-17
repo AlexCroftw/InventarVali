@@ -34,10 +34,10 @@ namespace InventarVali.DataAccess.Data
                     InvoiceNumber = "24/000838503/997",
                     CardNumber = "704310.0109124771",
                     TotalPrice = 30000m,
-                    InvoiceUrl ="",
+                    InvoiceUrl = "",
                     Price = 200m,
                     InvoiceDate = DateTime
-                .SpecifyKind(DateTime.Parse("02/11/2025"), DateTimeKind.Utc),                  
+                .SpecifyKind(DateTime.Parse("02/11/2025"), DateTimeKind.Utc),
                 });
             modelBuilder.Entity<Autovehicule>().HasData(
                new Autovehicule
@@ -53,7 +53,7 @@ namespace InventarVali.DataAccess.Data
                    HasVinieta = true,
                    VinietaExpirationDate = DateTime.SpecifyKind(DateTime.Parse("04/10/2024"), DateTimeKind.Utc),
                    EmployeeId = 1,
-                   
+
                },
                new Autovehicule
                {
