@@ -7,17 +7,7 @@ using InventarVali.Utility.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
-using UglyToad.PdfPig.DocumentLayoutAnalysis.PageSegmenter;
-using UglyToad.PdfPig.DocumentLayoutAnalysis.ReadingOrderDetector;
-using UglyToad.PdfPig.DocumentLayoutAnalysis.WordExtractor;
-using UglyToad.PdfPig.Fonts.Standard14Fonts;
-using UglyToad.PdfPig.Writer;
-using UglyToad.PdfPig;
-using Microsoft.Extensions.Options;
-using UglyToad.PdfPig.Content;
-using System.Text;
 
 
 namespace InventarVali.Areas.Admin.Controllers

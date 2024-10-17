@@ -4,6 +4,7 @@ using InventarVali.Utility.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Quartz;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Infrastructure
 {
@@ -25,8 +26,23 @@ namespace Infrastructure
         public Task Execute(IJobExecutionContext context)
         {
             List<Autovehicule> objAutovehiculeslist = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
-
+            List<Invoice> objInvoiceList = _unitOfWork.Invoice.GetAll(includeProperties:"Autovehicule").ToList();
             var now = DateTime.Now;
+
+            foreach (var invoice in objInvoiceList) 
+            {
+                if (invoice.InvoiceDate.HasValue) 
+                {
+                    TimeSpan diff = invoice.InvoiceDate.Value - now;
+                    if (diff.Days <= 14 && diff.Days >= 0) 
+                    {
+                        _myEmailSender.SendEmail(_config.GetSection("EmailToSendTo").Value, $"Insurance Expiration Date  {now}", $"Please be informed that the DKV Invoice {invoice.InvoiceNumber} has been issued \r\n" +
+                            $" And it requiers payment if you already paid it please ignore it");
+                    }
+                }
+            }
+
+
             foreach (var date in objAutovehiculeslist)
             {
                 if (date.InsuranceExpirationDate.HasValue)

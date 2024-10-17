@@ -25,7 +25,24 @@ function loadDataTable() {
             { data: 'invoiceNumber', "width": "10%" },
             { data: 'displayInvoiceDate', "width": "10%" },
             { data: 'totalPrice', "width": "10%" },
-            { data : 'autovehicule.licensePlate', "width": "10%"}
+            {
+                data: 'autovehicule',
+                "render": function (d)
+                {
+                    if (d !== null) {
+                        var table = "<table>";
+                        $.each(d, function (k, v) {
+                            table += " " + v.licensePlate
+                        });
+                        return table + "</table>";
+
+                    }
+                    else
+                    {
+                        return "";
+                    }
+                }
+            }
         ],
 
         dom: 'Bfltip',
@@ -69,6 +86,7 @@ function loadDataTable() {
                 }
             }
         ],
+        processing: true,
         "exportOptions": {
             columns: ":visible:not(.noExport)"
         },
