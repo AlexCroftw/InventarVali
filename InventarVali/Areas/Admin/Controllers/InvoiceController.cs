@@ -58,9 +58,8 @@ namespace InventarVali.Areas.Admin.Controllers
             }
             else
             {
-                var invoice = _mapper.Map<InvoiceVM>(invoiceDetailsVM);
-
-                invoiceDetailsVM = invoice;
+                var invoice = _unitOfWork.Invoice.Get(x => x.Id == id);
+                invoiceDetailsVM = _mapper.Map<InvoiceVM>(invoice);
 
                 return View(invoiceDetailsVM);
             }
@@ -137,7 +136,51 @@ namespace InventarVali.Areas.Admin.Controllers
             }
         }
 
+        #region APICALLS
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Invoice> invoiceList = _unitOfWork.Invoice.GetAll(includeProperties: "Autovehicule").ToList();
+            List<Autovehicule> autovehiculesList = _unitOfWork.Autovehicule.GetAll().ToList();
 
+            foreach (var item in invoiceList)
+            {
+                item.Autovehicule.AddRange(autovehiculesList);
+            }
+
+            var invoiceVM = _mapper.Map<List<InvoiceVM>>(invoiceList);
+
+            return Json(new { data = invoiceVM });
+        }
+
+        [HttpDelete]
+
+        public IActionResult Delete(int? id) 
+        {
+            var invoiceToBeDeleted = _unitOfWork.Invoice.Get(o => o.Id == id);
+            
+            if (invoiceToBeDeleted == null)
+            {
+                return Json(new { success = false, message = "Error while deleting" });
+            }
+
+            if (!string.IsNullOrEmpty(invoiceToBeDeleted.InvoiceUrl))
+            {
+                var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, invoiceToBeDeleted.InvoiceUrl.TrimStart('\\'));
+
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+            }
+
+            _unitOfWork.Invoice.Remove(invoiceToBeDeleted);
+            _unitOfWork.Save();
+
+            return Json(new { success = true, message = "Deleted Successfully" });
+        }
+
+        #endregion
     }
 }
 

@@ -33,9 +33,9 @@ namespace InventarVali.DataAccess.Data
                     Id = 1,
                     InvoiceNumber = "24/000838503/997",
                     CardNumber = "704310.0109124771",
-                    TotalPrice = 300000.2,
+                    TotalPrice = 30000m,
                     InvoiceUrl ="",
-                    Price = 200,
+                    Price = 200m,
                     InvoiceDate = DateTime
                 .SpecifyKind(DateTime.Parse("02/11/2025"), DateTimeKind.Utc),                  
                 });

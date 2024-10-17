@@ -41,9 +41,9 @@
                                             <span asp-validation-for="InvoiceDate" class="text-danger"></span>
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label asp-for="CardNumber" class="ms-2">Enter The Card that was used</label>
-                                            <input asp-for="CardNumber" class="form-control border-0 shadow" placeholder="ex: 702xxxxxxxxxx">
-                                            <span asp-validation-for="CardNumber" class="text-danger"></span>
+                                            <label asp-for="TotalPrice" class="ms-2">Enter The Total Cost of the Invoice</label>
+                                            <input asp-for="TotalPrice" class="form-control border-0 shadow" placeholder="ex:7000">
+                                            <span asp-validation-for="TotalPrice" class="text-danger"></span>
                                         </div>
                                          
                                         @foreach (var item in Model.Autovehicule)
