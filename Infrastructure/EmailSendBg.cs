@@ -42,7 +42,7 @@ namespace Infrastructure
                     if (diff.Days <= 14 && diff.Days >= 0)
                     {
                         _myEmailSender.SendEmailWithAttachment(_config.GetSection("EmailToSendTo").Value, $"Invoice DKV  {now}", $"Please be informed that the DKV Invoice {invoice.InvoiceNumber} has been issued \r\n" +
-                            $" And it requiers payment if you already paid it please ignore it", Path.Combine(wwwRoot, @"invoice", $"{invoice.InvoiceNumber}.pdf"));
+                            $" And it requiers payment if you already paid it please ignore it, the ammount due is {invoice.TotalPrice}", Path.Combine(wwwRoot, @"invoice", $"{invoice.InvoiceNumber}.pdf"));
                     }
                 }
             }
