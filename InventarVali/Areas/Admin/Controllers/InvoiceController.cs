@@ -26,12 +26,12 @@ namespace InventarVali.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Invoice> invoiceList = _unitOfWork.Invoice.GetAll(includeProperties:"AutovehiculeInvoice").ToList();
-            List<Autovehicule> autovehiculesList = _unitOfWork.Autovehicule.GetAll().ToList();
+            List<AutovehiculeInvoice> autovehiculesList = _unitOfWork.AutovehiculeInvoice.GetAll().ToList();
 
-            //foreach (var item in invoiceList)
-            //{
-            //    item.Autovehicule.AddRange(autovehiculesList);
-            //}
+            foreach (var item in invoiceList)
+            {
+                item.AutovehiculeInvoice.AddRange(autovehiculesList);
+            }
 
             var invoiceVM = _mapper.Map<List<InvoiceVM>>(invoiceList);
 
@@ -58,12 +58,12 @@ namespace InventarVali.Areas.Admin.Controllers
 
         public IActionResult Upsert(int? id)
         {
-            var licensePlate = _unitOfWork.Autovehicule.GetAll().ToList();
-            var licensePLateVM = _mapper.Map<List<AutovehiculeVM>>(licensePlate);
+            var licensePlate = _unitOfWork.AutovehiculeInvoice.GetAll().ToList();
+            var licensePLateVM = _mapper.Map<List<AutovehiculeInvoiceVM>>(licensePlate);
 
             InvoiceVM invoiceDetailsVM = new();
             {
-                invoiceDetailsVM.Autovehicule = licensePLateVM;
+                invoiceDetailsVM.AutovehiculeInvoiceList = licensePLateVM;
             }
 
 
@@ -121,6 +121,7 @@ namespace InventarVali.Areas.Admin.Controllers
                 else
                 {
                     _unitOfWork.Invoice.Update(model);
+                    
 
                 }
                 _unitOfWork.Save();
@@ -131,9 +132,9 @@ namespace InventarVali.Areas.Admin.Controllers
             else
             {
                 var licensePlate = _unitOfWork.Autovehicule.GetAll().ToList();
-                var licensePLateVM = _mapper.Map<List<AutovehiculeVM>>(licensePlate);
+                var licensePLateVM = _mapper.Map<List<AutovehiculeInvoiceVM>>(licensePlate);
 
-                invoiceDetailsVM.Autovehicule = licensePLateVM;
+                invoiceDetailsVM.AutovehiculeInvoiceList = licensePLateVM;
                 return View(invoiceDetailsVM);
             }
         }
@@ -142,13 +143,13 @@ namespace InventarVali.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Invoice> invoiceList = _unitOfWork.Invoice.GetAll(includeProperties: "Autovehicule").ToList();
-            List<Autovehicule> autovehiculesList = _unitOfWork.Autovehicule.GetAll().ToList();
+            List<Invoice> invoiceList = _unitOfWork.Invoice.GetAll(includeProperties: "AutovehiculeInvoice").ToList();
+            List<AutovehiculeInvoice> autovehiculesList = _unitOfWork.AutovehiculeInvoice.GetAll().ToList();
 
-            //foreach (var item in invoiceList)
-            //{
-            //    item.Autovehicule.AddRange(autovehiculesList);
-            //}
+            foreach (var item in invoiceList)
+            {
+                item.AutovehiculeInvoice.AddRange(autovehiculesList);
+            }
 
             var invoiceVM = _mapper.Map<List<InvoiceVM>>(invoiceList);
 

@@ -10,8 +10,8 @@ namespace InventarVali.Models
     {
         public Autovehicule Autovehicule { get; set; }
         public Invoice Invoice { get; set; }
-        public  int AutovehiculeFKID { get; set; }
-        public int InvoiceFKID { get; set; }
+        public  int AutovehiculeId { get; set; }
+        public int InvoiceId { get; set; }
         public decimal PriceFuel { get; set; }
         public double FuelConsumed { get; set; }
     }

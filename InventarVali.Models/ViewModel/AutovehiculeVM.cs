@@ -53,7 +53,7 @@ namespace InventarVali.Models.ViewModel
         [Remote(action: "VerifyInsurance", controller: "autovehicule")]
         public string? InsurenceDoc { get; set; }
         [ValidateNever]
-        public List<InvoiceVM> Invoice { get; set; }
+        public List<AutovehiculeInvoiceVM> AutovehiculeInvoiceList { get; set; }
 
     }
 }

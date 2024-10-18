@@ -5,15 +5,11 @@
 namespace InventarVali.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class CreatedNewJointTable : Migration
+    public partial class CreatedNewJoinTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_AutovehiculeInvoice_Autovehicule_AutovehiculeId",
-                table: "AutovehiculeInvoice");
-
             migrationBuilder.DropForeignKey(
                 name: "FK_AutovehiculeInvoice_Invoice_InvoicesId",
                 table: "AutovehiculeInvoice");
@@ -21,17 +17,12 @@ namespace InventarVali.DataAccess.Migrations
             migrationBuilder.RenameColumn(
                 name: "InvoicesId",
                 table: "AutovehiculeInvoice",
-                newName: "InvoiceFKID");
-
-            migrationBuilder.RenameColumn(
-                name: "AutovehiculeId",
-                table: "AutovehiculeInvoice",
-                newName: "AutovehiculeFKID");
+                newName: "InvoiceId");
 
             migrationBuilder.RenameIndex(
                 name: "IX_AutovehiculeInvoice_InvoicesId",
                 table: "AutovehiculeInvoice",
-                newName: "IX_AutovehiculeInvoice_InvoiceFKID");
+                newName: "IX_AutovehiculeInvoice_InvoiceId");
 
             migrationBuilder.AddColumn<double>(
                 name: "FuelConsumed",
@@ -48,17 +39,9 @@ namespace InventarVali.DataAccess.Migrations
                 defaultValue: 0m);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_AutovehiculeInvoice_Autovehicule_AutovehiculeFKID",
+                name: "FK_AutovehiculeInvoice_Invoice_InvoiceId",
                 table: "AutovehiculeInvoice",
-                column: "AutovehiculeFKID",
-                principalTable: "Autovehicule",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_AutovehiculeInvoice_Invoice_InvoiceFKID",
-                table: "AutovehiculeInvoice",
-                column: "InvoiceFKID",
+                column: "InvoiceId",
                 principalTable: "Invoice",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -68,11 +51,7 @@ namespace InventarVali.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_AutovehiculeInvoice_Autovehicule_AutovehiculeFKID",
-                table: "AutovehiculeInvoice");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_AutovehiculeInvoice_Invoice_InvoiceFKID",
+                name: "FK_AutovehiculeInvoice_Invoice_InvoiceId",
                 table: "AutovehiculeInvoice");
 
             migrationBuilder.DropColumn(
@@ -84,27 +63,14 @@ namespace InventarVali.DataAccess.Migrations
                 table: "AutovehiculeInvoice");
 
             migrationBuilder.RenameColumn(
-                name: "InvoiceFKID",
+                name: "InvoiceId",
                 table: "AutovehiculeInvoice",
                 newName: "InvoicesId");
 
-            migrationBuilder.RenameColumn(
-                name: "AutovehiculeFKID",
-                table: "AutovehiculeInvoice",
-                newName: "AutovehiculeId");
-
             migrationBuilder.RenameIndex(
-                name: "IX_AutovehiculeInvoice_InvoiceFKID",
+                name: "IX_AutovehiculeInvoice_InvoiceId",
                 table: "AutovehiculeInvoice",
                 newName: "IX_AutovehiculeInvoice_InvoicesId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_AutovehiculeInvoice_Autovehicule_AutovehiculeId",
-                table: "AutovehiculeInvoice",
-                column: "AutovehiculeId",
-                principalTable: "Autovehicule",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AutovehiculeInvoice_Invoice_InvoicesId",

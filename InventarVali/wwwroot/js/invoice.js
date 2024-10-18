@@ -44,7 +44,7 @@ function loadDataTable() {
             { data: 'displayInvoiceDate', "width": "10%" },
             { data: 'totalPrice', "width": "10%" },
             {
-                data: 'autovehicule',
+                data: 'autovehiculeInvoice',
                 "render": function (d)
                 {
                     if (d !== null) {

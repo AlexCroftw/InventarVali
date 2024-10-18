@@ -31,7 +31,7 @@ namespace Infrastructure
         {
             var wwwRoot = _webHostEnvironment.WebRootPath;
             List<Autovehicule> objAutovehiculeslist = _unitOfWork.Autovehicule.GetAll(includeProperties: "Employees").ToList();
-            List<Invoice> objInvoiceList = _unitOfWork.Invoice.GetAll(includeProperties: "Autovehicule").ToList();
+            List<Invoice> objInvoiceList = _unitOfWork.Invoice.GetAll(includeProperties: "AutovehiculeInvoice").ToList();
             var now = DateTime.Now;
 
             foreach (var invoice in objInvoiceList)

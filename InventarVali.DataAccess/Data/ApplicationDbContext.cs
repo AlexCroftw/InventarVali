@@ -24,15 +24,15 @@ namespace InventarVali.DataAccess.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<AutovehiculeInvoice>()
-                .HasKey(sc => new { sc.AutovehiculeFKID, sc.InvoiceFKID }); 
+                .HasKey(sc => new { sc.AutovehiculeId, sc.InvoiceId }); 
             modelBuilder.Entity<AutovehiculeInvoice>()
                 .HasOne(sc => sc.Autovehicule)
                 .WithMany(s => s.AutovehiculeInvoice) 
-                .HasForeignKey(sc => sc.AutovehiculeFKID); 
+                .HasForeignKey(sc => sc.AutovehiculeId); 
             modelBuilder.Entity<AutovehiculeInvoice>()
                 .HasOne(sc => sc.Invoice)
                 .WithMany(c => c.AutovehiculeInvoice) 
-                .HasForeignKey(sc => sc.InvoiceFKID); 
+                .HasForeignKey(sc => sc.InvoiceId); 
 
             modelBuilder.Entity<AutovehiculeInvoice>().ToTable("AutovehiculeInvoice");
 

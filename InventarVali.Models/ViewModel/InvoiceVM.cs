@@ -19,6 +19,6 @@ namespace InventarVali.Models.ViewModel
         [ValidateNever]
         public string? InvoiceUrl { get; set; }
         [ValidateNever]
-        public List<AutovehiculeVM> Autovehicule { get; set; }
+        public List<AutovehiculeInvoiceVM> AutovehiculeInvoiceList { get; set; }
     }
 }

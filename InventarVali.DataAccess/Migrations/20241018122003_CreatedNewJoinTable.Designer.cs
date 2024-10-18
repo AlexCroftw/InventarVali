@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InventarVali.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241018112556_CreatedNewJointTable")]
-    partial class CreatedNewJointTable
+    [Migration("20241018122003_CreatedNewJoinTable")]
+    partial class CreatedNewJoinTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,10 +111,10 @@ namespace InventarVali.DataAccess.Migrations
 
             modelBuilder.Entity("InventarVali.Models.AutovehiculeInvoice", b =>
                 {
-                    b.Property<int>("AutovehiculeFKID")
+                    b.Property<int>("AutovehiculeId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("InvoiceFKID")
+                    b.Property<int>("InvoiceId")
                         .HasColumnType("integer");
 
                     b.Property<double>("FuelConsumed")
@@ -123,9 +123,9 @@ namespace InventarVali.DataAccess.Migrations
                     b.Property<decimal>("PriceFuel")
                         .HasColumnType("numeric");
 
-                    b.HasKey("AutovehiculeFKID", "InvoiceFKID");
+                    b.HasKey("AutovehiculeId", "InvoiceId");
 
-                    b.HasIndex("InvoiceFKID");
+                    b.HasIndex("InvoiceId");
 
                     b.ToTable("AutovehiculeInvoice", (string)null);
                 });
@@ -493,13 +493,13 @@ namespace InventarVali.DataAccess.Migrations
                 {
                     b.HasOne("InventarVali.Models.Autovehicule", "Autovehicule")
                         .WithMany("AutovehiculeInvoice")
-                        .HasForeignKey("AutovehiculeFKID")
+                        .HasForeignKey("AutovehiculeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("InventarVali.Models.Invoice", "Invoice")
                         .WithMany("AutovehiculeInvoice")
-                        .HasForeignKey("InvoiceFKID")
+                        .HasForeignKey("InvoiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
