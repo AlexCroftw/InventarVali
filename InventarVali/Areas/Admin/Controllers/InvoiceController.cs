@@ -25,13 +25,13 @@ namespace InventarVali.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Invoice> invoiceList = _unitOfWork.Invoice.GetAll(includeProperties: "Autovehicule").ToList();
+            List<Invoice> invoiceList = _unitOfWork.Invoice.GetAll(includeProperties:"AutovehiculeInvoice").ToList();
             List<Autovehicule> autovehiculesList = _unitOfWork.Autovehicule.GetAll().ToList();
 
-            foreach (var item in invoiceList)
-            {
-                item.Autovehicule.AddRange(autovehiculesList);
-            }
+            //foreach (var item in invoiceList)
+            //{
+            //    item.Autovehicule.AddRange(autovehiculesList);
+            //}
 
             var invoiceVM = _mapper.Map<List<InvoiceVM>>(invoiceList);
 
@@ -145,10 +145,10 @@ namespace InventarVali.Areas.Admin.Controllers
             List<Invoice> invoiceList = _unitOfWork.Invoice.GetAll(includeProperties: "Autovehicule").ToList();
             List<Autovehicule> autovehiculesList = _unitOfWork.Autovehicule.GetAll().ToList();
 
-            foreach (var item in invoiceList)
-            {
-                item.Autovehicule.AddRange(autovehiculesList);
-            }
+            //foreach (var item in invoiceList)
+            //{
+            //    item.Autovehicule.AddRange(autovehiculesList);
+            //}
 
             var invoiceVM = _mapper.Map<List<InvoiceVM>>(invoiceList);
 

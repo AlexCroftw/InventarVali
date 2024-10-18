@@ -31,6 +31,8 @@ namespace InventarVali.Models
             CreateMap<Invoice, InvoiceVM>().ForMember(x => x.DisplayInvoiceDate, opt => opt.MapFrom(src => src.InvoiceDate.HasValue ? src.InvoiceDate.Value.
                                                                                                          ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy"))).ReverseMap();
 
+            CreateMap<AutovehiculeInvoice, AutovehiculeInvoiceVM>().ReverseMap();
+
 
 
 

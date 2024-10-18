@@ -17,10 +17,24 @@ namespace InventarVali.DataAccess.Data
         public DbSet<Employees> Employees { get; set; }
         public DbSet<Computer> Computers { get; set; }
         public DbSet<Invoice> Invoice { get; set; }
+        public DbSet<AutovehiculeInvoice> AutovehiculeInvoice { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<AutovehiculeInvoice>()
+                .HasKey(sc => new { sc.AutovehiculeFKID, sc.InvoiceFKID }); 
+            modelBuilder.Entity<AutovehiculeInvoice>()
+                .HasOne(sc => sc.Autovehicule)
+                .WithMany(s => s.AutovehiculeInvoice) 
+                .HasForeignKey(sc => sc.AutovehiculeFKID); 
+            modelBuilder.Entity<AutovehiculeInvoice>()
+                .HasOne(sc => sc.Invoice)
+                .WithMany(c => c.AutovehiculeInvoice) 
+                .HasForeignKey(sc => sc.InvoiceFKID); 
+
+            modelBuilder.Entity<AutovehiculeInvoice>().ToTable("AutovehiculeInvoice");
 
             modelBuilder.Entity<Employees>().HasData(
                new Employees { Id = 1, FirstName = "John", LastName = "Doe", Email = "test@email.com", FullName = "John Doe" },

@@ -10,6 +10,9 @@ namespace InventarVali.DataAccess.Repository
         public IAutovehiculeRepository Autovehicule { get; private set; }
         public IComputerRepository Computer { get; private set; }
         public IInvoiceRepository Invoice { get; private set; }
+        public IAutovevehiculeInvoiceRepository AutovehiculeInvoice { get; private set; }
+
+
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
@@ -17,6 +20,7 @@ namespace InventarVali.DataAccess.Repository
             Autovehicule = new AutovehiculeRepository(_db);
             Computer = new ComputerRepository(_db);
             Invoice = new InvoiceRepository(_db);
+            AutovehiculeInvoice = new AutovehiculeInvoiceRepository(_db);
         }
 
         public void Save()

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InventarVali.Models
 {
@@ -14,7 +15,7 @@ namespace InventarVali.Models
         public string? CardNumber { get; set; }
         public string? InvoiceUrl { get; set; }
         [ValidateNever]
-        public List<Autovehicule> Autovehicule { get; set; }
+        public List<AutovehiculeInvoice> AutovehiculeInvoice { get; set; }
 
     }
 }

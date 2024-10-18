@@ -36,7 +36,6 @@ namespace InventarVali.Models
         [DataType(DataType.Currency)]
         public string? InsurenceDoc { get; set; }
         [ValidateNever]
-        public List<Invoice> Invoices { get; set; }
-
+        public List<AutovehiculeInvoice> AutovehiculeInvoice { get; set; }
     }
 }
