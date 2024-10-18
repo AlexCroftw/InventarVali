@@ -26,11 +26,11 @@ namespace InventarVali.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Invoice> invoiceList = _unitOfWork.Invoice.GetAll(includeProperties:"AutovehiculeInvoice").ToList();
-            List<AutovehiculeInvoice> autovehiculesList = _unitOfWork.AutovehiculeInvoice.GetAll().ToList();
+            List<AutovehiculeInvoice> autovehiculeInvoiceList = _unitOfWork.AutovehiculeInvoice.GetAll().ToList();
 
-            foreach (var item in invoiceList)
+            foreach (var item in invoiceList) 
             {
-                item.AutovehiculeInvoice.AddRange(autovehiculesList);
+                item.AutovehiculeInvoice = autovehiculeInvoiceList;
             }
 
             var invoiceVM = _mapper.Map<List<InvoiceVM>>(invoiceList);
@@ -113,6 +113,7 @@ namespace InventarVali.Areas.Admin.Controllers
                     model.InvoiceUrl = @"\invoice\" + fileName;
                 }
 
+              
 
                 if (model.Id == 0)
                 {

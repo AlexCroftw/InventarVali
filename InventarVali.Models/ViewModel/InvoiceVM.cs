@@ -13,8 +13,6 @@ namespace InventarVali.Models.ViewModel
         public string? DisplayInvoiceDate { get; set; }
         [DataType(DataType.Currency)]
         public double? TotalPrice { get; set; }
-        [DataType(DataType.Currency)]
-        public double Price { get; set; }
         public string? CardNumber { get; set; }
         [ValidateNever]
         public string? InvoiceUrl { get; set; }
