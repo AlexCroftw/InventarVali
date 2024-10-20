@@ -1,6 +1,5 @@
 ﻿@model InvoiceVM
 
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,11 +14,16 @@
                     <div class="card-header text-center bg-black text-white">
                         <div class="row">
                             <div class="col-12 text-center">
-                                <h2 class="text-white py-2">@(Model.Id != 0 ? "Update " : "Create ") Invoice  <i class="bi bi-car-front-fill"></i></h2>
+                                <h2 class="text-white py-2">
+                                    @(Model.Id != 0 ? "Update " : "Create ") Invoice
+                                    <i class="bi bi-car-front-fill"></i>
+                                </h2>
                             </div>
                         </div>
                     </div>
-                    <h2 class="text-center text-dark"> Please make sure that all the @(Model.Id != 0 ? "Changes are " : "Information is ") correct before saving</h2>
+                    <h2 class="text-center text-dark">
+                        Please make sure that all the @(Model.Id != 0 ? "Changes are " : "Information is ") correct before saving
+                    </h2>
                     <div class="card-body">
                         <form method="post" class="row" enctype="multipart/form-data">
                             <input asp-for="@Model.Id" hidden />
@@ -27,15 +31,15 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="border p-3">
-                                        @* <div asp-validation-summary="ModelOnly"></div> *@
+
                                         <div class="form-group mb-3">
-                                            <label asp-for="InvoiceNumber" class="ms-2">Enter Insurence No </label>
+                                            <label asp-for="InvoiceNumber" class="ms-2">Enter Insurance No</label>
                                             <input asp-for="InvoiceNumber" class="form-control border-0 shadow" placeholder="ex: xxx/xxxxxxxxxxxxxs">
                                             <span asp-validation-for="InvoiceNumber" class="text-danger"></span>
                                         </div>
-                                        
+
                                         <div class="form-group mb-3">
-                                            <label asp-for="DisplayInvoiceDate" class="ms-2"> Enter the Date the Insurence was issued</label>
+                                            <label asp-for="DisplayInvoiceDate" class="ms-2">Enter the Date the Insurance was issued</label>
                                             <input asp-for="InvoiceDate" class="form-control border-0 shadow">
                                             <input asp-for="DisplayInvoiceDate" hidden class="form-control border-0 shadow">
                                             <span asp-validation-for="InvoiceDate" class="text-danger"></span>
@@ -46,51 +50,102 @@
                                             <input asp-for="TotalPrice" class="form-control border-0 shadow" placeholder="ex:7000">
                                             <span asp-validation-for="TotalPrice" class="text-danger"></span>
                                         </div>
-                                        
+
+                                        <!-- Dynamic Vehicle List with Dropdown -->
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label class="ms-2">Vehicles</label>
+                                                <div id="autovehiculeinvoice-list">
+                                                    @for (int i = 0; i < Model.AutovehiculeInvoice.Count; i++)
+
+                                                    {
+                                                        <div class="autovehicule-item mb-3">
+                                                            <!-- Dropdown for selecting a vehicle -->
+                                                            <select asp-for="AutovehiculeInvoice[@i].AutovehiculeID" asp-items="@(new SelectList(Model.Autovehicule, "Id", "LicensePlate"))" class="form-control mb-2">
+                                                                <option value="">Select Vehicle</option>
+                                                            </select>
+                                                            <!-- Inputs for other vehicle details -->
+                                                            <input asp-for="AutovehiculeInvoice[@i].PriceFuel" class="form-control mb-2" placeholder="Price of Fuel" />
+                                                            <input asp-for="AutovehiculeInvoice[@i].FuelConsumed" class="form-control mb-2" placeholder="Fuel Consumed" />
+                                                            <button type="button" class="btn btn-danger remove-autovehicule-btn">Remove</button>
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <button type="button" id="add-autovehicule-btn" class="btn btn-success">Add Vehicle</button>
+                                                <span asp-validation-for="AutovehiculeInvoice" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <!-- File Upload -->
                                         <div class="form-group mb-3">
-                                            Only .pdf
-                                            <label asp-for="@Model.InvoiceUrl" class="ms-2"></label>
+                                            <label asp-for="@Model.InvoiceUrl" class="ms-2">Upload Invoice (.pdf only)</label>
                                             <input type="file" name="file" class="form-control border-0 shadow">
                                         </div>
+
+                                        <!-- Submit Buttons -->
                                         <div class="row pt-2">
                                             <div class="col-6">
-                                                @if (Model.Id != 0)
-                                                {
-                                                    <button type="submit" class="btn btn-primary form-control">Update</button>
-                                                }
-                                                else
-                                                {
-                                                    <button type="submit" class="btn btn-primary form-control">Create</button>
-                                                }
-
+                                                <button type="submit" class="btn btn-primary form-control">
+                                                    @(Model.Id != 0 ? "Update" : "Create")
+                                                </button>
                                             </div>
                                             <div class="col-6">
-
-                                                <a asp-controller="Invoice" asp-action="Index" class="btn btn-outline-primary border form-control">
-                                                    Back to List
-                                                </a>
-
+                                                <a asp-controller="Invoice" asp-action="Index" class="btn btn-outline-primary form-control">Back to List</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Dynamic List Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Add event listener to the "Add Vehicle" button
+            document.getElementById("add-autovehicule-btn").addEventListener("click", function () {
+                var index = document.querySelectorAll("#autovehiculeinvoice-list .autovehicule-item").length;
+                var vehicleInput = `
+                            <div class="autovehicule-item mb-3">
+                                <!-- Dropdown for selecting a vehicle -->
+                                <select name="AutovehiculeInvoice[${index}].AutovehiculeID" class="form-control mb-2">
+                                    <option value="">Select Vehicle</option>
+                                    @foreach (var vehicle in Model.Autovehicule)
+
+                                    {
+                                            <option value="@vehicle.Id">@vehicle.LicensePlate</option>
+                                    }
+                                </select>
+                                <input name="AutovehiculeInvoice[${index}].PriceFuel" class="form-control mb-2" placeholder="Price of Fuel"/>
+                                <input name="AutovehiculeInvoice[${index}].FuelConsumed" class="form-control mb-2" placeholder="Fuel Consumed"/>
+                                <button type="button" class="btn btn-danger remove-autovehicule-btn">Remove</button>
+                            </div>`;
+                document.getElementById("autovehiculeinvoice-list").insertAdjacentHTML('beforeend', vehicleInput);
+
+                // Attach remove event to newly added remove buttons
+                attachRemoveEvent();
+            });
+
+            // Attach remove event to existing and newly added "Remove" buttons
+            function attachRemoveEvent() {
+                document.querySelectorAll(".remove-autovehicule-btn").forEach(function (button) {
+                    button.addEventListener("click", function () {
+                        this.parentElement.remove();
+                    });
+                });
+            }
+
+            // Call it initially to set event on existing items
+            attachRemoveEvent();
+        });
+    </script>
 </body>
 
-
 @section Scripts {
-
-    @{
-        <partial name="_ValidationScriptsPartial" />
-    }
-   
+    @* Validation scripts *@
+    <partial name="_ValidationScriptsPartial" />
 }

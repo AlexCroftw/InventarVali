@@ -8,10 +8,7 @@ namespace InventarVali.Models.ViewModel
 {
     public class AutovehiculeInvoiceVM
     {
-        public Autovehicule Autovehicule { get; set; }
-        public Invoice Invoice { get; set; }
-        public int AutovehiculeFKID { get; set; }
-        public int InvoiceFKID { get; set; }
+        public int AutovehiculeID { get; set; }
         public decimal PriceFuel { get; set; }
         public double FuelConsumed { get; set; }
     }

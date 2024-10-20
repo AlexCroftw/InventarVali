@@ -26,12 +26,6 @@ namespace InventarVali.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Invoice> invoiceList = _unitOfWork.Invoice.GetAll(includeProperties:"AutovehiculeInvoice").ToList();
-            List<AutovehiculeInvoice> autovehiculeInvoiceList = _unitOfWork.AutovehiculeInvoice.GetAll().ToList();
-
-            foreach (var item in invoiceList) 
-            {
-                item.AutovehiculeInvoice = autovehiculeInvoiceList;
-            }
 
             var invoiceVM = _mapper.Map<List<InvoiceVM>>(invoiceList);
 
@@ -58,12 +52,12 @@ namespace InventarVali.Areas.Admin.Controllers
 
         public IActionResult Upsert(int? id)
         {
-            var licensePlate = _unitOfWork.AutovehiculeInvoice.GetAll().ToList();
-            var licensePLateVM = _mapper.Map<List<AutovehiculeInvoiceVM>>(licensePlate);
+            var licensePlate = _unitOfWork.Autovehicule.GetAll().ToList();
+            var licensePLateVM = _mapper.Map<List<AutovehiculeVM>>(licensePlate);
 
             InvoiceVM invoiceDetailsVM = new();
             {
-                invoiceDetailsVM.AutovehiculeInvoiceList = licensePLateVM;
+                invoiceDetailsVM.Autovehicule = licensePLateVM;
             }
 
 
@@ -75,8 +69,9 @@ namespace InventarVali.Areas.Admin.Controllers
             }
             else
             {
-                var invoice = _unitOfWork.Invoice.Get(x => x.Id == id);
+                var invoice = _unitOfWork.Invoice.Get(x => x.Id == id, includeProperties: "AutovehiculeInvoice");
                 invoiceDetailsVM = _mapper.Map<InvoiceVM>(invoice);
+                invoiceDetailsVM.Autovehicule = licensePLateVM;
 
                 return View(invoiceDetailsVM);
             }
@@ -135,7 +130,7 @@ namespace InventarVali.Areas.Admin.Controllers
                 var licensePlate = _unitOfWork.Autovehicule.GetAll().ToList();
                 var licensePLateVM = _mapper.Map<List<AutovehiculeInvoiceVM>>(licensePlate);
 
-                invoiceDetailsVM.AutovehiculeInvoiceList = licensePLateVM;
+                invoiceDetailsVM.AutovehiculeInvoice = licensePLateVM;
                 return View(invoiceDetailsVM);
             }
         }
