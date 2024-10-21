@@ -5,6 +5,7 @@ using InventarVali.Models.ViewModel;
 using InventarVali.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 
 namespace InventarVali.Areas.Admin.Controllers
@@ -121,7 +122,6 @@ namespace InventarVali.Areas.Admin.Controllers
                     model.InvoiceUrl = @"\invoice\" + fileName;
                 }
 
-              
 
                 if (model.Id == 0)
                 {
@@ -129,8 +129,8 @@ namespace InventarVali.Areas.Admin.Controllers
                 }
                 else
                 {
-                    var existingInvoice = _unitOfWork.Invoice.Get(x => x.Id == model.Id, includeProperties: "AutovehiculeInvoice");
-                    _unitOfWork.Invoice.Update(existingInvoice);
+
+                    _unitOfWork.Invoice.Update(model);
                 }
                 _unitOfWork.Save();
                 TempData["success"] = "Invoice  was created successfully";
@@ -146,6 +146,21 @@ namespace InventarVali.Areas.Admin.Controllers
                 return View(invoiceDetailsVM);
             }
         }
+
+        #region VALIDATORS
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult VerifyInvoiceNumber(InvoiceVM invoiceVM)
+        {
+
+            var model = _unitOfWork.Invoice.Get(x => x.InvoiceNumber == invoiceVM.InvoiceNumber && x.Id != invoiceVM.Id);
+            if (model != null)
+            {
+                return Json($" The Invoice number : {invoiceVM.InvoiceNumber} is already in the DataBase");
+            }
+
+            return Json(true);
+        }
+        #endregion
 
         #region APICALLS
         [HttpGet]

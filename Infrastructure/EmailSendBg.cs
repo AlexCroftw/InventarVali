@@ -77,7 +77,7 @@ namespace Infrastructure
                         }
 
                         var emailRecipient = _config.GetSection("EmailToSendTo").Value;
-                        var emailSubject = $"Invoice DKV {now}";
+                        var emailSubject = $"Invoice DKV {now.Date} {invoice.InvoiceNumber} ";
                         var invoiceFilePath = Path.Combine(wwwRoot, @"invoice", $"{invoice.InvoiceNumber}.pdf");
 
                         _myEmailSender.SendEmailWithAttachment(emailRecipient, emailSubject, emailBody, invoiceFilePath);
