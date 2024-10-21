@@ -90,14 +90,19 @@ namespace InventarVali.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var model = _mapper.Map<Invoice>(invoiceDetailsVM);
-                string wwwRootPath = _webHostEnvironment.WebRootPath;
-                model.TotalPrice = 0;
+                var model = new Invoice();
 
-                foreach (var item in invoiceDetailsVM.AutovehiculeInvoice) 
+                if (invoiceDetailsVM.Id != 0) 
                 {
-                    model.TotalPrice = model.TotalPrice + item.PriceFuel;
+                    model = _unitOfWork.Invoice.Get(x => x.Id == invoiceDetailsVM.Id, includeProperties: "AutovehiculeInvoice");
                 }
+
+                model = _mapper.Map(invoiceDetailsVM, model);
+
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+
+                model.TotalPrice = invoiceDetailsVM.AutovehiculeInvoice.Sum(x => x.PriceFuel);
+
 
                 if (file != null && Path.GetExtension(file.FileName) == ".pdf")
                 {
@@ -129,7 +134,7 @@ namespace InventarVali.Areas.Admin.Controllers
                 }
                 else
                 {
-
+                   
                     _unitOfWork.Invoice.Update(model);
                 }
                 _unitOfWork.Save();
