@@ -45,21 +45,20 @@ function loadDataTable() {
             { data: 'totalPrice', "width": "10%" },
             {
                 data: 'autovehiculeInvoice',
-                "render": function (d)
-                {
+                "render": function (d, type, row) {
                     if (d !== null) {
-                        var table = "<table>";
+                        var result = "";
                         $.each(d, function (k, v) {
-                            table += " " + v.licensePlate
+                            var licensePlate = row.autovehicule.find(a => a.id === v.autovehiculeID).licensePlate;
+                            result += `${licensePlate} - Fuel Price: ${v.priceFuel} RON<br/>`;
                         });
-                        return table + "</table>";
 
-                    }
-                    else
-                    {
+                        return result.trim();
+                    } else {
                         return "";
                     }
-                }
+                },
+                "width": "20%"
             }
         ],
 

@@ -44,16 +44,9 @@
                                             <input asp-for="DisplayInvoiceDate" hidden class="form-control border-0 shadow">
                                             <span asp-validation-for="InvoiceDate" class="text-danger"></span>
                                         </div>
-
-                                        <div class="form-group mb-3">
-                                            <label asp-for="TotalPrice" class="ms-2">Enter The Total Cost of the Invoice</label>
-                                            <input asp-for="TotalPrice" class="form-control border-0 shadow" placeholder="ex:7000">
-                                            <span asp-validation-for="TotalPrice" class="text-danger"></span>
-                                        </div>
-
                                         <!-- Dynamic Vehicle List with Dropdown -->
                                         <div class="row">
-                                            <div class="col-12">
+                                            <div class="col-12 form-group mb-3">
                                                 <label class="ms-2">Vehicles</label>
                                                 <div id="autovehiculeinvoice-list">
                                                     @for (int i = 0; i < Model.AutovehiculeInvoice.Count; i++)
@@ -65,13 +58,13 @@
                                                                 <option value="">Select Vehicle</option>
                                                             </select>
                                                             <!-- Inputs for other vehicle details -->
-                                                            <input asp-for="AutovehiculeInvoice[@i].PriceFuel" class="form-control mb-2" placeholder="Price of Fuel" />
-                                                            <input asp-for="AutovehiculeInvoice[@i].FuelConsumed" class="form-control mb-2" placeholder="Fuel Consumed" />
+                                                            <input asp-for="AutovehiculeInvoice[@i].PriceFuel" class="form-control mb-2  border-0 shadow" placeholder="Price of Fuel" />
+                                                            <input asp-for="AutovehiculeInvoice[@i].FuelConsumed" class="form-control mb-2  border-0 shadow" placeholder="Fuel Consumed" />
                                                             <button type="button" class="btn btn-danger remove-autovehicule-btn">Remove</button>
                                                         </div>
                                                     }
                                                 </div>
-                                                <button type="button" id="add-autovehicule-btn" class="btn btn-success">Add Vehicle</button>
+                                                <button type="button" id="add-autovehicule-btn" class="btn btn-primary">Add Vehicle</button>
                                                 <span asp-validation-for="AutovehiculeInvoice" class="text-danger"></span>
                                             </div>
                                         </div>

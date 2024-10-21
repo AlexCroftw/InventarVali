@@ -25,9 +25,16 @@ namespace InventarVali.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Invoice> invoiceList = _unitOfWork.Invoice.GetAll(includeProperties:"AutovehiculeInvoice").ToList();
-
+            List<Invoice> invoiceList = _unitOfWork.Invoice.GetAll(includeProperties: "AutovehiculeInvoice").ToList();
             var invoiceVM = _mapper.Map<List<InvoiceVM>>(invoiceList);
+
+            List<Autovehicule> autovehiculesList = _unitOfWork.Autovehicule.GetAll().ToList();
+            var autovehiculeList = _mapper.Map<List<AutovehiculeVM>>(autovehiculesList);
+
+            foreach (var invoice in invoiceVM)
+            {
+                invoice.Autovehicule = autovehiculeList;
+            }
 
             return View(invoiceVM);
         }
@@ -84,6 +91,12 @@ namespace InventarVali.Areas.Admin.Controllers
             {
                 var model = _mapper.Map<Invoice>(invoiceDetailsVM);
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
+                model.TotalPrice = 0;
+
+                foreach (var item in invoiceDetailsVM.AutovehiculeInvoice) 
+                {
+                    model.TotalPrice = model.TotalPrice + item.PriceFuel;
+                }
 
                 if (file != null && Path.GetExtension(file.FileName) == ".pdf")
                 {
@@ -116,9 +129,8 @@ namespace InventarVali.Areas.Admin.Controllers
                 }
                 else
                 {
-                    _unitOfWork.Invoice.Update(model);
-                    
-
+                    var existingInvoice = _unitOfWork.Invoice.Get(x => x.Id == model.Id, includeProperties: "AutovehiculeInvoice");
+                    _unitOfWork.Invoice.Update(existingInvoice);
                 }
                 _unitOfWork.Save();
                 TempData["success"] = "Invoice  was created successfully";
@@ -140,14 +152,15 @@ namespace InventarVali.Areas.Admin.Controllers
         public IActionResult GetAll()
         {
             List<Invoice> invoiceList = _unitOfWork.Invoice.GetAll(includeProperties: "AutovehiculeInvoice").ToList();
-            List<AutovehiculeInvoice> autovehiculesList = _unitOfWork.AutovehiculeInvoice.GetAll().ToList();
-
-            foreach (var item in invoiceList)
-            {
-                item.AutovehiculeInvoice.AddRange(autovehiculesList);
-            }
-
             var invoiceVM = _mapper.Map<List<InvoiceVM>>(invoiceList);
+
+            List<Autovehicule> autovehiculesList = _unitOfWork.Autovehicule.GetAll().ToList();
+            var autovehiculeList = _mapper.Map<List<AutovehiculeVM>>(autovehiculesList);
+
+            foreach (var invoice in invoiceVM) 
+            {
+                invoice.Autovehicule = autovehiculeList;
+            }
 
             return Json(new { data = invoiceVM });
         }
