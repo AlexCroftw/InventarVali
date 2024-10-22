@@ -54,7 +54,7 @@ namespace InventarVali.Utility
                 Content = new MimeContent(File.OpenRead(fileName)),
                 ContentId = fileName,
                 ContentTransferEncoding = ContentEncoding.Base64,
-                FileName = subject,
+                FileName = fileName,
             };
 
             var multipart = new Multipart
