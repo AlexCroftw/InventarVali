@@ -32,7 +32,12 @@ function loadDataTable() {
             { data: 'displayInsuranceExpirationDate', "width": "10%" },
             { data: 'displayHasVinieta', "width": "10%" },
             { data: 'displayVinietaExpirationDate', "width": "10%" },
-            { data: 'employees.fullName', "width": "30%" }
+            {
+                data: 'employees.fullName',
+                "width": "30%",
+                "render": function (data) {
+                    return data ? data : 'N/A';
+            } }
         ],
         
         dom: 'Bfltip',

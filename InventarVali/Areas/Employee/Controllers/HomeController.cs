@@ -38,8 +38,17 @@ namespace InventarVali.Areas.Employee.Controllers
 
         public IActionResult DetailsAutovehicule(AutovehiculeVM autovehicleVM, int id)
         {
-            var autovehicule = _unitOfWork.Autovehicule.Get(x => x.Id == id, includeProperties: "Employees");
-            autovehicleVM = _mapper.Map<AutovehiculeVM>(autovehicule);
+           var autovehicule = _unitOfWork.Autovehicule.Get(x => x.Id == id, includeProperties: "Employees");
+           autovehicleVM = _mapper.Map<AutovehiculeVM>(autovehicule);
+            if (autovehicleVM.Employees == null) 
+            {
+                var employeeVM = new EmployeesVM();
+                employeeVM.FullName = "N/A";
+                autovehicleVM.Employees = employeeVM;
+
+            }
+           
+           
 
             return View(autovehicleVM);
         }
